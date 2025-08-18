@@ -8,7 +8,7 @@ import { toast } from "@/hooks/use-toast";
 import axios from "axios";
 
 const COLORS = ['#1E40AF', '#3B82F6', '#60A5FA', '#93C5FD', '#DBEAFE'];
-const API_BASE_URL = "http://localhost:4000/api";
+const API_BASE_URL = "https://stock-analysis-y1zp.onrender.com/api";
 
 const PortfolioAnalysis = () => {
   const [portfolioJson, setPortfolioJson] = useState(`{
@@ -30,7 +30,7 @@ const PortfolioAnalysis = () => {
       // Parse and validate JSON
       const portfolioData = JSON.parse(portfolioJson.trim());
       const holdings = portfolioData.holdings;
-      
+
       if (!holdings || !Array.isArray(holdings)) {
         throw new Error("Portfolio must contain a 'holdings' array");
       }
@@ -179,15 +179,15 @@ const PortfolioAnalysis = () => {
                     {analysisData.biasScore.diversification_benefit ? "✓ Diversification Benefit" : "⚠ Limited Diversification"}
                   </p>
                 </div>
-                
+
                 {/* Individual Holdings Bias Scores */}
                 <div className="space-y-2">
                   <h5 className="font-medium text-sm">Individual Holdings Bias:</h5>
                   {analysisData.holdings.map((holding: any, index: number) => (
                     <div key={holding.symbol} className="flex justify-between items-center p-2 bg-muted/20 rounded">
                       <div className="flex items-center space-x-2">
-                        <div 
-                          className="w-3 h-3 rounded-full" 
+                        <div
+                          className="w-3 h-3 rounded-full"
                           style={{ backgroundColor: COLORS[index % COLORS.length] }}
                         />
                         <span className="font-medium text-sm">{holding.symbol}</span>
@@ -234,8 +234,8 @@ const PortfolioAnalysis = () => {
                 {analysisData.holdings.map((holding: any, index: number) => (
                   <div key={holding.symbol} className="flex justify-between items-center">
                     <div className="flex items-center space-x-2">
-                      <div 
-                        className="w-3 h-3 rounded-full" 
+                      <div
+                        className="w-3 h-3 rounded-full"
                         style={{ backgroundColor: COLORS[index % COLORS.length] }}
                       />
                       <span className="font-medium">{holding.symbol}</span>

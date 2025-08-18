@@ -6,7 +6,7 @@ import { Shield, Search, AlertTriangle, CheckCircle, Info, Loader2 } from "lucid
 import { toast } from "@/hooks/use-toast";
 import axios from "axios";
 
-const API_BASE_URL = "http://localhost:4000/api";
+const API_BASE_URL = "https://stock-analysis-y1zp.onrender.com/api";
 
 const BiasAnalysis = () => {
   const [symbol, setSymbol] = useState("");

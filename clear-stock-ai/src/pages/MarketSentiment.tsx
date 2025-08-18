@@ -6,7 +6,7 @@ import { TrendingUp, TrendingDown, Minus, Search, Newspaper, AlertCircle, Loader
 import { toast } from "@/hooks/use-toast";
 import axios from "axios";
 
-const API_BASE_URL = "http://localhost:4000/api";
+const API_BASE_URL = "https://stock-analysis-y1zp.onrender.com/api";
 
 const MarketSentiment = () => {
   const [symbol, setSymbol] = useState("");
@@ -29,11 +29,11 @@ const MarketSentiment = () => {
 
     try {
       const upperSymbol = symbol.toUpperCase().trim();
-      
+
       // Call the sentiment API
       const response = await axios.get(`${API_BASE_URL}/market/sentiment/${upperSymbol}`);
       const data = response.data;
-      
+
       setSentimentData(data);
       toast({
         title: "Sentiment Analysis Complete",
@@ -204,7 +204,7 @@ const MarketSentiment = () => {
           {/* Sentiment Scenarios */}
           {sentimentData.sentiment_analysis && (() => {
             const scenarios = getSentimentScenarios(sentimentData.sentiment_analysis);
-            
+
             return scenarios.bull || scenarios.bear || scenarios.neutral ? (
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {/* Bull Case */}

@@ -7,7 +7,7 @@ import { Search, TrendingUp, DollarSign, Calendar, Loader2, Shield, TrendingDown
 import { toast } from "@/hooks/use-toast";
 import axios from "axios";
 
-const API_BASE_URL = "http://localhost:4000/api";
+const API_BASE_URL = "https://stock-analysis-y1zp.onrender.com/api";
 
 const StockAnalysis = () => {
   const [symbol, setSymbol] = useState("");
@@ -30,11 +30,11 @@ const StockAnalysis = () => {
 
     try {
       const upperSymbol = symbol.toUpperCase().trim();
-      
+
       // Call the real API
       const response = await axios.get(`${API_BASE_URL}/stock/${upperSymbol}/analysis`);
       const data = response.data;
-      
+
       // Transform API data to display format
       const transformedData = {
         symbol: data.symbol,
@@ -48,7 +48,7 @@ const StockAnalysis = () => {
         methodology: data.methodology,
         timestamp: data.timestamp
       };
-      
+
       setStockData(transformedData);
       toast({
         title: "Analysis Complete",
@@ -148,9 +148,8 @@ const StockAnalysis = () => {
                   <p className="text-2xl font-bold text-foreground">
                     ${parseFloat(stockData.price).toFixed(2)}
                   </p>
-                  <p className={`text-sm font-medium ${
-                    parseFloat(stockData.change) >= 0 ? 'text-success' : 'text-destructive'
-                  }`}>
+                  <p className={`text-sm font-medium ${parseFloat(stockData.change) >= 0 ? 'text-success' : 'text-destructive'
+                    }`}>
                     {parseFloat(stockData.change) >= 0 ? '+' : ''}{parseFloat(stockData.change).toFixed(2)} ({stockData.changePercent})
                   </p>
                 </div>
@@ -169,12 +168,12 @@ const StockAnalysis = () => {
                     <p className="text-xs text-muted-foreground">{stockData.biasScore.confidence} confidence</p>
                   </div>
                 </div>
-                
+
                 <div className="flex items-center space-x-2 text-sm text-muted-foreground">
                   <Calendar className="w-4 h-4" />
                   <span>Last updated: {new Date(stockData.timestamp).toLocaleDateString()}</span>
                 </div>
-                
+
                 <div>
                   <h4 className="font-semibold text-foreground mb-2">Unbiased AI Analysis</h4>
                   <div className="text-card-foreground leading-relaxed prose prose-sm max-w-none">
@@ -189,7 +188,7 @@ const StockAnalysis = () => {
                     })}
                   </div>
                 </div>
-                
+
                 {/* Data Sources */}
                 <div className="mt-4 p-3 bg-muted/20 rounded-xl">
                   <h5 className="font-medium mb-2 text-sm">Data Sources ({stockData.sources.length})</h5>
@@ -236,7 +235,7 @@ const StockAnalysis = () => {
                     <p className="text-xs text-muted-foreground">AI Analysis</p>
                   </div>
                 </div>
-                
+
                 {/* Current Day Trading Data */}
                 <div className="mt-4 p-4 bg-gradient-to-r from-primary/5 to-accent/5 rounded-xl">
                   <h5 className="font-semibold mb-3">Today's Trading Summary</h5>
