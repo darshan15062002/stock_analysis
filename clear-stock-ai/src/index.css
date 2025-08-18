@@ -1,0 +1,151 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Unbiased Stock Analysis - Financial Dashboard Design System */
+
+@layer base {
+  :root {
+    /* Financial App Color Palette */
+    --background: 219 27% 98%;  /* #F9FAFB */
+    --foreground: 220 13% 7%;   /* #111827 */
+
+    --card: 0 0% 100%;          /* #FFFFFF */
+    --card-foreground: 220 9% 22%; /* #374151 */
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 13% 7%;
+
+    /* Primary - Financial Blue */
+    --primary: 219 84% 39%;     /* #1E40AF */
+    --primary-foreground: 0 0% 100%;
+
+    /* Secondary - Lighter Blue */
+    --secondary: 217 91% 59%;   /* #3B82F6 */
+    --secondary-foreground: 0 0% 100%;
+
+    /* Muted tones for subtle elements */
+    --muted: 220 13% 97%;       /* #F3F4F6 */
+    --muted-foreground: 220 9% 42%; /* #6B7280 */
+
+    /* Accent for highlights */
+    --accent: 217 91% 59%;      /* #3B82F6 */
+    --accent-foreground: 0 0% 100%;
+
+    /* Status colors */
+    --destructive: 0 72% 51%;   /* #DC2626 */
+    --destructive-foreground: 0 0% 100%;
+
+    --success: 142 71% 45%;     /* #16A34A */
+    --success-foreground: 0 0% 100%;
+
+    --warning: 45 93% 47%;      /* #D97706 */
+    --warning-foreground: 0 0% 100%;
+
+    /* Interface elements */
+    --border: 220 13% 91%;      /* #E5E7EB */
+    --input: 220 13% 91%;
+    --ring: 219 84% 39%;        /* Primary blue */
+
+    --radius: 0.5rem;
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-inter;
+    font-feature-settings: 'cv11', 'ss01';
+  }
+}
+
+@layer components {
+  /* Financial Dashboard Components */
+  .financial-card {
+    @apply bg-card rounded-2xl shadow-lg p-6 mb-6 border border-border/50;
+  }
+  
+  .financial-input {
+    @apply w-full p-3 border border-input rounded-xl focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-200;
+  }
+  
+  .chart-container {
+    @apply bg-card rounded-xl p-4 border border-border/30;
+  }
+}
+
+@layer utilities {
+  .gradient-primary {
+    background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
+  }
+  
+  .text-gradient {
+    background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .shadow-financial {
+    box-shadow: 0 10px 30px -10px hsl(var(--primary) / 0.15);
+  }
+}
