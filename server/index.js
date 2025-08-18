@@ -73,6 +73,71 @@ const detectMarket = (symbol) => {
     }
     return 'US';
 };
+function normalizeStockData(source, rawData) {
+    switch (source) {
+        case "AlphaVantage":
+            const q = rawData["Global Quote"];
+            return {
+                symbol: q["01. symbol"],
+                price: parseFloat(q["05. price"]),
+                change: parseFloat(q["09. change"]),
+                changePercent: q["10. change percent"],
+                previousClose: parseFloat(q["08. previous close"]),
+                open: parseFloat(q["02. open"]),
+                high: parseFloat(q["03. high"]),
+                low: parseFloat(q["04. low"]),
+                volume: parseInt(q["06. volume"], 10),
+                currency: "USD"
+            };
+
+        case "Finnhub":
+            return {
+                symbol: rawData.symbol || null,
+                price: rawData.c,
+                change: rawData.d,
+                changePercent: rawData.dp ? `${rawData.dp}%` : null,
+                previousClose: rawData.pc,
+                open: rawData.o,
+                high: rawData.h,
+                low: rawData.l,
+                volume: rawData.v,
+                currency: "USD"
+            };
+
+        case "Yahoo Finance India":
+            const { meta, indicators } = rawData.chart.result[0];
+            const quote = indicators.quote[0];
+
+            // Fallback handling
+            const prevClose = meta.previousClose || meta.chartPreviousClose || quote.close?.[0] || null;
+            const price = meta.regularMarketPrice || quote.close?.[0] || null;
+
+            let change = null;
+            let changePercent = null;
+            if (price !== null && prevClose !== null) {
+                change = price - prevClose;
+                changePercent = (((price - prevClose) / prevClose) * 100).toFixed(2) + "%";
+            }
+
+            return {
+                symbol: meta.symbol,
+                price,
+                change,
+                changePercent,
+                previousClose: prevClose,
+                open: quote.open?.[0] ?? null,
+                high: quote.high?.[0] ?? null,
+                low: quote.low?.[0] ?? null,
+                volume: quote.volume?.[0] ?? null,
+                currency: meta.currency
+            };
+
+        default:
+            return {};
+    }
+}
+
+
 
 // Enhanced data aggregation for both US and Indian markets
 const aggregateDataSources = async (symbol, dataType) => {
@@ -90,10 +155,10 @@ const aggregateDataSources = async (symbol, dataType) => {
                 }
             });
             sources.push({
-                source: 'AlphaVantage',
-                data: avResponse.data,
-                reliability: 0.85,
-                market: 'US'
+                source: "AlphaVantage",
+                reliability: 0.9,
+                market: "US",
+                data: normalizeStockData("AlphaVantage", avResponse.data)
             });
         } catch (error) {
             console.error('AlphaVantage error:', error.message);
@@ -107,10 +172,10 @@ const aggregateDataSources = async (symbol, dataType) => {
                 }
             });
             sources.push({
-                source: 'Finnhub',
-                data: fhResponse.data,
-                reliability: 0.90,
-                market: 'US'
+                source: "Finnhub",
+                reliability: 0.9,
+                market: "US",
+                data: normalizeStockData("Finnhub", fhResponse.data)
             });
         } catch (error) {
             console.error('Finnhub error:', error.message);
@@ -133,19 +198,10 @@ const aggregateDataSources = async (symbol, dataType) => {
             const quote = chartData.indicators.quote[0];
 
             sources.push({
-                source: 'Yahoo Finance India',
-                data: {
-                    symbol: meta.symbol,
-                    price: meta.regularMarketPrice,
-                    previousClose: meta.previousClose,
-                    open: quote.open[0],
-                    high: quote.high[0],
-                    low: quote.low[0],
-                    volume: quote.volume[0],
-                    currency: meta.currency
-                },
+                source: "Yahoo Finance India",
                 reliability: 0.88,
-                market: 'INDIAN'
+                market: "INDIAN",
+                data: normalizeStockData("Yahoo Finance India", yahooResponse.data)
             });
         } catch (error) {
             console.error('Yahoo Finance India error:', error.message);
