@@ -38,10 +38,16 @@ const StockAnalysis = () => {
       // Transform API data to display format
       const transformedData = {
         symbol: data.symbol,
-        name: `${data.symbol} Corporation`, // API doesn't return company name
-        price: data.sources[0]?.data?.["Global Quote"]?.["05. price"] || data.sources[1]?.data?.c,
-        change: data.sources[0]?.data?.["Global Quote"]?.["09. change"] || data.sources[1]?.data?.d,
-        changePercent: data.sources[0]?.data?.["Global Quote"]?.["10. change percent"] || `${data.sources[1]?.data?.dp}%`,
+        name: `${data.symbol} Corporation`, // still fake, unless you add company name in backend
+        price: data.sources[0]?.data?.price || null,
+        change: data.sources[0]?.data?.change || null,
+        changePercent: data.sources[0]?.data?.changePercent || null,
+        previousClose: data.sources[0]?.data?.previousClose || null,
+        open: data.sources[0]?.data?.open || null,
+        high: data.sources[0]?.data?.high || null,
+        low: data.sources[0]?.data?.low || null,
+        volume: data.sources[0]?.data?.volume || null,
+        currency: data.sources[0]?.data?.currency || null,
         analysis: data.ai_analysis,
         biasScore: data.bias_metrics,
         sources: data.sources,
@@ -242,22 +248,39 @@ const StockAnalysis = () => {
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
                     <div>
                       <span className="text-muted-foreground">Open:</span>
-                      <p className="font-semibold">${parseFloat(stockData.sources[0]?.data?.["Global Quote"]?.["02. open"] || stockData.sources[1]?.data?.o).toFixed(2)}</p>
+                      <p className="font-semibold">
+                        {stockData.sources[0]?.data?.open !== null
+                          ? `$${parseFloat(stockData.sources[0].data.open).toFixed(2)}`
+                          : "N/A"}
+                      </p>
                     </div>
                     <div>
                       <span className="text-muted-foreground">High:</span>
-                      <p className="font-semibold text-success">${parseFloat(stockData.sources[0]?.data?.["Global Quote"]?.["03. high"] || stockData.sources[1]?.data?.h).toFixed(2)}</p>
+                      <p className="font-semibold text-success">
+                        {stockData.sources[0]?.data?.high !== null
+                          ? `$${parseFloat(stockData.sources[0].data.high).toFixed(2)}`
+                          : "N/A"}
+                      </p>
                     </div>
                     <div>
                       <span className="text-muted-foreground">Low:</span>
-                      <p className="font-semibold text-destructive">${parseFloat(stockData.sources[0]?.data?.["Global Quote"]?.["04. low"] || stockData.sources[1]?.data?.l).toFixed(2)}</p>
+                      <p className="font-semibold text-destructive">
+                        {stockData.sources[0]?.data?.low !== null
+                          ? `$${parseFloat(stockData.sources[0].data.low).toFixed(2)}`
+                          : "N/A"}
+                      </p>
                     </div>
                     <div>
                       <span className="text-muted-foreground">Volume:</span>
-                      <p className="font-semibold">{parseInt(stockData.sources[0]?.data?.["Global Quote"]?.["06. volume"] || "0").toLocaleString()}</p>
+                      <p className="font-semibold">
+                        {stockData.sources[0]?.data?.volume !== null
+                          ? parseInt(stockData.sources[0].data.volume).toLocaleString()
+                          : "N/A"}
+                      </p>
                     </div>
                   </div>
                 </div>
+
               </div>
             </CardContent>
           </Card>
