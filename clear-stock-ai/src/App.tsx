@@ -8,6 +8,7 @@ import StockAnalysis from "./pages/StockAnalysis";
 import PortfolioAnalysis from "./pages/PortfolioAnalysis";
 import BiasAnalysis from "./pages/BiasAnalysis";
 import MarketSentiment from "./pages/MarketSentiment";
+import StoryStock from "./pages/StoryStock";
 import About from "./pages/About";
 import NotFound from "./pages/NotFound";
 
@@ -27,6 +28,7 @@ const App = () => (
               <Route path="/portfolio" element={<PortfolioAnalysis />} />
               <Route path="/bias" element={<BiasAnalysis />} />
               <Route path="/sentiment" element={<MarketSentiment />} />
+              <Route path="/story" element={<StoryStock />} />
               <Route path="/about" element={<About />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />

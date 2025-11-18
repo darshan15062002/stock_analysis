@@ -1,9 +1,12 @@
 const express = require('express');
 const axios = require('axios');
 const cors = require('cors');
+const path = require('path');
 const rateLimit = require('express-rate-limit');
 const helmet = require('helmet');
+const multer = require('multer');
 const { GoogleGenerativeAI } = require('@google/generative-ai');
+const { generateElevenAudio } = require('./src/generateAudio');
 require('dotenv').config();
 
 const app = express();
@@ -12,6 +15,20 @@ const PORT = process.env.PORT || 3000;
 // Initialize Gemini AI
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+const visionModel = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+
+// Configure multer for file uploads (memory storage)
+const upload = multer({
+    storage: multer.memoryStorage(),
+    limits: { fileSize: 10 * 1024 * 1024 }, // 10MB limit
+    fileFilter: (req, file, cb) => {
+        if (file.mimetype.startsWith('image/')) {
+            cb(null, true);
+        } else {
+            cb(new Error('Only images are allowed'));
+        }
+    }
+});
 
 // Middleware
 app.use(helmet());
@@ -778,6 +795,541 @@ app.get('/api/compare/:usSymbol/:indianSymbol', async (req, res) => {
     }
 });
 
+// **OCR PORTFOLIO IMAGE PROCESSING**
+app.post('/api/portfolio/extract-from-image', upload.single('portfolio_image'), async (req, res) => {
+    try {
+        if (!req.file) {
+            return res.status(400).json({
+                error: 'No image uploaded',
+                message: 'Please upload a portfolio screenshot or statement'
+            });
+        }
+
+        // Convert image buffer to base64
+        const imageBase64 = req.file.buffer.toString('base64');
+        const mimeType = req.file.mimetype;
+
+        // Use Gemini Vision to extract portfolio data
+        const extractionPrompt = `
+Analyze this portfolio statement/screenshot and extract the following information:
+
+1. List all stock holdings visible
+2. For each holding, extract:
+   - Stock symbol/name (convert to NSE symbol format like RELIANCE.NS, TCS.NS)
+   - Quantity/shares held
+   - Average buy price or invested amount
+   - Current price
+   - Current value
+   - Profit/Loss amount and percentage
+
+3. Calculate or extract:
+   - Total portfolio invested amount
+   - Total current value
+   - Overall P&L
+
+Return the data in this EXACT JSON format:
+{
+  "holdings": [
+    {
+      "symbol": "RELIANCE.NS",
+      "quantity": 100,
+      "invested": 250000,
+      "currentValue": 280000,
+      "pnl": 30000,
+      "pnlPercent": 12.0
+    }
+  ],
+  "summary": {
+    "totalInvested": 500000,
+    "totalCurrentValue": 520000,
+    "totalPnL": 20000,
+    "totalPnLPercent": 4.0
+  }
+}
+
+If you cannot extract some values, use reasonable estimates based on visible data.
+For Indian stocks, always add .NS suffix (NSE) or .BO (BSE) to symbols.
+Be precise with numbers - extract exact values shown in the image.
+`;
+
+        const result = await visionModel.generateContent([
+            extractionPrompt,
+            {
+                inlineData: {
+                    data: imageBase64,
+                    mimeType: mimeType
+                }
+            }
+        ]);
+
+        const response = await result.response;
+        const extractedText = response.text();
+
+        // Parse JSON from response
+        let portfolioData;
+        try {
+            // Extract JSON from markdown code blocks if present
+            const jsonMatch = extractedText.match(/```json\s*([\s\S]*?)\s*```/) ||
+                extractedText.match(/```\s*([\s\S]*?)\s*```/) ||
+                [null, extractedText];
+            portfolioData = JSON.parse(jsonMatch[1].trim());
+        } catch (parseError) {
+            console.error('JSON parse error:', parseError);
+            return res.status(500).json({
+                error: 'Failed to parse portfolio data from image',
+                details: 'OCR extraction was unclear. Please try a clearer image.',
+                rawExtraction: extractedText
+            });
+        }
+
+        res.json({
+            success: true,
+            message: 'Portfolio extracted from image',
+            portfolioData: portfolioData,
+            extractedHoldings: portfolioData.holdings?.length || 0
+        });
+
+    } catch (error) {
+        console.error('Image processing error:', error);
+        res.status(500).json({
+            error: 'Image processing failed',
+            details: error.message
+        });
+    }
+});
+
+// **STORY STOCK - NARRATIVE STOCK ANALYSIS**
+app.post('/api/stock-story', async (req, res) => {
+    try {
+        const { symbol, style = 'movie' } = req.body;
+
+        if (!symbol) {
+            return res.status(400).json({
+                error: 'Stock symbol required',
+                example: { symbol: 'AAPL', style: 'movie' }
+            });
+        }
+
+        const market = detectMarket(symbol);
+        const searchSymbol = market === 'INDIAN' && !symbol.includes('.NS') ? `${symbol}.NS` : symbol;
+
+        // Fetch real stock data
+        const sources = await aggregateDataSources(searchSymbol.toUpperCase());
+
+        if (sources.length === 0) {
+            return res.status(404).json({
+                error: 'Stock not found',
+                symbol: searchSymbol.toUpperCase()
+            });
+        }
+
+        // Extract key data
+        const mainSource = sources[0].data;
+        const currentPrice = mainSource.price || mainSource.c || parseFloat(mainSource['Global Quote']?.['05. price']) || 0;
+        const change = mainSource.change || mainSource.d || parseFloat(mainSource['Global Quote']?.['09. change']) || 0;
+        const changePercent = mainSource.changePercent || mainSource.dp || mainSource['Global Quote']?.['10. change percent'] || '0%';
+
+        // Define story style prompts
+        const stylePrompts = {
+            bedtime: "Write in a calm, simple narrative style like a bedtime story. Use gentle language and easy analogies.",
+            movie: "Write in a dramatic, exciting style like a movie script with acts and scenes. Make it engaging and suspenseful.",
+            teacher: "Write in an educational style with clear explanations and teaching moments. Be detailed but understandable.",
+            eli5: "Explain everything like you're talking to a 5-year-old. Use very simple words and everyday examples.",
+            facts: "Present just the facts in a straightforward, data-driven manner without storytelling elements."
+        };
+
+        const storyPrompt = `
+You are a master storyteller who makes stock investing accessible to everyone.
+
+Stock: ${searchSymbol.toUpperCase()}
+Current Price: $${currentPrice.toFixed(2)}
+Change: ${change >= 0 ? '+' : ''}${change.toFixed(2)} (${changePercent})
+Market: ${market}
+
+Style: ${stylePrompts[style] || stylePrompts.movie}
+
+Create a comprehensive story following this EXACT structure:
+
+**ACT 1: THE SETUP (Who is this company?)**
+Introduce the company like a character in a story. When did they start? What do they do? Use analogies to explain their business model in simple terms. Make it relatable.
+
+**ACT 2: THE CURRENT SITUATION**
+Explain where the stock stands today. What does the current price of $${currentPrice.toFixed(2)} really mean? Explain key metrics like P/E ratio, ROE, Debt/Equity using real-world analogies (like buying a shop, investing in a friend's business, etc.). Make numbers meaningful.
+
+**ACT 3: THE CONFLICT (The Risks)**
+Every story needs conflict. What could go wrong? What are the biggest risks? Competition? Economy? Management issues? Be honest and specific. Use examples people can visualize.
+
+**ACT 4: THE STRENGTHS**
+Balance the story. What makes this company strong? Why do people still believe in it? What are its competitive advantages? Use concrete examples.
+
+**ACT 5: THE VERDICT**
+Tie everything together. What's the story here? Is this a safe play, a risky bet, or somewhere in between? Be balanced and honest.
+
+CRITICAL RULES:
+1. Write for someone with ZERO financial knowledge
+2. Use analogies for every complex concept (P/E = buying a shop, ROE = return on your money, etc.)
+3. Be conversational and engaging
+4. NO jargon without explanation
+5. Make it personal ("imagine you..." "think of it like...")
+6. Keep paragraphs short and readable
+7. Be brutally honest about risks AND strengths
+8. Each act should be 150-200 words
+
+Return ONLY the story content, no JSON, no markdown headers. Just pure narrative text divided into the 5 acts with clear labels.
+`;
+
+        // Generate the story using Gemini
+        const storyResult = await model.generateContent(storyPrompt);
+        const storyResponse = await storyResult.response;
+        const fullStory = storyResponse.text();
+
+        // Parse the story into acts
+        const parseStory = (text) => {
+            const acts = {
+                setup: '',
+                currentSituation: '',
+                conflict: '',
+                strengths: '',
+                verdict: ''
+            };
+
+            // Try to extract each act
+            const setupMatch = text.match(/\*\*ACT 1[:\s]*THE SETUP[^*]*\*\*\s*([\s\S]*?)(?=\*\*ACT 2|$)/i);
+            const currentMatch = text.match(/\*\*ACT 2[:\s]*THE CURRENT SITUATION[^*]*\*\*\s*([\s\S]*?)(?=\*\*ACT 3|$)/i);
+            const conflictMatch = text.match(/\*\*ACT 3[:\s]*THE CONFLICT[^*]*\*\*\s*([\s\S]*?)(?=\*\*ACT 4|$)/i);
+            const strengthsMatch = text.match(/\*\*ACT 4[:\s]*THE STRENGTHS[^*]*\*\*\s*([\s\S]*?)(?=\*\*ACT 5|$)/i);
+            const verdictMatch = text.match(/\*\*ACT 5[:\s]*THE VERDICT[^*]*\*\*\s*([\s\S]*?)$/i);
+
+            acts.setup = setupMatch ? setupMatch[1].trim() : 'Story generation in progress...';
+            acts.currentSituation = currentMatch ? currentMatch[1].trim() : 'Analyzing current situation...';
+            acts.conflict = conflictMatch ? conflictMatch[1].trim() : 'Identifying risks...';
+            acts.strengths = strengthsMatch ? strengthsMatch[1].trim() : 'Evaluating strengths...';
+            acts.verdict = verdictMatch ? verdictMatch[1].trim() : 'Forming verdict...';
+
+            return acts;
+        };
+
+        const storyContent = parseStory(fullStory);
+
+        // Generate decision framework
+        const decisionPrompt = `
+Based on the stock ${searchSymbol.toUpperCase()} analysis, provide a simple decision framework.
+
+Give 3-4 clear, specific reasons for each category:
+1. YES, BUY IF: (When should someone buy this stock?)
+2. NO, DON'T BUY IF: (When should someone avoid this stock?)
+3. MAYBE, CONSIDER IF: (Middle ground scenarios)
+
+Make each reason one clear sentence. Be specific and actionable.
+Format as:
+YES:
+- reason 1
+- reason 2
+NO:
+- reason 1
+- reason 2
+MAYBE:
+- reason 1
+- reason 2
+`;
+
+        const decisionResult = await model.generateContent(decisionPrompt);
+        const decisionResponse = await decisionResult.response;
+        const decisionText = decisionResponse.text();
+
+        // Parse decision framework
+        const parseDecisions = (text) => {
+            const framework = {
+                buyIf: [],
+                noIf: [],
+                maybeIf: []
+            };
+
+            const yesMatch = text.match(/YES[:\s]*([\s\S]*?)(?=NO:|$)/i);
+            const noMatch = text.match(/NO[:\s]*([\s\S]*?)(?=MAYBE:|$)/i);
+            const maybeMatch = text.match(/MAYBE[:\s]*([\s\S]*?)$/i);
+
+            if (yesMatch) {
+                framework.buyIf = yesMatch[1].split('\n')
+                    .filter(line => line.trim().startsWith('-') || line.trim().startsWith('•'))
+                    .map(line => line.replace(/^[-•]\s*/, '').trim())
+                    .filter(line => line.length > 0);
+            }
+
+            if (noMatch) {
+                framework.noIf = noMatch[1].split('\n')
+                    .filter(line => line.trim().startsWith('-') || line.trim().startsWith('•'))
+                    .map(line => line.replace(/^[-•]\s*/, '').trim())
+                    .filter(line => line.length > 0);
+            }
+
+            if (maybeMatch) {
+                framework.maybeIf = maybeMatch[1].split('\n')
+                    .filter(line => line.trim().startsWith('-') || line.trim().startsWith('•'))
+                    .map(line => line.replace(/^[-•]\s*/, '').trim())
+                    .filter(line => line.length > 0);
+            }
+
+            return framework;
+        };
+
+        const decisionFramework = parseDecisions(decisionText);
+
+        const combinedStoryText = `
+ACT 1: ${storyContent.setup}
+
+ACT 2: ${storyContent.currentSituation}
+
+ACT 3: ${storyContent.conflict}
+
+ACT 4: ${storyContent.strengths}
+
+ACT 5: ${storyContent.verdict}
+`;
+        const storyAudioUrl = await generateElevenAudio(combinedStoryText);
+
+        // Build response
+        res.json({
+            symbol: searchSymbol.toUpperCase(),
+            currentPrice: currentPrice,
+            change: change,
+            changePercent: changePercent,
+            market: market,
+            storyStyle: style,
+            storyContent: storyContent,
+            storyAudio: storyAudioUrl,
+            decisionFramework: decisionFramework,
+            biasCheck: {
+                ownership: "We don't own this stock. We don't get paid by this company. We don't benefit if you buy or sell.",
+                dataSources: sources.map(s => s.source),
+                methodology: "This story was generated by AI analyzing real-time financial data, market news, expert opinions, and historical performance. Our goal: Tell you the truth, not sell you the stock."
+            },
+            metrics: {
+                pe: null, // Can be enhanced with real PE data
+                roe: null, // Can be enhanced with real ROE data
+                debtEquity: null // Can be enhanced with real debt/equity data
+            },
+            timestamp: new Date().toISOString()
+        });
+
+    } catch (error) {
+        console.error('Story generation error:', error);
+        res.status(500).json({
+            error: 'Story generation failed',
+            details: error.message
+        });
+    }
+});
+
+// **CLARITY ANALYSIS - THE KILLER FEATURE**
+app.post('/api/portfolio/clarity-analysis', async (req, res) => {
+    try {
+        const { holdings } = req.body;
+
+        if (!holdings || !Array.isArray(holdings)) {
+            return res.status(400).json({
+                error: 'Holdings array required',
+                message: 'Upload an image first or provide holdings data',
+                example: {
+                    holdings: [
+                        { symbol: 'RELIANCE.NS', weight: 0.25, invested: 100000 },
+                        { symbol: 'TCS.NS', weight: 0.25, invested: 100000 }
+                    ]
+                }
+            });
+        }
+
+        // Fetch real market data for each holding
+        const portfolioAnalysis = [];
+        let totalInvested = 0;
+        let totalCurrentValue = 0;
+        let losingStocks = [];
+
+        for (const holding of holdings) {
+            await sleep(200); // Rate limiting
+
+            const market = detectMarket(holding.symbol);
+            const sources = await aggregateDataSources(holding.symbol);
+
+            // Get current price from live data or use extracted data
+            let currentPrice = null;
+            if (sources.length > 0) {
+                const priceData = sources[0].data;
+                currentPrice = priceData.c || priceData.price ||
+                    priceData['Global Quote']?.['05. price'] || null;
+            }
+
+            // Use extracted values or calculate from live data
+            const invested = holding.invested || 0;
+            const currentValue = holding.currentValue || (holding.quantity * currentPrice) || 0;
+            const pnl = holding.pnl !== undefined ? holding.pnl : (currentValue - invested);
+            const pnlPercent = holding.pnlPercent !== undefined ?
+                holding.pnlPercent :
+                ((pnl / (invested || 1)) * 100).toFixed(2);
+
+            totalInvested += invested;
+            totalCurrentValue += currentValue;
+
+            portfolioAnalysis.push({
+                symbol: holding.symbol,
+                invested: invested,
+                currentValue: currentValue,
+                pnl: pnl,
+                pnlPercent: parseFloat(pnlPercent),
+                sources: sources
+            });
+
+            // Track losing stocks
+            if (pnl < 0) {
+                losingStocks.push({
+                    symbol: holding.symbol,
+                    loss: Math.abs(pnl),
+                    lossPercent: pnlPercent
+                });
+            }
+        }
+
+        const totalPnL = totalCurrentValue - totalInvested;
+        const totalPnLPercent = ((totalPnL / totalInvested) * 100).toFixed(2);
+
+        // Calculate health score (0-10)
+        // Factors: Diversity, PnL%, Losing positions, Risk concentration
+        const diversityScore = Math.min(holdings.length / 10, 1) * 3; // Max 3 points
+        const pnlScore = Math.max(0, Math.min((parseFloat(totalPnLPercent) + 50) / 10, 4)); // Max 4 points
+        const lossScore = Math.max(0, 3 - (losingStocks.length * 0.5)); // Max 3 points
+        const healthScore = Math.min((diversityScore + pnlScore + lossScore), 10).toFixed(1);
+
+        // Determine health label
+        let healthLabel, healthColor;
+        if (healthScore >= 8) {
+            healthLabel = "EXCELLENT";
+            healthColor = "text-green-500";
+        } else if (healthScore >= 6) {
+            healthLabel = "NEEDS ATTENTION";
+            healthColor = "text-yellow-500";
+        } else {
+            healthLabel = "CRITICAL";
+            healthColor = "text-red-500";
+        }
+
+        // Calculate anxiety score (0-10)
+        const anxietyFactors = {
+            losingPositions: Math.min(losingStocks.length * 2, 4),
+            portfolioDown: totalPnL < 0 ? 3 : 0,
+            lackOfDiversity: holdings.length < 5 ? 2 : 0,
+            majorLosses: losingStocks.filter(s => parseFloat(s.lossPercent) < -20).length
+        };
+        const anxietyScore = Math.min(
+            Object.values(anxietyFactors).reduce((a, b) => a + b, 0),
+            10
+        );
+
+        // Calculate "what if index fund" scenario
+        // Assume Nifty 50 average return: 12% per year
+        const monthsSinceInvest = 8; // Example timeframe
+        const indexReturn = 0.12 * (monthsSinceInvest / 12);
+        const ifIndexFund = totalInvested * (1 + indexReturn);
+        const yourLoss = Math.abs(totalPnL);
+        const difference = ifIndexFund - totalCurrentValue;
+
+        // Generate AI-powered brutally honest analysis
+        const clarityPrompt = `
+        You are a brutally honest financial advisor. Analyze this portfolio and provide a CLARITY report.
+        
+        Portfolio Data:
+        - Total Invested: ₹${totalInvested.toLocaleString('en-IN')}
+        - Current Value: ₹${totalCurrentValue.toLocaleString('en-IN')}
+        - Total P&L: ₹${totalPnL.toLocaleString('en-IN')} (${totalPnLPercent}%)
+        - Losing Stocks: ${losingStocks.length} out of ${holdings.length}
+        - Health Score: ${healthScore}/10
+        - Anxiety Score: ${anxietyScore}/10
+        
+        Holdings:
+        ${portfolioAnalysis.map(h =>
+            `${h.symbol}: Invested ₹${h.invested.toLocaleString('en-IN')}, ` +
+            `Current ₹${h.currentValue.toLocaleString('en-IN')}, ` +
+            `P&L: ${h.pnlPercent}%`
+        ).join('\n')}
+        
+        INSTRUCTIONS:
+        1. Be BRUTALLY HONEST - no sugar coating
+        2. Identify the ONE biggest problem with this portfolio
+        3. Give ONE clear actionable fix (sell X, buy Y)
+        4. Explain in simple language WHY the losing stocks are losing
+        5. Predict what will happen if they don't take action
+        6. Compare their performance to simple Nifty 50 index
+        7. Make it personal - talk directly to them
+        8. Maximum 250 words
+        
+        Write like you're their friend who's tired of watching them lose money.
+        `;
+
+        const aiAnalysis = await analyzeWithGemini(clarityPrompt, portfolioAnalysis);
+
+        // Biggest problem identification
+        let biggestProblem = {
+            title: "Holding losing stocks hoping for recovery",
+            description: "You have stocks that are bleeding money while you wait for a miracle recovery that probably won't come.",
+            losingStocks: losingStocks.sort((a, b) => parseFloat(a.lossPercent) - parseFloat(b.lossPercent)).slice(0, 3)
+        };
+
+        if (losingStocks.length === 0) {
+            biggestProblem = {
+                title: "Lack of diversification",
+                description: "Your portfolio is too concentrated. One bad quarter and you're in trouble.",
+                losingStocks: []
+            };
+        }
+
+        // The Fix
+        const theFix = {
+            action: losingStocks.length > 0
+                ? `Sell these ${losingStocks.length} losing positions tomorrow morning. Move to Nifty 50 Index Fund.`
+                : `Add more diversification. Add 3-5 more quality stocks or index funds.`,
+            expectedOutcome: losingStocks.length > 0
+                ? `Stop losing ₹${Math.abs(totalPnL).toLocaleString('en-IN')} → Start gaining with market returns`
+                : `Reduce risk, sleep better, match market returns`,
+            timeframe: "1 year"
+        };
+
+        res.json({
+            healthScore: parseFloat(healthScore),
+            healthLabel: healthLabel,
+            healthColor: healthColor,
+            anxietyScore: anxietyScore,
+            biggestProblem: biggestProblem,
+            theFix: theFix,
+            truthBomb: {
+                yourLoss: Math.round(yourLoss),
+                ifIndexFund: Math.round(ifIndexFund - totalInvested),
+                difference: Math.round(difference)
+            },
+            fullAnalysis: aiAnalysis,
+            portfolioSummary: {
+                totalInvested: totalInvested,
+                currentValue: totalCurrentValue,
+                totalPnL: totalPnL,
+                totalPnLPercent: parseFloat(totalPnLPercent),
+                losingPositions: losingStocks.length,
+                totalPositions: holdings.length
+            },
+            holdings: portfolioAnalysis,
+            timestamp: new Date().toISOString(),
+            nextAction: {
+                reminder: "Set for 9:30 AM tomorrow",
+                message: "Time to take action. No more waiting."
+            }
+        });
+
+    } catch (error) {
+        console.error('Clarity analysis error:', error);
+        res.status(500).json({
+            error: 'Clarity analysis failed',
+            details: error.message
+        });
+    }
+});
+
 // Health check with market support status
 app.get('/health', (req, res) => {
     res.json({
@@ -794,6 +1346,12 @@ app.get('/health', (req, res) => {
         sample_symbols: {
             us: ['AAPL', 'GOOGL', 'TSLA'],
             indian: ['RELIANCE.NS', 'TCS.NS', 'INFY.NS']
+        },
+        features: {
+            clarity_analysis: 'Enabled - Anti-anxiety investment insights',
+            bias_detection: 'Enabled',
+            voice_explanations: 'Frontend feature',
+            truth_bombs: 'Enabled'
         }
     });
 });
@@ -806,6 +1364,8 @@ app.use((error, req, res, next) => {
         message: process.env.NODE_ENV === 'development' ? error.message : 'Something went wrong'
     });
 });
+app.use("/api/audio", express.static(path.join(__dirname, "public", "audio")));
+
 
 app.listen(PORT, () => {
     console.log(`🚀 Multi-Market Stock Analysis API running on port ${PORT}`);
