@@ -1,0 +1,42 @@
+2025-11-25 22:35:18.527 | INFO     | agent:initialize_baseline:62 - 文件数量基准已初始化: {'insight': 0, 'media': 0, 'query': 0}
+2025-11-25 22:35:18.529 | INFO     | agent:__init__:143 - Report Agent已初始化
+2025-11-25 22:35:18.530 | INFO     | agent:__init__:144 - 使用LLM: {'provider': 'gemini-2.0-flash', 'model': 'gemini-2.0-flash', 'api_base': 'https://generativelanguage.googleapis.com/v1beta'}
+2025-11-25 22:35:18.531 | INFO     | agent:generate_report:197 - 开始生成报告: Generate an English ESG performance report for Alibaba Group's 2024 sustainability efforts
+2025-11-25 22:35:18.531 | INFO     | agent:generate_report:198 - 输入数据 - 报告数量: 3, 论坛日志长度: 351
+2025-11-25 22:35:18.532 | INFO     | agent:_select_template:226 - 选择报告模板...
+2025-11-25 22:35:18.534 | INFO     | nodes.template_selection_node:run:42 - 开始模板选择...
+2025-11-25 22:35:18.534 | ERROR    | nodes.template_selection_node:_get_available_templates:193 - 模板目录不存在: ReportEngine/report_template
+2025-11-25 22:35:18.535 | INFO     | nodes.template_selection_node:run:52 - 未找到预设模板，使用内置默认模板
+2025-11-25 22:35:18.536 | INFO     | nodes.template_selection_node:_get_fallback_template:239 - 未找到合适模板，使用空模板让LLM自行发挥
+2025-11-25 22:35:18.536 | INFO     | agent:_select_template:249 - 选择模板: 自由发挥模板
+2025-11-25 22:35:18.537 | INFO     | agent:_select_template:250 - 选择理由: 未找到合适的预设模板，让LLM根据内容自行设计报告结构
+2025-11-25 22:35:18.537 | INFO     | agent:_generate_html_report:266 - 多轮生成HTML报告...
+2025-11-25 22:35:18.538 | INFO     | nodes.html_generation_node:run:46 - 开始生成HTML报告...
+2025-11-25 22:36:19.451 | INFO     | nodes.html_generation_node:process_output:108 - 处理LLM原始输出，长度: 36124 字符
+2025-11-25 22:36:19.453 | INFO     | nodes.html_generation_node:process_output:127 - HTML处理完成，最终长度: 36112 字符
+2025-11-25 22:36:19.453 | INFO     | nodes.html_generation_node:run:68 - HTML报告生成完成
+2025-11-25 22:36:19.453 | INFO     | agent:_generate_html_report:294 - HTML报告生成完成
+2025-11-25 22:36:19.455 | INFO     | agent:_save_report:360 - 报告已保存到: final_reports\final_report__20251125_223619.html
+2025-11-25 22:36:19.457 | INFO     | agent:_save_report:366 - 状态已保存到: final_reports\report_state__20251125_223619.json
+2025-11-25 22:36:19.458 | INFO     | agent:generate_report:216 - 报告生成完成，耗时: 60.93 秒
+2025-11-29 06:34:24.710 | INFO     | agent:initialize_baseline:62 - 文件数量基准已初始化: {'insight': 0, 'media': 0, 'query': 0}
+2025-11-29 06:34:24.713 | INFO     | agent:__init__:143 - Report Agent已初始化
+2025-11-29 06:34:24.714 | INFO     | agent:__init__:144 - 使用LLM: {'provider': 'gemini-2.0-flash', 'model': 'gemini-2.0-flash', 'api_base': 'https://generativelanguage.googleapis.com/v1beta'}
+2025-11-29 06:34:28.854 | INFO     | agent:generate_report:197 - 开始生成报告: Generate a comprehensive daily portfolio report for darshanjain15062002@gmail.com's investment portfolio showing current performance, profit/loss analysis, and recommendations. Total P&L: ₹1,197.19
+2025-11-29 06:34:28.855 | INFO     | agent:generate_report:198 - 输入数据 - 报告数量: 3, 论坛日志长度: 247
+2025-11-29 06:34:28.855 | INFO     | agent:_select_template:226 - 选择报告模板...
+2025-11-29 06:34:28.856 | INFO     | nodes.template_selection_node:run:42 - 开始模板选择...
+2025-11-29 06:34:28.856 | ERROR    | nodes.template_selection_node:_get_available_templates:193 - 模板目录不存在: ReportEngine/report_template
+2025-11-29 06:34:28.857 | INFO     | nodes.template_selection_node:run:52 - 未找到预设模板，使用内置默认模板
+2025-11-29 06:34:28.857 | INFO     | nodes.template_selection_node:_get_fallback_template:239 - 未找到合适模板，使用空模板让LLM自行发挥
+2025-11-29 06:34:28.858 | INFO     | agent:_select_template:249 - 选择模板: 自由发挥模板
+2025-11-29 06:34:28.858 | INFO     | agent:_select_template:250 - 选择理由: 未找到合适的预设模板，让LLM根据内容自行设计报告结构
+2025-11-29 06:34:28.860 | INFO     | agent:_generate_html_report:266 - 多轮生成HTML报告...
+2025-11-29 06:34:28.863 | INFO     | nodes.html_generation_node:run:46 - 开始生成HTML报告...
+2025-11-29 06:35:23.868 | INFO     | nodes.html_generation_node:process_output:108 - 处理LLM原始输出，长度: 31036 字符
+2025-11-29 06:35:23.869 | INFO     | nodes.html_generation_node:process_output:127 - HTML处理完成，最终长度: 31028 字符
+2025-11-29 06:35:23.870 | INFO     | nodes.html_generation_node:run:68 - HTML报告生成完成
+2025-11-29 06:35:23.870 | INFO     | agent:_generate_html_report:294 - HTML报告生成完成
+2025-11-29 06:35:23.896 | INFO     | agent:_save_report:360 - 报告已保存到: final_reports\final_report__20251129_063523.html
+2025-11-29 06:35:23.901 | INFO     | agent:_save_report:366 - 状态已保存到: final_reports\report_state__20251129_063523.json
+2025-11-29 06:35:23.904 | INFO     | agent:generate_report:216 - 报告生成完成，耗时: 55.05 秒
