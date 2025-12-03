@@ -268,6 +268,64 @@ const aggregateDataSources = async (symbol, dataType) => {
         } catch (error) {
             console.error('AlphaVantage India error:', error.message);
         }
+
+        try {
+
+            const data = axios.get(`https://stockinsights-ai-main-95a26a0.zuplo.app/api/in/v0/documents/announcement`, {
+                params: {
+                    "ticker": ` BSE:${symbol.replace('.NS', '')}`,
+                    // take only last one month data
+                    "from_date": new Date(new Date().getFullYear(), new Date().getMonth() - 1, new Date().getDate()).toISOString().split('T')[0],
+                    "to_date": new Date().toISOString().split('T')[0]
+                },
+                headers: {
+                    "Authorization": `Bearer ${process.env.STOCK_INSIGHTS_AI_KEY}`
+                }
+            });
+
+            sources.push({
+                source: 'Stock Insights AI - Filings',
+                data: data.data,
+                reliability: 0.85,
+                market: 'INDIAN'
+            });
+
+        } catch (error) {
+            console.error('Stock Insights AI error:', error.message);
+        }
+
+        try {
+
+            const newsResponse = await axios.get(`https://news.google.com/rss/search`, {
+                params: {
+                    q: `${symbol} stock`,
+                    hl: 'en-IN',
+                    gl: 'IN',
+                    ceid: 'IN:en'
+                }
+            });
+
+            const newsItem = []
+            newsResponse?.data?.forEach((item) => {
+                newsItem.push({ title: item.title, link: item.link });
+            })
+
+
+
+
+
+            sources.push({
+                source: 'Google News',
+                data: newsItem,
+                reliability: 0.75,
+                market: 'INDIAN'
+            });
+
+        } catch (error) {
+            console.error('Google News error:', error.message);
+        }
+
+
     }
 
     return sources;
@@ -614,7 +672,7 @@ app.post('/api/portfolio/analysis', async (req, res) => {
 
         // Portfolio-level AI analysis with cross-market insights
         const portfolioAnalysis = await analyzeWithGemini(
-            `Analyze this multi-market portfolio for ${analysis_type}. 
+            `Analyze this portfolio for ${analysis_type}. 
              Portfolio includes ${marketBreakdown.US > 0 ? 'US stocks' : ''} ${marketBreakdown.INDIAN > 0 ? 'Indian stocks' : ''}.
              Consider currency risk, market correlation, regulatory differences, and potential biases in individual holdings.`,
             portfolioData

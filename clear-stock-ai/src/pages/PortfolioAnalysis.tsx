@@ -14,7 +14,7 @@ import { toast } from "@/hooks/use-toast";
 import axios from "axios";
 
 // const API_BASE_URL = "https://stock-analysis-y1zp.onrender.com/api";
-const API_BASE_URL = "http://localhost:4000/api";
+const API_BASE_URL = "https://stock-analysis-y1zp.onrender.com/api";
 
 type ViewMode = 'upload' | 'verdict' | 'explanation';
 

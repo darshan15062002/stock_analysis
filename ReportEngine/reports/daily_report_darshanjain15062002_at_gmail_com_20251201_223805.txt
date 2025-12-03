@@ -1,0 +1,875 @@
+Daily Portfolio Report for darshanjain15062002@gmail.com
+Generated on: 2025-12-01 22:38:56
+==================================================
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Portfolio Report</title>
+    <style>
+        /* CSS Reset */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Variables */
+        :root {
+            --primary-color: #007bff;
+            --secondary-color: #6c757d;
+            --success-color: #28a745;
+            --danger-color: #dc3545;
+            --warning-color: #ffc107;
+            --info-color: #17a2b8;
+            --light-color: #f8f9fa;
+            --dark-color: #343a40;
+            --text-color: #495057;
+            --background-color: #fff;
+            --border-color: #dee2e6;
+            --box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.075);
+
+            /* Dark Mode */
+            --dark-mode-text-color: #f8f9fa;
+            --dark-mode-background-color: #343a40;
+            --dark-mode-border-color: #495057;
+        }
+
+        /* General Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            transition: background-color 0.3s, color 0.3s;
+            padding: 20px;
+        }
+
+        body.dark-mode {
+            color: var(--dark-mode-text-color);
+            background-color: var(--dark-mode-background-color);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--dark-color);
+            margin-bottom: 1rem;
+        }
+
+        .dark-mode h1, .dark-mode h2, .dark-mode h3, .dark-mode h4, .dark-mode h5, .dark-mode h6 {
+            color: var(--dark-mode-text-color);
+        }
+
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        a:hover {
+            color: darken(var(--primary-color), 10%);
+        }
+
+        /* Layout */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Navigation */
+        nav {
+            margin-bottom: 2rem;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        nav li {
+            margin: 0 1rem;
+        }
+
+        nav a {
+            display: block;
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+        }
+
+        nav a:hover {
+            background-color: var(--light-color);
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .dark-mode nav a {
+            border-color: var(--dark-mode-border-color);
+        }
+
+        .dark-mode nav a:hover {
+            background-color: var(--dark-mode-background-color);
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        /* Sections */
+        section {
+            margin-bottom: 3rem;
+            padding: 20px;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            background-color: var(--light-color); /* Light background for sections */
+            box-shadow: var(--box-shadow);
+        }
+
+        .dark-mode section {
+            border-color: var(--dark-mode-border-color);
+            background-color: #444; /* Darker background for sections in dark mode */
+        }
+
+        section h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 0.5rem;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1.5rem;
+        }
+
+        th, td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            font-weight: bold;
+        }
+
+        tbody tr:nth-child(odd) {
+            background-color: #f9f9f9;
+        }
+
+        .dark-mode tbody tr:nth-child(odd) {
+            background-color: #555;
+        }
+
+        /* Forms */
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        textarea {
+            width: 100%;
+            padding: 0.75rem;
+            margin-bottom: 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        textarea:focus {
+            border-color: var(--primary-color);
+            outline: none;
+        }
+
+        button {
+            padding: 0.75rem 1.5rem;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: darken(var(--primary-color), 10%);
+        }
+
+        /* Utilities */
+        .text-center {
+            text-align: center;
+        }
+
+        .mt-2 {
+            margin-top: 2rem;
+        }
+
+        .mb-2 {
+            margin-bottom: 2rem;
+        }
+
+        .bold {
+            font-weight: bold;
+        }
+
+        /* Alerts */
+        .alert {
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid transparent;
+            border-radius: 5px;
+        }
+
+        .alert-success {
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+            color: #155724;
+        }
+
+        .alert-danger {
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+            color: #721c24;
+        }
+
+        /* Dark Mode adjustments for form elements */
+        .dark-mode input[type="text"],
+        .dark-mode input[type="email"],
+        .dark-mode textarea {
+            background-color: #444;
+            color: var(--dark-mode-text-color);
+            border-color: var(--dark-mode-border-color);
+        }
+
+        .dark-mode input[type="text"]:focus,
+        .dark-mode input[type="email"]:focus,
+        .dark-mode textarea:focus {
+            border-color: var(--primary-color);
+        }
+
+        .dark-mode button {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .dark-mode button:hover {
+            background-color: darken(var(--primary-color), 10%);
+        }
+
+        /* Accordion Styles */
+        .accordion {
+            margin-bottom: 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            overflow: hidden; /* Important for smooth transitions */
+        }
+
+        .accordion-header {
+            background-color: #eee;
+            color: #444;
+            cursor: pointer;
+            padding: 1rem;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 1rem;
+            transition: 0.4s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .accordion-header:hover {
+            background-color: #ddd;
+        }
+
+        .accordion-content {
+            padding: 0 1rem;
+            background-color: white;
+            display: none; /* Hidden by default */
+            overflow: hidden;
+            transition: max-height 0.3s ease; /* Transition for smooth expand/collapse */
+        }
+
+        .accordion-content p {
+            margin: 1rem 0;
+        }
+
+        .accordion.active .accordion-content {
+            display: block; /* Show when active */
+        }
+
+        /* Dark Mode Accordion */
+        .dark-mode .accordion {
+            border-color: var(--dark-mode-border-color);
+        }
+
+        .dark-mode .accordion-header {
+            background-color: #555;
+            color: var(--dark-mode-text-color);
+        }
+
+        .dark-mode .accordion-header:hover {
+            background-color: #666;
+        }
+
+        .dark-mode .accordion-content {
+            background-color: #444;
+            color: var(--dark-mode-text-color);
+        }
+
+        /* Chart Styles */
+        .chart-container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            background-color: var(--light-color);
+            box-shadow: var(--box-shadow);
+        }
+
+        .dark-mode .chart-container {
+            border-color: var(--dark-mode-border-color);
+            background-color: #444;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+
+            header h1 {
+                font-size: 2rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            nav li {
+                margin: 0.5rem 0;
+            }
+            .chart-container {
+                width: 100%; /* Make charts full width on smaller screens */
+            }
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .dark-mode footer {
+            border-color: var(--dark-mode-border-color);
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                background-color: white !important;
+                color: black !important;
+            }
+
+            .dark-mode body {
+                background-color: white !important;
+                color: black !important;
+            }
+
+            header, nav, button, .toggle-container, footer {
+                display: none !important;
+            }
+
+            section {
+                border: none !important;
+                box-shadow: none !important;
+                background-color: transparent !important;
+            }
+
+            table, th, td {
+                border: 1px solid black !important;
+            }
+
+            a {
+                color: black !important;
+                text-decoration: none !important;
+            }
+        }
+
+        /* Toggle Switch Styles */
+        .toggle-container {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            margin-bottom: 1rem;
+        }
+
+        .toggle-label {
+            margin-right: 10px;
+            font-size: 0.9rem;
+            color: var(--text-color);
+        }
+
+        .dark-mode .toggle-label {
+            color: var(--dark-mode-text-color);
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+        }
+
+        input:checked + .slider {
+            background-color: var(--primary-color);
+        }
+
+        input:focus + .slider {
+            box-shadow: 0 0 1px var(--primary-color);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+
+        /* Rounded sliders */
+        .slider.round {
+            border-radius: 34px;
+        }
+
+        .slider.round:before {
+            border-radius: 50%;
+        }
+
+        /* Button Styles */
+        .button-group {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .button-group button {
+            margin: 0 10px;
+        }
+
+        /* Collapsible Table */
+        .collapsible {
+          background-color: #777;
+          color: white;
+          cursor: pointer;
+          padding: 18px;
+          width: 100%;
+          border: none;
+          text-align: left;
+          outline: none;
+          font-size: 15px;
+        }
+
+        .active, .collapsible:hover {
+          background-color: #555;
+        }
+
+        .content {
+          padding: 0 18px;
+          display: none;
+          overflow: hidden;
+          background-color: #f1f1f1;
+        }
+
+        /* Forum Styles */
+        .forum-logs {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+        }
+
+        .forum-logs p {
+            margin: 5px 0;
+        }
+
+        .forum-logs p strong {
+            font-weight: bold;
+        }
+
+        /* Dark Mode Forum Styles */
+        .dark-mode .forum-logs {
+            background-color: #444;
+            border-color: #555;
+            color: var(--dark-mode-text-color);
+        }
+
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Daily Portfolio Report</h1>
+            <p>For: darshanjain15062002@gmail.com</p>
+        </header>
+
+        <div class="toggle-container">
+            <span class="toggle-label">Light Mode</span>
+            <label class="switch">
+                <input type="checkbox" id="themeToggle">
+                <span class="slider round"></span>
+            </label>
+            <span class="toggle-label">Dark Mode</span>
+        </div>
+
+        <nav>
+            <ul>
+                <li><a href="#summary">Report Summary</a></li>
+                <li><a href="#portfolioOverview">Portfolio Overview</a></li>
+                <li><a href="#holdingsBreakdown">Holdings Breakdown</a></li>
+                <li><a href="#forumAnalysis">Forum Analysis</a></li>
+                <li><a href="#recommendations">Recommendations</a></li>
+                <li><a href="#dataAppendix">Data Appendix</a></li>
+            </ul>
+        </nav>
+
+        <div class="button-group">
+            <button onclick="window.print()">Print Report</button>
+            <button onclick="downloadPDF()">Download as PDF</button>
+        </div>
+
+        <section id="summary">
+            <h2>Report Summary</h2>
+            <p>This daily portfolio report provides an overview of your investment portfolio's performance, profit/loss analysis, and recommendations based on current data and forum analysis. The report covers key performance indicators (KPIs), holdings breakdown, and insights derived from recent forum discussions.</p>
+            <p>Total P&L: <strong>₹1,197.19</strong></p>
+        </section>
+
+        <section id="portfolioOverview">
+            <h2>Portfolio Overview</h2>
+            <p>The portfolio consists of 6 stocks with a total value of ₹13,949.41. The overall Profit & Loss (P&L) is ₹1,197.19, representing a 9.39% increase.</p>
+
+            <h3>Key Points:</h3>
+            <ul>
+                <li>Total Investment: ₹12,752.22</li>
+                <li>Current Value: ₹13,949.41</li>
+                <li>Profit/Loss: ₹1,197.19</li>
+                <li>Number of Holdings: 6</li>
+            </ul>
+
+            <div class="chart-container">
+                <canvas id="portfolioValueChart"></canvas>
+            </div>
+
+            <p>The chart above visualizes the growth of your portfolio, comparing the initial investment against the current value. This provides a clear view of the overall portfolio performance.</p>
+
+            <button type="button" class="collapsible">Portfolio Composition Analysis</button>
+            <div class="content">
+                <p>This section provides a deeper dive into the allocation of assets within your portfolio. Understanding the distribution of investments across different stocks is crucial for risk management and diversification.</p>
+
+                <ul>
+                  <li><strong>Diversification Analysis:</strong> Assessment of how well the portfolio is diversified across different sectors and asset classes.</li>
+                  <li><strong>Sector Allocation:</strong> Breakdown of the portfolio by sector (e.g., IT, Finance, Energy).</li>
+                  <li><strong>Asset Class Allocation:</strong> Allocation of investments across different asset classes (e.g., Stocks, Bonds, Commodities).</li>
+                  <li><strong>Concentration Risk:</strong> Identification of any concentration risk due to over-investment in a single stock or sector.</li>
+                  <li><strong>Recommendations:</strong> Suggestions for rebalancing the portfolio to achieve better diversification and risk management.</li>
+                </ul>
+
+                <div class="chart-container">
+                    <canvas id="portfolioCompositionChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <section id="holdingsBreakdown">
+            <h2>Holdings Breakdown</h2>
+            <p>This section provides a detailed breakdown of each holding in your portfolio, including their performance and contribution to the overall P&L.</p>
+
+            <h3>Top Performers:</h3>
+            <ul>
+                <li>SBIN (State Bank of India): +₹649.08</li>
+                <li>KALYANJEWL (Kalyan Jewellers): +₹229.30</li>
+                <li>TATAMOTORS (Tata Motors): +₹103.20</li>
+            </ul>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Symbol</th>
+                        <th>Name</th>
+                        <th>Quantity</th>
+                        <th>Avg Price</th>
+                        <th>Current Price</th>
+                        <th>P&L (₹)</th>
+                        <th>P&L (%)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>TATAMOTORS.NS</td>
+                        <td>TATAMOTORS</td>
+                        <td>6</td>
+                        <td>671.1</td>
+                        <td>688.30</td>
+                        <td>103.20</td>
+                        <td>2.56%</td>
+                    </tr>
+                    <tr>
+                        <td>ADANITOTALGAS.NS</td>
+                        <td>ADANITOTALGAS</td>
+                        <td>3</td>
+                        <td>645.9</td>
+                        <td>675.75</td>
+                        <td>89.55</td>
+                        <td>4.62%</td>
+                    </tr>
+                    <tr>
+                        <td>INFOSYS.NS</td>
+                        <td>INFOSYS</td>
+                        <td>1</td>
+                        <td>1502.9</td>
+                        <td>1601.80</td>
+                        <td>98.90</td>
+                        <td>6.58%</td>
+                    </tr>
+                    <tr>
+                        <td>SBIN.NS</td>
+                        <td>SBIN</td>
+                        <td>6</td>
+                        <td>711.67</td>
+                        <td>819.85</td>
+                        <td>649.08</td>
+                        <td>15.20%</td>
+                    </tr>
+                    <tr>
+                        <td>TATASTEEL.NS</td>
+                        <td>TATASTEEL</td>
+                        <td>1</td>
+                        <td>132.6</td>
+                        <td>159.76</td>
+                        <td>27.16</td>
+                        <td>20.48%</td>
+                    </tr>
+                    <tr>
+                        <td>KALYANJEWL.NS</td>
+                        <td>KALYANJEWL</td>
+                        <td>2</td>
+                        <td>441.2</td>
+                        <td>555.85</td>
+                        <td>229.30</td>
+                        <td>25.99%</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p>The table above provides a detailed view of each holding, including the symbol, name, quantity, average price, current price, and P&L in both absolute value and percentage.</p>
+
+            <button type="button" class="collapsible">Detailed Stock Analysis</button>
+            <div class="content">
+              <p>This section dives deep into the individual performance of each stock within the portfolio. We'll analyze key metrics, potential risks, and opportunities for each holding.</p>
+              <ul>
+                <li><strong>Fundamental Analysis:</strong> Evaluation of each company's financial health, including revenue, earnings, debt, and cash flow.</li>
+                <li><strong>Technical Analysis:</strong> Examination of price charts and trading volumes to identify trends and patterns.</li>
+                <li><strong>SWOT Analysis:</strong> Identification of each company's Strengths, Weaknesses, Opportunities, and Threats.</li>
+                <li><strong>Peer Comparison:</strong> Comparison of each stock's performance against its industry peers.</li>
+                <li><strong>Recommendations:</strong> Specific buy, sell, or hold recommendations for each stock based on the analysis.</li>
+              </ul>
+            </div>
+        </section>
+
+        <section id="forumAnalysis">
+            <h2>Forum Analysis</h2>
+            <p>This section analyzes relevant forum discussions to provide additional insights into market sentiment and potential impacts on your portfolio.</p>
+
+            <div class="forum-logs">
+                <p><strong>[ForumHost]:</strong> Daily portfolio report for darshanjain15062002@gmail.com - 2025-12-01</p>
+                <p><strong>[PortfolioAgent]:</strong> Analyzed 6 holdings with total value ₹13,949.41</p>
+                <p><strong>[RiskAgent]:</strong> Portfolio shows positive performance</p>
+                <p><strong>[RecommendationAgent]:</strong> Focus on profit booking</p>
+            </div>
+
+            <p>The forum analysis indicates a positive sentiment regarding your portfolio's performance. The Recommendation Agent suggests focusing on profit booking, which may be a strategic move to capitalize on gains.</p>
+
+            <button type="button" class="collapsible">Sentiment Analysis from Forum Data</button>
+            <div class="content">
+              <p>This section provides a comprehensive sentiment analysis derived from forum discussions related to your portfolio holdings. Understanding public opinion can offer valuable insights into potential market movements.</p>
+                <ul>
+                  <li><strong>Overall Sentiment Score:</strong> A numerical representation of the general sentiment towards the portfolio.</li>
+                  <li><strong>Sentiment Breakdown by Stock:</strong> Analysis of sentiment for each individual stock within the portfolio.</li>
+                  <li><strong>Trending Topics:</strong> Identification of the most discussed topics related to the portfolio and its holdings.</li>
+                  <li><strong>Potential Risks and Opportunities:</strong> Highlighting potential risks and opportunities identified from the sentiment analysis.</li>
+                  <li><strong>Recommendations:</strong> Suggestions based on the sentiment analysis, such as adjusting positions based on market sentiment.</li>
+                </ul>
+
+                <div class="chart-container">
+                    <canvas id="sentimentAnalysisChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <section id="recommendations">
+            <h2>Recommendations</h2>
+            <p>Based on the portfolio overview, holdings breakdown, and forum analysis, the following recommendations are suggested:</p>
+
+            <ul>
+                <li><strong>Profit Booking:</strong> Consider booking profits on holdings that have shown significant gains, such as SBIN and KALYANJEWL.</li>
+                <li><strong>Portfolio Rebalancing:</strong> Evaluate the portfolio's diversification and rebalance as needed to align with your risk tolerance and investment goals.</li>
+                <li><strong>Monitor Market Sentiment:</strong> Continuously monitor market sentiment and forum discussions to stay informed about potential market impacts.</li>
+            </ul>
+        </section>
+
+        <section id="dataAppendix">
+            <h2>Data Appendix</h2>
+            <p>This section provides the raw data and additional information used in generating this report.</p>
+
+            <h3>Raw Data:</h3>
+            <pre>
+                <code>
+{
+  "query": "Generate a comprehensive daily portfolio report for darshanjain15062002@gmail.com's investment portfolio showing current performance, profit/loss analysis, and recommendations. Total P&L: ₹1,197.19",
+  "query_engine_report": "{'type': 'portfolio', 'summary': 'Portfolio of 6 stocks with total value ₹13,949.41. Overall P&L: ₹1,197.19 (+9.39%)', 'key_points': ['Total Investment: ₹12,752.22', 'Current Value: ₹13,949.41', 'Profit/Loss: ₹1,197.19', 'Number of Holdings: 6']}",
+  "media_engine_report": "{'type': 'holdings', 'summary': 'Top performers: SBIN (+₹649.08), KALYANJEWL (+₹229.30), TATAMOTORS (+₹103.20)', 'holdings_breakdown': [{'symbol': 'TATAMOTORS.NS', 'name': 'TATAMOTORS', 'quantity': 6, 'avg_price': 671.1, 'current_price': 688.3000000000001, 'pnl': 103.2, 'pnl_percentage': 2.5629563403367674}, {'symbol': 'ADANITOTALGAS.NS', 'name': 'ADANITOTALGAS', 'quantity': 3, 'avg_price': 645.9, 'current_price': 675.75, 'pnl': 89.55, 'pnl_percentage': 4.621458430097542}, {'symbol': 'INFOSYS.NS', 'name': 'INFOSYS', 'quantity': 1, 'avg_price': 1502.9, 'current_price': 1601.8, 'pnl': 98.9, 'pnl_percentage': 6.5806108190830965}, {'symbol': 'SBIN.NS', 'name': 'SBIN', 'quantity': 6, 'avg_price': 711.6700000000001, 'current_price': 819.85, 'pnl': 649.08, 'pnl_percentage': 15.200865569716292}, {'symbol': 'TATASTEEL.NS', 'name': 'TATASTEEL', 'quantity': 1, 'avg_price': 132.6, 'current_price': 159.76, 'pnl': 27.16, 'pnl_percentage': 20.482654600301657}, {'symbol': 'KALYANJEWL.NS', 'name': 'KALYANJEWL', 'quantity': 2, 'avg_price': 441.2, 'current_price': 555.85, 'pnl': 229.3, 'pnl_percentage': 25.985947416137815}]}",
+  "insight_engine_report": "{'type': 'ai_analysis', 'summary': 'Portfolio analysis unavailable', 'bias_score': {}, 'market_breakdown': {}}",
+  "forum_logs": "\n[ForumHost]: Daily portfolio report for darshanjain15062002@gmail.com - 2025-12-01\n[PortfolioAgent]: Analyzed 6 holdings with total value ₹13,949.41\n[RiskAgent]: Portfolio shows positive performance\n[RecommendationAgent]: Focus on profit booking\n",
+  "selected_template": ""
+}
+                </code>
+            </pre>
+        </section>
+
+        <footer>
+            <p>&copy; 2024 Portfolio Analysis. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+
+        themeToggle.addEventListener('change', () => {
+            body.classList.toggle('dark-mode');
+        });
+
+        // Accordion Functionality
+        const collapsibles = document.querySelectorAll(".collapsible");
+
+        collapsibles.forEach(collapsible => {
+          collapsible.addEventListener("click", function() {
+            this.classList.toggle("active");
+            var content = this.nextElementSibling;
+            if (content.style.display === "block") {
+              content.style.display = "none";
+            } else {
+              content.style.display = "block";
+            }
+          });
+        });
+
+        // Chart Data
+        const portfolioValueData = {
+            labels: ['Total Investment', 'Current Value'],
+            datasets: [{
+                label: 'Portfolio Value',
+                data: [12752.22, 13949.41],
+                backgroundColor: [
+                    'rgba(54, 162, 235, 0.5)',
+                    'rgba(75, 192, 192, 0.5)'
+                ],
+                borderColor: [
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(75, 192, 192, 1)'
+                ],
+                borderWidth: 1
+            }]
+        };
+
+        const portfolioCompositionData = {
+          labels: ['TATAMOTORS', 'ADANITOTALGAS', 'INFOSYS', 'SBIN', 'TATASTEEL', 'KALYANJEWL'],
+          datasets: [{
+            label: 'Portfolio Composition',
+            data: [688.30, 675.75, 1601.80, 819.85, 159.76, 555.85], // Current prices
+            backgroundColor: [
+              'rgba(255, 99, 132, 0.5)', // Red
+              'rgba(54, 162, 235, 0.5)', // Blue
+              'rgba(255, 206, 86, 0.5)', // Yellow
+              'rgba(75, 192, 192, 0.5)', // Green
+              'rgba(153, 102, 255, 0.5)', // Purple
+              'rgba(255, 159, 64, 0.5)'  // Orange
+            ],
+            borderColor: [
+              'rgba(255, 99, 132, 1)',
+              'rgba(54, 162, 235, 1)',
+              'rgba(255, 206, 86, 1)',
+              'rgba(75, 192, 192, 1)',
+              'rgba(153, 102, 255, 1)',
+              'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+          }]
+        };
+
+        const sentimentAnalysisData = {
+          labels: ['Positive', 'Negative', 'Neutral'],
+          datasets: [{
+            label: 'Sentiment Analysis',
+            data: [75, 15, 10], // Example sentiment percentages
+            backgroundColor: [
+              'rgba(75, 192, 192, 0.5)', // Green
+              'rgba(255, 99, 132, 0.5)', // Red
+              'rgba(255, 206, 86, 0.5)'  // Yellow
+            ],
+            borderColor: [
+              'rgba(75, 192, 192, 1)',

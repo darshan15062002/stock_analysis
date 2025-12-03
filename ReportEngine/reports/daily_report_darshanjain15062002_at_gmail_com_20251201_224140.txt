@@ -1,0 +1,677 @@
+Daily Portfolio Report for darshanjain15062002@gmail.com
+Generated on: 2025-12-01 22:42:29
+==================================================
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Portfolio Report</title>
+    <style>
+        /* CSS Reset */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Variables */
+        :root {
+            --primary-color: #007bff;
+            --secondary-color: #6c757d;
+            --success-color: #28a745;
+            --danger-color: #dc3545;
+            --warning-color: #ffc107;
+            --info-color: #17a2b8;
+            --light-color: #f8f9fa;
+            --dark-color: #343a40;
+            --body-bg: #fff;
+            --body-text: #333;
+            --link-color: #007bff;
+            --link-hover-color: #0056b3;
+            --border-color: #dee2e6;
+            --box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.075);
+        }
+
+        /* Dark Mode */
+        [data-theme="dark"] {
+            --body-bg: #121212;
+            --body-text: #f8f9fa;
+            --link-color: #5bc0de;
+            --link-hover-color: #46b8da;
+            --border-color: #444;
+            --box-shadow: 0 0.25rem 0.5rem rgba(255, 255, 255, 0.075);
+        }
+
+        /* General Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--body-text);
+            background-color: var(--body-bg);
+            margin: 0;
+            padding: 0;
+        }
+
+        a {
+            color: var(--link-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--link-hover-color);
+            text-decoration: underline;
+        }
+
+        /* Layout */
+        .container {
+            width: 95%;
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: var(--light-color);
+            border-radius: 8px;
+            box-shadow: var(--box-shadow);
+        }
+
+        .report-header {
+            text-align: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .report-section {
+            margin-bottom: 30px;
+            padding: 15px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .report-section:last-child {
+            border-bottom: none;
+        }
+
+        .report-section h2 {
+            margin-bottom: 15px;
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 5px;
+        }
+
+        .report-section h3 {
+            margin-top: 20px;
+            margin-bottom: 10px;
+            color: var(--secondary-color);
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Arial', sans-serif;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+
+        p {
+            margin-bottom: 15px;
+            font-size: 1.05rem;
+        }
+
+        ul, ol {
+            margin-bottom: 15px;
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        /* Tables */
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 15px;
+            background-color: var(--body-bg);
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            background-color: #f2f2f2;
+            color: var(--dark-color);
+            font-weight: bold;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        /* Charts */
+        .chart-container {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 1rem;
+            font-weight: 500;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary-color);
+            color: #fff;
+        }
+
+        .btn-secondary:hover {
+            background-color: #545b62;
+        }
+
+        /* Forms */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            font-size: 1rem;
+            color: var(--body-text);
+            background-color: var(--body-bg);
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="password"]:focus,
+        textarea:focus,
+        select:focus {
+            border-color: var(--primary-color);
+            outline: none;
+        }
+
+        /* Utilities */
+        .text-center {
+            text-align: center;
+        }
+
+        .mt-2 {
+            margin-top: 20px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                width: 95%;
+                padding: 10px;
+            }
+
+            th, td {
+                padding: 8px 10px;
+            }
+
+            .btn {
+                padding: 8px 16px;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Collapsible Sections */
+        .collapsible {
+            background-color: #777;
+            color: white;
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 15px;
+        }
+
+        .active, .collapsible:hover {
+            background-color: #555;
+        }
+
+        .content {
+            padding: 0 18px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.2s ease-out;
+            background-color: #f1f1f1;
+        }
+        /* Float Chart */
+        .chart-float {
+            float: left;
+            width: 45%; /* Adjust as needed */
+            margin-right: 20px; /* Adjust as needed */
+            margin-bottom: 20px;
+        }
+        /* Theme Toggle Button */
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: var(--secondary-color);
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        .theme-toggle:hover {
+            background-color: #545b62;
+        }
+        /* Print Styles */
+        @media print {
+            body {
+                background-color: #fff !important;
+                color: #000 !important;
+            }
+
+            .container {
+                box-shadow: none !important;
+                border: none !important;
+            }
+
+            /* Hide unnecessary elements */
+            .theme-toggle, .print-button, #report-toc {
+                display: none !important;
+            }
+
+            /* Adjust table styles for printing */
+            table {
+                border: 1px solid #000 !important;
+            }
+
+            th, td {
+                border: 1px solid #000 !important;
+            }
+
+            a {
+                color: inherit !important;
+                text-decoration: none !important;
+            }
+            /* Expand all collapsible sections */
+            .collapsible {
+                display: none !important; /* Hide the button itself */
+            }
+
+            .content {
+                max-height: none !important; /* Show all content */
+                display: block !important; /* Ensure content is displayed */
+                padding: 0 !important; /* Reset padding */
+            }
+
+            /* Remove borders that were previously hidden with CSS */
+            .report-section {
+                border-bottom: 1px solid #000 !important; /* Or whatever color you want */
+            }
+
+            .report-section:last-child {
+                border-bottom: none !important;
+            }
+
+        }
+        /* PDF Export Button */
+        .pdf-export-button {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            text-decoration: none;
+        }
+
+        .pdf-export-button:hover {
+            background-color: #c82333;
+        }
+        /* Section Numbering */
+        body {
+          counter-reset: section;
+        }
+
+        h2::before {
+          counter-increment: section;
+          content: counter(section) ". ";
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<button class="theme-toggle" onclick="toggleTheme()">Toggle Dark Mode</button>
+
+<div class="container">
+    <div class="report-header">
+        <h1>Daily Portfolio Report</h1>
+        <p><strong>Email:</strong> darshanjain15062002@gmail.com</p>
+        <p><strong>Date:</strong> 2025-12-01</p>
+        <p><strong>Total P&L:</strong> ₹1,197.19</p>
+        <button class="btn btn-primary print-button" onclick="window.print()">Print Report</button>
+        <a href="#" class="pdf-export-button" onclick="exportToPDF()">Export to PDF</a>
+    </div>
+
+    <div id="report-toc">
+        <h2>Table of Contents</h2>
+        <ul>
+            <li><a href="#portfolio-summary">Portfolio Summary</a></li>
+            <li><a href="#holdings-analysis">Holdings Analysis</a></li>
+            <li><a href="#ai-analysis">AI Analysis</a></li>
+            <li><a href="#forum-insights">Forum Insights</a></li>
+            <li><a href="#profit-loss">Profit/Loss Analysis</a></li>
+            <li><a href="#recommendations">Recommendations</a></li>
+            <li><a href="#market-risk-assessment">Market-Specific Risk Assessment</a></li>
+            <li><a href="#bias-analysis">Bias Analysis</a></li>
+            <li><a href="#scenario-analysis">Scenario Analysis</a></li>
+            <li><a href="#cross-market-comparison">Cross-Market Comparison</a></li>
+            <li><a href="#data-appendix">Data Appendix</a></li>
+        </ul>
+    </div>
+
+    <div class="report-section" id="portfolio-summary">
+        <h2>Portfolio Summary</h2>
+        <p>Portfolio of 6 stocks with a total value of ₹13,949.41. Overall P&L: ₹1,197.19 (+9.39%).</p>
+        <ul>
+            <li>Total Investment: ₹12,752.22</li>
+            <li>Current Value: ₹13,949.41</li>
+            <li>Profit/Loss: ₹1,197.19</li>
+            <li>Number of Holdings: 6</li>
+        </ul>
+    </div>
+
+    <div class="report-section" id="holdings-analysis">
+        <h2>Holdings Analysis</h2>
+        <p>Top performers: SBIN (+₹649.08), KALYANJEWL (+₹229.30), TATAMOTORS (+₹103.20)</p>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Symbol</th>
+                        <th>Name</th>
+                        <th>Quantity</th>
+                        <th>Avg. Price</th>
+                        <th>Current Price</th>
+                        <th>P&L (₹)</th>
+                        <th>P&L (%)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>TATAMOTORS.NS</td>
+                        <td>TATAMOTORS</td>
+                        <td>6</td>
+                        <td>671.1</td>
+                        <td>688.30</td>
+                        <td>103.20</td>
+                        <td>2.56%</td>
+                    </tr>
+                    <tr>
+                        <td>ADANITOTALGAS.NS</td>
+                        <td>ADANITOTALGAS</td>
+                        <td>3</td>
+                        <td>645.9</td>
+                        <td>675.75</td>
+                        <td>89.55</td>
+                        <td>4.62%</td>
+                    </tr>
+                    <tr>
+                        <td>INFOSYS.NS</td>
+                        <td>INFOSYS</td>
+                        <td>1</td>
+                        <td>1502.9</td>
+                        <td>1601.80</td>
+                        <td>98.90</td>
+                        <td>6.58%</td>
+                    </tr>
+                    <tr>
+                        <td>SBIN.NS</td>
+                        <td>SBIN</td>
+                        <td>6</td>
+                        <td>711.67</td>
+                        <td>819.85</td>
+                        <td>649.08</td>
+                        <td>15.20%</td>
+                    </tr>
+                    <tr>
+                        <td>TATASTEEL.NS</td>
+                        <td>TATASTEEL</td>
+                        <td>1</td>
+                        <td>132.6</td>
+                        <td>159.76</td>
+                        <td>27.16</td>
+                        <td>20.48%</td>
+                    </tr>
+                    <tr>
+                        <td>KALYANJEWL.NS</td>
+                        <td>KALYANJEWL</td>
+                        <td>2</td>
+                        <td>441.2</td>
+                        <td>555.85</td>
+                        <td>229.30</td>
+                        <td>25.99%</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="chart-container">
+            <canvas id="holdingsChart"></canvas>
+        </div>
+    </div>
+
+     <div class="report-section" id="ai-analysis">
+        <h2>AI Analysis</h2>
+        <p>Here's an unbiased financial analysis of the provided portfolio data, focusing on implications for US-based investors and incorporating the requested elements:</p>
+
+        <h3>1. Objective Summary of Current Metrics</h3>
+        <ul>
+            <li><strong>Portfolio Composition:</strong> The portfolio contains a mix of Indian equities listed on the National Stock Exchange of India (NSE). The data indicates that some stocks are classified as "US" market stocks, though this seems inconsistent with their NSE listing. This is a critical data discrepancy that needs immediate clarification.</li>
+            <li><strong>Weights:</strong> SBIN.NS (35.26%) and TATAMOTORS.NS (29.61%) constitute a significant portion of the portfolio, making its performance highly dependent on these two stocks. ADANITOTALGAS.NS (14.53%), INFOSYS.NS (11.48%), KALYANJEWL.NS (7.97%), and TATASTEEL.NS (1.15%) have relatively smaller weights.</li>
+            <li><strong>Data Sources:</strong> Most stocks rely on AlphaVantage India for data. TATASTEEL.NS also uses NSE India data, providing some price information. The reliability scores for the sources are generally acceptable (0.8-0.95).</li>
+            <li><strong>"Bias Score":</strong> The "bias_score" is consistently 0.5 with low confidence due to a lack of sources. This score seems to indicate a lack of information about potential biases affecting these stocks, not an actual bias level.</li>
+            <li><strong>Price Data (TATASTEEL.NS only):</strong> We have limited current price information only for TATASTEEL.NS, suggesting a recent price of ₹168.6, a small increase from the previous close.</li>
+        </ul>
+    </div>
+
+    <div class="report-section" id="market-risk-assessment">
+        <h2>Market-Specific Risk Assessment</h2>
+        <h3>US Market (Perspective):</h3>
+        <p>For US investors, these are <em>foreign</em> equities. The primary risks are:</p>
+        <ul>
+            <li><strong>Currency Risk:</strong> Fluctuations in the INR/USD exchange rate directly impact dollar-denominated returns. A weakening INR will reduce returns, while a strengthening INR will boost them.</li>
+            <li><strong>Political and Regulatory Risk (India):</strong> Indian political stability, government policies, and regulatory environment can significantly affect Indian companies' performance. Changes in tax laws, trade policies, or industry-specific regulations are key risks.</li>
+            <li><strong>Economic Risk (India):</strong> India's economic growth, inflation, interest rates, and fiscal policies all influence the profitability and valuation of these companies. A slowdown in the Indian economy would negatively impact these holdings.</li>
+            <li><strong>Liquidity Risk:</strong> Liquidity in the Indian stock market for these specific stocks is a factor. US investors might face challenges in quickly buying or selling large positions without affecting prices.</li>
+            <li><strong>Information Asymmetry:</strong> US investors might have less access to real-time information and in-depth analysis of Indian companies compared to domestic investors in India.</li>
+            <li><strong>SEC Regulations:</strong> SEC regulations primarily concern US-listed securities and broker-dealers. Since these stocks are listed in India, US investors need to ensure their brokerage accounts allow trading in foreign markets and comply with all relevant KYC/AML regulations. Holding these stocks might have implications for US tax reporting (e.g., Foreign Account Tax Compliance Act - FATCA).</li>
+        </ul>
+    </div>
+
+    <div class="report-section" id="key-factors-to-monitor">
+        <h2>Key Factors to Monitor for US Markets (Relevant to this portfolio)</h2>
+        <ul>
+            <li><strong>USD/INR Exchange Rate:</strong> Closely monitor the exchange rate and factors driving its movement (e.g., US and Indian monetary policies, trade balances, global risk sentiment).</li>
+            <li><strong>US Interest Rate Policy:</strong> The Federal Reserve's interest rate decisions affect the strength of the dollar and global capital flows, indirectly impacting Indian markets.</li>
+            <li><strong>Global Risk Sentiment:</strong> "Risk-on" or "risk-off" sentiment in global markets influences investment flows into and out of emerging markets like India. Increased risk aversion typically leads to capital outflows from emerging markets and a weaker INR.</li>
+            <li><strong>US Inflation Data:</strong> US inflation reports guide the Fed's monetary policy and affect US interest rates, indirectly influencing global markets.</li>
+            <li><strong>US-India Trade Relations:</strong> Monitor any changes in trade agreements or policies between the US and India, as they can impact the prospects of Indian companies.</li>
+        </ul>
+    </div>
+
+    <div class="report-section" id="bias-analysis">
+        <h2>Potential Biases in the Data or Common Market Misconceptions</h2>
+        <ul>
+            <li><strong>Data Accuracy:</strong> The categorization of INFOSYS.NS, SBIN.NS and KALYANJEWL.NS as "US" market stocks is highly suspect. This needs to be verified. It's possible there are ADRs (American Depositary Receipts) listed in the US, but the '.NS' suffix strongly suggests they are primarily listed in India.</li>
+            <li><strong>Availability Bias:</strong> Relying heavily on AlphaVantage India might introduce a bias toward information readily available in English and accessible to US-based analysts, potentially overlooking crucial local insights.</li>
+            <li><strong>Representativeness Heuristic:</strong> Assuming that past performance of these Indian stocks will continue in the future, even if the US and Indian economies or market conditions change significantly.</li>
+            <li><strong>Overconfidence Bias:</strong> US investors might overestimate their understanding of the Indian market, its regulations, and the specific risks associated with these companies.</li>
+            <li><strong>Confirmation Bias:</strong> Seeking out information that confirms existing beliefs about these stocks or the Indian market, while ignoring contradictory evidence.</li>
+        </ul>
+    </div>
+
+    <div class="report-section" id="scenario-analysis">
+        <h2>Multiple Scenarios (Bull, Bear, Neutral Cases)</h2>
+        <h3>Bull Case:</h3>
+        <ul>
+            <li><strong>Scenario:</strong> Strong global economic growth, a stable or weakening USD/INR exchange rate, supportive Indian government policies, and positive earnings growth for the portfolio companies.</li>
+            <li><strong>Impact:</strong> Dollar-denominated returns would be strong, driven by both local currency appreciation and stock price gains.</li>
+            <li><strong>US Relevance:</strong> Increased risk appetite in the US market would further boost investment flows into emerging markets like India.</li>
+        </ul>
+        <h3>Bear Case:</h3>
+        <ul>
+            <li><strong>Scenario:</strong> Global recession, strengthening USD/INR exchange rate (INR weakening), negative regulatory changes in India, and disappointing earnings for the portfolio companies.</li>
+            <li><strong>Impact:</strong> Significant dollar-denominated losses due to currency depreciation and stock price declines.</li>
+            <li><strong>US Relevance:</strong> Risk aversion in the US market would lead to capital outflows from emerging markets.</li>
+        </ul>
+        <h3>Neutral Case:</h3>
+        <ul>
+            <li><strong>Scenario:</strong> Moderate global economic growth, a relatively stable USD/INR exchange rate, no major policy changes in India, and mixed earnings performance for the portfolio companies.</li>
+            <li><strong>Impact:</strong> Modest dollar-denominated returns, potentially underperforming US market benchmarks.</li>
+            <li><strong>US Relevance:</strong> US market performance would be a greater driver of overall portfolio returns, with the Indian holdings providing some diversification benefits but limited growth potential.</li>
+        </ul>
+    </div>
+
+    <div class="report-section" id="cross-market-comparison">
+        <h2>Cross-Market Comparison Insights</h2>
+        <ul>
+            <li><strong>Correlation:</strong> The correlation between the Indian stock market and the US stock market is not always high. While global economic factors can impact both, local events and policy decisions often have a greater influence on the Indian market. Consider the correlation of returns for Indian ADRs (if they exist) with the US market.</li>
+            <li><strong>Growth vs. Value:</strong> Emerging markets like India often offer higher growth potential compared to developed markets like the US, but also come with greater risk and volatility. The portfolio's allocation to Indian equities should be considered in light of the investor's risk tolerance and investment goals.</li>
+            <li><strong>Sector Exposure:</strong> The Indian stock market has different sector compositions compared to the US market. The portfolio's sector exposure needs to be considered in the context of the overall investment strategy and risk profile. For instance, an overweight position in Indian financials (like SBIN.NS) might be desirable if the investor believes in the long-term growth of the Indian banking sector.</li>
+        </ul>
+    </div>
+    <div class="report-section" id="forum-insights">
+        <h2>Forum Insights</h2>
+        <p>Analysis of forum logs related to the portfolio:</p>
+        <ul>
+            <li><strong>ForumHost:</strong> Daily portfolio report for darshanjain15062002@gmail.com - 2025-12-01</li>
+            <li><strong>PortfolioAgent:</strong> Analyzed 6 holdings with total value ₹13,949.41</li>
+            <li><strong>RiskAgent:</strong> Portfolio shows positive performance</li>
+            <li><strong>RecommendationAgent:</strong> Focus on profit booking</li>
+        </ul>
+        <p>The forum discussions suggest a positive outlook on the portfolio's performance. There's a consensus that focusing on profit booking might be a prudent strategy.</p>
+        <div class="chart-container">
+            <canvas id="forumActivityChart"></canvas>
+        </div>
+    </div>
+
+    <div class="report-section" id="profit-loss">
+        <h2>Profit/Loss Analysis</h2>
+        <p>Detailed breakdown of profit and loss for each holding:</p>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Stock</th>
+                        <th>Profit/Loss (₹)</th>
+                        <th>Profit/Loss (%)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>TATAMOTORS.NS</td>
+                        <td>103.20</td>
+                        <td>2.56%</td>
+                    </tr>
+                    <tr>
+                        <td>ADANITOTALGAS.NS</td>
+                        <td>89.55</td>
+                        <td>4.62%</td>
+                    </tr>
+                    <tr>
+                        <td>INFOSYS.NS</td>
+                        <td>98.90</td>
+                        <td>6.58%</td>
+                    </tr>
+                    <tr>
+                        <td>SBIN.NS</td>
+                        <td>649.08</td>
+                        <td>15.20%</td>
+                    </tr>
+                    <tr>
+                        <td>TATASTEEL.NS</td>
+                        <td>27.16</td>
+                        <td>20.48%</td>
+                    </tr>
+                    <tr>
+                        <td>KALYANJEWL.NS</td>
+                        <td>229.30</td>
+                        <td>25.99%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Total</strong></td>
+                        <td><strong>1197.19</strong></td>
+                        <td><strong>9.39%</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="chart-container">
+            <canvas id="profitLossChart"></canvas>
+        </div>
+    </div>
+
+    <div class="report-section" id="recommendations">
+        <h2>Recommendations</h2>
+        <ol>
+            <li><strong>Verify Data:</strong> Immediately clarify and correct the market classifications. Determine if any of these companies have ADRs listed on US exchanges.</li>
+            <li><strong>Diversification:</strong> The portfolio is highly concentrated in a few Indian stocks. Consider diversifying across sectors, geographies, and asset classes to reduce risk.</li>
+            <li><strong>Currency Hedging:</strong> Evaluate the feasibility of hedging the USD/INR exchange rate risk to mitigate potential losses from currency depreciation.</li>
+            <li><strong>Due Diligence:</strong> Conduct thorough due diligence on each company, including financial analysis, industry analysis, and management assessment. Seek independent research from reputable sources with expertise in the Indian market.</li>
+            <li><strong>Risk Tolerance:</strong> Assess your risk tolerance and investment goals before making any investment decisions. Emerging market investments are inherently riskier than developed market investments.</li>
+            <li><strong>ESG Factors:</strong> Consider Environmental, Social, and Governance (ESG) factors. Evaluate the ESG practices of the Indian companies, as these factors are increasingly important for responsible investing.</li>
+            <li><strong>Profit Booking:</strong> Given the positive performance, consider booking profits in stocks that have significantly contributed to the portfolio's gains, as suggested by the RecommendationAgent.</li>
+        </ol>
+        <p>This analysis is based on the limited information provided. A more comprehensive assessment would require detailed financial data, economic forecasts, and in-depth knowledge of the Indian market.</p>
+    </div>
+
+    <div class="report-section" id="data-appendix">
+        <h2>Data Appendix</h2>
+        <p>Additional data and sources used for this report:</p>
+        <ul>
+            <li>Query: Generate a comprehensive daily portfolio report for darshanjain15062002@gmail.com's investment portfolio showing current performance, profit/loss analysis, and recommendations. Total P&L: ₹1,197.19</li>
+            <li>Query Engine Report: {'type': 'portfolio', 'summary': 'Portfolio of 6 stocks with total value ₹13,949.41. Overall P&L: ₹1,197.19 (+9.39%)', 'key_points': ['Total Investment: ₹12,752.22', 'Current Value: ₹13,949.41', 'Profit/Loss: ₹1,197.19', 'Number of Holdings: 6']}</li>
+            <li>Media Engine Report: {'type': 'holdings', 'summary': 'Top performers: SBIN (+₹649.08), KALYANJEWL (+₹229.30), TATAMOTORS (+₹103.20)', 'holdings_breakdown': [{'symbol': 'TATAMOTORS.NS', 'name': 'TATAMOTORS', 'quantity': 6, 'avg_price': 671.1, 'current_price': 688.3000000000001, 'pnl': 103.2, 'pnl_percentage': 2.5629563403367674}, {'symbol': 'ADANITOTALGAS.NS', 'name': 'ADANITOTALGAS', 'quantity': 3, 'avg_price': 645.9, 'current_price': 675.75, 'pnl': 89.55, 'pnl_percentage': 4.621458430097542}, {'symbol': 'INFOSYS.NS', 'name': 'INFOSYS', 'quantity': 1, 'avg_price': 1502.9, 'current_price': 1601.8, 'pnl': 98.9, 'pnl_percentage': 6.5806108190830965}, {'symbol': 'SBIN.NS', 'name': 'SBIN', 'quantity': 6, 'avg_price': 711.6700000000001, 'current_price': 819.85, 'pnl': 649.08, 'pnl_percentage': 15.200865569716292}, {'symbol': 'TATASTEEL.NS', 'name': 'TATASTEEL', 'quantity': 1, 'avg_price': 132.6, 'current_price': 159.76, 'pnl': 27.16, 'pnl_percentage': 20.482654600301657}, {'symbol': 'KALYANJEWL.NS', 'name': 'KALYANJEWL', 'quantity': 2, 'avg_price': 441.2, 'current_price': 555.85, 'pnl': 229.3, 'pnl_percentage': 25.985947416137815}]}</li>
+            <li>Insight Engine Report: {'type': 'ai_analysis', 'summary': 'Okay, here\'s an unbiased financial analysis of the provided portfolio data, focusing on implications for US-based investors and incorporating the requested elements:\n\n**1. Objective Summary of Current Metrics**\n\n*   **Portfolio Composition:** The portfolio contains a mix of Indian equities listed on the National Stock Exchange of India (NSE). The data indicates that some stocks are classified as "US" market stocks, though this seems inconsistent with their NSE listing. This is a critical data discrepancy that needs immediate clarification.\n*   **Weights:**  SBIN.NS (35.26%) and TATAMOTORS.NS (29.61%) constitute a significant portion of the portfolio, making its performance highly dependent on these two stocks. ADANITOTALGAS.NS (14.53%), INFOSYS.NS (11.48%), KALYANJEWL.NS (7.97%), and TATASTEEL.NS (1.15%) have relatively smaller weights.\n*   **Data Sources:**  Most stocks rely on AlphaVantage India for data. TATASTEEL.NS also uses NSE India data, providing some price information. The reliability scores for the sources are generally acceptable (0.8-0.95).\n*   **"Bias Score":** The "bias_score" is consistently 0.5 with low confidence due to a lack of sources. This score seems to indicate a lack of information about potential biases affecting these stocks, not an actual bias level.\n*   **Price Data (TATASTEEL.NS only):**  We have limited current price information only for TATASTEEL.NS, suggesting a recent price of ₹168.6, a small increase from the previous close.\n\n**2. Market-Specific Risk Assessment**\n\n*   **US Market (Perspective):**  For US investors, these are *foreign* equities. The primary risks are:\\n    *   **Currency Risk:** Fluctuations in the INR/USD exchange rate directly impact dollar-denominated returns. A weakening INR will reduce returns, while a strengthening INR will boost them.\\n    *   **Political and Regulatory Risk (India):**  Indian political stability, government policies, and regulatory environment can significantly affect Indian companies\' performance. Changes in tax laws, trade policies, or industry-specific regulations are key risks.\\n    *   **Economic Risk (India):** India\'s economic growth, inflation, interest rates, and fiscal policies all influence the profitability and valuation of these companies. A slowdown in the Indian economy would negatively impact these holdings.\\n    *   **Liquidity Risk:**  Liquidity in the Indian stock market for these specific stocks is a factor.  US investors might face challenges in quickly buying or selling large positions without affecting prices.\\n    *   **Information Asymmetry:** US investors might have less access to real-time information and in-depth analysis of Indian companies compared to domestic investors in India.\\n    *   **SEC Regulations:** SEC regulations primarily concern US-listed securities and broker-dealers. Since these stocks

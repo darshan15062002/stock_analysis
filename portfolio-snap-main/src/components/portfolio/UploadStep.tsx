@@ -28,7 +28,7 @@ const UploadStep = ({ onUploadSuccess }: UploadStepProps) => {
   const handleDrop = useCallback((e: React.DragEvent) => {
     e.preventDefault();
     setIsDragging(false);
-    
+
     const file = e.dataTransfer.files[0];
     if (file && file.type.startsWith("image/")) {
       setSelectedFile(file);
@@ -52,12 +52,12 @@ const UploadStep = ({ onUploadSuccess }: UploadStepProps) => {
     if (!selectedFile) return;
 
     setIsUploading(true);
-    
+
     try {
       const formData = new FormData();
       formData.append("portfolio_image", selectedFile);
 
-      const response = await fetch("http://localhost:4000/api/portfolio/extract-from-image", {
+      const response = await fetch("https://stock-analysis-y1zp.onrender.com/api/portfolio/extract-from-image", {
         method: "POST",
         headers: {
           "accept": "application/json",
@@ -70,7 +70,7 @@ const UploadStep = ({ onUploadSuccess }: UploadStepProps) => {
       }
 
       const data = await response.json();
-      
+
       // Transform API response to match our PortfolioData type
       const portfolioData: PortfolioData = {
         source: data.portfolio_source || "unknown",
@@ -126,8 +126,8 @@ const UploadStep = ({ onUploadSuccess }: UploadStepProps) => {
             onDrop={handleDrop}
             className={`
               relative border-2 border-dashed rounded-2xl transition-all duration-300
-              ${isDragging 
-                ? "border-primary bg-primary/5 scale-[1.02]" 
+              ${isDragging
+                ? "border-primary bg-primary/5 scale-[1.02]"
                 : "border-border hover:border-primary/50 hover:bg-muted/20"
               }
               ${selectedFile ? "bg-muted/30" : ""}
@@ -141,12 +141,12 @@ const UploadStep = ({ onUploadSuccess }: UploadStepProps) => {
                 className="hidden"
                 disabled={isUploading}
               />
-              
+
               <div className="flex flex-col items-center space-y-6">
                 <div className={`
                   p-6 rounded-2xl transition-all duration-300
-                  ${selectedFile 
-                    ? "bg-primary/20 shadow-glow" 
+                  ${selectedFile
+                    ? "bg-primary/20 shadow-glow"
                     : "bg-muted/50"
                   }
                 `}>
@@ -156,7 +156,7 @@ const UploadStep = ({ onUploadSuccess }: UploadStepProps) => {
                     <Upload className="w-16 h-16 text-muted-foreground" />
                   )}
                 </div>
-                
+
                 {selectedFile ? (
                   <div className="text-center space-y-2">
                     <p className="text-lg font-semibold text-foreground">

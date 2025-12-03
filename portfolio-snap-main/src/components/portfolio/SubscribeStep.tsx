@@ -47,7 +47,7 @@ const SubscribeStep = ({ portfolioData, onSubscribe, onBack }: SubscribeStepProp
         },
       };
 
-      const response = await fetch("http://localhost:4000/api/user/subscribe", {
+      const response = await fetch("https://stock-analysis-y1zp.onrender.com/api/user/subscribe", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -125,7 +125,7 @@ const SubscribeStep = ({ portfolioData, onSubscribe, onBack }: SubscribeStepProp
             <Label className="text-base font-semibold text-foreground">
               Report Frequency
             </Label>
-            
+
             <div className="grid gap-4">
               {[
                 { value: "daily", label: "Daily", desc: "Get insights every day" },

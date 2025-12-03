@@ -40,3 +40,519 @@
 2025-11-29 06:35:23.896 | INFO     | agent:_save_report:360 - 报告已保存到: final_reports\final_report__20251129_063523.html
 2025-11-29 06:35:23.901 | INFO     | agent:_save_report:366 - 状态已保存到: final_reports\report_state__20251129_063523.json
 2025-11-29 06:35:23.904 | INFO     | agent:generate_report:216 - 报告生成完成，耗时: 55.05 秒
+2025-12-01 20:53:59.641 | INFO     | agent:initialize_baseline:62 - 文件数量基准已初始化: {'insight': 0, 'media': 0, 'query': 0}
+2025-12-01 20:53:59.645 | INFO     | agent:__init__:143 - Report Agent已初始化
+2025-12-01 20:53:59.645 | INFO     | agent:__init__:144 - 使用LLM: {'provider': 'gemini-2.0-flash', 'model': 'gemini-2.0-flash', 'api_base': 'https://generativelanguage.googleapis.com/v1beta'}
+2025-12-01 20:54:03.752 | INFO     | agent:generate_report:197 - 开始生成报告: Generate a comprehensive daily portfolio report for darshanjain15062002@gmail.com's investment portfolio showing current performance, profit/loss analysis, and recommendations. Total P&L: ₹1,197.19
+2025-12-01 20:54:03.754 | INFO     | agent:generate_report:198 - 输入数据 - 报告数量: 3, 论坛日志长度: 247
+2025-12-01 20:54:03.754 | INFO     | agent:_select_template:226 - 选择报告模板...
+2025-12-01 20:54:03.755 | INFO     | nodes.template_selection_node:run:42 - 开始模板选择...
+2025-12-01 20:54:03.755 | ERROR    | nodes.template_selection_node:_get_available_templates:193 - 模板目录不存在: ReportEngine/report_template
+2025-12-01 20:54:03.755 | INFO     | nodes.template_selection_node:run:52 - 未找到预设模板，使用内置默认模板
+2025-12-01 20:54:03.756 | INFO     | nodes.template_selection_node:_get_fallback_template:239 - 未找到合适模板，使用空模板让LLM自行发挥
+2025-12-01 20:54:03.756 | INFO     | agent:_select_template:249 - 选择模板: 自由发挥模板
+2025-12-01 20:54:03.757 | INFO     | agent:_select_template:250 - 选择理由: 未找到合适的预设模板，让LLM根据内容自行设计报告结构
+2025-12-01 20:54:03.757 | INFO     | agent:_generate_html_report:266 - 多轮生成HTML报告...
+2025-12-01 20:54:03.759 | INFO     | nodes.html_generation_node:run:46 - 开始生成HTML报告...
+2025-12-01 20:54:05.887 | ERROR    | llms.base:stream_invoke:117 - 流式请求失败: Error code: 403 - [{'error': {'code': 403, 'message': 'Your API key was reported as leaked. Please use another API key.', 'status': 'PERMISSION_DENIED'}}]
+2025-12-01 20:54:05.887 | ERROR    | nodes.html_generation_node:run:72 - HTML生成失败: Error code: 403 - [{'error': {'code': 403, 'message': 'Your API key was reported as leaked. Please use another API key.', 'status': 'PERMISSION_DENIED'}}]
+Traceback (most recent call last):
+
+  File "C:\Darshan\stockanalysis\ReportEngine\test.py", line 382, in <module>
+    generate_daily_reports()
+    └ <function generate_daily_reports at 0x000002889B14C9A0>
+
+  File "C:\Darshan\stockanalysis\ReportEngine\test.py", line 312, in generate_daily_reports
+    report = agent.generate_report(
+             │     └ <function ReportAgent.generate_report at 0x000002889B14C0E0>
+             └ <agent.ReportAgent object at 0x000002889B13F0D0>
+
+  File "C:\Darshan\stockanalysis\ReportEngine\agent.py", line 205, in generate_report
+    html_report = self._generate_html_report(query, reports, forum_logs, template_result)
+                  │    │                     │      │        │           └ {'template_name': '自由发挥模板', 'template_content': '', 'selection_reason': '未找到合适的预设模板，让LLM根据内容自行设计报告结构'}
+                  │    │                     │      │        └ '\n[ForumHost]: Daily portfolio report for darshanjain15062002@gmail.com - 2025-12-01\n[PortfolioAgent]: Analyzed 6 holdings ...
+                  │    │                     │      └ [{'type': 'portfolio', 'summary': 'Portfolio of 6 stocks with total value ₹13,949.41. Overall P&L: ₹1,197.19 (+9.39%)', 'key_...
+                  │    │                     └ "Generate a comprehensive daily portfolio report for darshanjain15062002@gmail.com's investment portfolio showing current per...
+                  │    └ <function ReportAgent._generate_html_report at 0x000002889B14C220>
+                  └ <agent.ReportAgent object at 0x000002889B13F0D0>
+
+  File "C:\Darshan\stockanalysis\ReportEngine\agent.py", line 288, in _generate_html_report
+    html_content = self.html_generation_node.run(html_input)
+                   │    │                    │   └ {'query': "Generate a comprehensive daily portfolio report for darshanjain15062002@gmail.com's investment portfolio showing c...
+                   │    │                    └ <function HTMLGenerationNode.run at 0x000002889B0A20C0>
+                   │    └ <nodes.html_generation_node.HTMLGenerationNode object at 0x000002889B6CFA50>
+                   └ <agent.ReportAgent object at 0x000002889B13F0D0>
+
+> File "C:\Darshan\stockanalysis\ReportEngine\nodes\html_generation_node.py", line 63, in run
+    response = self.llm_client.stream_invoke_to_string(SYSTEM_PROMPT_HTML_GENERATION, message)
+               │    │          │                       │                              └ '{\n  "query": "Generate a comprehensive daily portfolio report for darshanjain15062002@gmail.com\'s investment portfolio sho...
+               │    │          │                       └ '\n你是一位专业的HTML报告生成专家。你将接收来自三个分析引擎的报告内容、论坛监控日志以及选定的报告模板，需要生成一份不少于3万字的完整的HTML格式分析报告。\n\n<INPUT JSON SCHEMA>\n{\n  "type": "obje...
+               │    │          └ <function LLMClient.stream_invoke_to_string at 0x000002889B087560>
+               │    └ <llms.base.LLMClient object at 0x000002889B36F4D0>
+               └ <nodes.html_generation_node.HTMLGenerationNode object at 0x000002889B6CFA50>
+
+  File "C:\Darshan\stockanalysis\ReportEngine\llms\base.py", line 135, in stream_invoke_to_string
+    for chunk in self.stream_invoke(system_prompt, user_prompt, **kwargs):
+                 │    │             │              │              └ {}
+                 │    │             │              └ '{\n  "query": "Generate a comprehensive daily portfolio report for darshanjain15062002@gmail.com\'s investment portfolio sho...
+                 │    │             └ '\n你是一位专业的HTML报告生成专家。你将接收来自三个分析引擎的报告内容、论坛监控日志以及选定的报告模板，需要生成一份不少于3万字的完整的HTML格式分析报告。\n\n<INPUT JSON SCHEMA>\n{\n  "type": "obje...
+                 │    └ <function LLMClient.stream_invoke at 0x000002889B086FC0>
+                 └ <llms.base.LLMClient object at 0x000002889B36F4D0>
+
+  File "C:\Darshan\stockanalysis\ReportEngine\llms\base.py", line 118, in stream_invoke
+    raise e
+
+  File "C:\Darshan\stockanalysis\ReportEngine\llms\base.py", line 104, in stream_invoke
+    stream = self.client.chat.completions.create(
+             │    │      │    │           └ <function Completions.create at 0x000002889B987560>
+             │    │      │    └ <openai.resources.chat.completions.completions.Completions object at 0x000002889B77F190>
+             │    │      └ <openai.resources.chat.chat.Chat object at 0x000002889B77EF90>
+             │    └ <openai.OpenAI object at 0x000002889B6CD550>
+             └ <llms.base.LLMClient object at 0x000002889B36F4D0>
+
+  File "C:\Users\darsh\AppData\Local\Programs\Python\Python311\Lib\site-packages\openai\_utils\_utils.py", line 286, in wrapper
+    return func(*args, **kwargs)
+           │     │       └ {'model': 'gemini-2.0-flash', 'messages': [{'role': 'system', 'content': '\n你是一位专业的HTML报告生成专家。你将接收来自三个分析引擎的报告内容、论坛监控日志以及选定的报告...
+           │     └ (<openai.resources.chat.completions.completions.Completions object at 0x000002889B77F190>,)
+           └ <function Completions.create at 0x000002889B987380>
+  File "C:\Users\darsh\AppData\Local\Programs\Python\Python311\Lib\site-packages\openai\resources\chat\completions\completions.py", line 1189, in create
+    return self._post(
+           │    └ <bound method SyncAPIClient.post of <openai.OpenAI object at 0x000002889B6CD550>>
+           └ <openai.resources.chat.completions.completions.Completions object at 0x000002889B77F190>
+  File "C:\Users\darsh\AppData\Local\Programs\Python\Python311\Lib\site-packages\openai\_base_client.py", line 1259, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+           │    │          │    │       │        │            │                  └ openai.Stream[openai.types.chat.chat_completion_chunk.ChatCompletionChunk]
+           │    │          │    │       │        │            └ True
+           │    │          │    │       │        └ FinalRequestOptions(method='post', url='/chat/completions', params={}, headers=NOT_GIVEN, max_retries=NOT_GIVEN, timeout=3000...
+           │    │          │    │       └ <class 'openai.types.chat.chat_completion.ChatCompletion'>
+           │    │          │    └ <function SyncAPIClient.request at 0x0000028899F345E0>
+           │    │          └ <openai.OpenAI object at 0x000002889B6CD550>
+           │    └ ~ResponseT
+           └ <function cast at 0x0000028896234FE0>
+  File "C:\Users\darsh\AppData\Local\Programs\Python\Python311\Lib\site-packages\openai\_base_client.py", line 1047, in request
+    raise self._make_status_error_from_response(err.response) from None
+          │    └ <function BaseClient._make_status_error_from_response at 0x0000028899F2ED40>
+          └ <openai.OpenAI object at 0x000002889B6CD550>
+
+openai.PermissionDeniedError: Error code: 403 - [{'error': {'code': 403, 'message': 'Your API key was reported as leaked. Please use another API key.', 'status': 'PERMISSION_DENIED'}}]
+2025-12-01 20:54:06.137 | INFO     | nodes.html_generation_node:_generate_fallback_html:144 - 使用备用HTML生成方法
+2025-12-01 20:54:06.138 | ERROR    | agent:generate_report:221 - 报告生成过程中发生错误: 'locale' codec can't encode character '\u5e74' in position 2: encoding error
+Traceback (most recent call last):
+
+  File "C:\Darshan\stockanalysis\ReportEngine\nodes\html_generation_node.py", line 63, in run
+    response = self.llm_client.stream_invoke_to_string(SYSTEM_PROMPT_HTML_GENERATION, message)
+               │    │          │                       │                              └ '{\n  "query": "Generate a comprehensive daily portfolio report for darshanjain15062002@gmail.com\'s investment portfolio sho...
+               │    │          │                       └ '\n你是一位专业的HTML报告生成专家。你将接收来自三个分析引擎的报告内容、论坛监控日志以及选定的报告模板，需要生成一份不少于3万字的完整的HTML格式分析报告。\n\n<INPUT JSON SCHEMA>\n{\n  "type": "obje...
+               │    │          └ <function LLMClient.stream_invoke_to_string at 0x000002889B087560>
+               │    └ <llms.base.LLMClient object at 0x000002889B36F4D0>
+               └ <nodes.html_generation_node.HTMLGenerationNode object at 0x000002889B6CFA50>
+
+  File "C:\Darshan\stockanalysis\ReportEngine\llms\base.py", line 135, in stream_invoke_to_string
+    for chunk in self.stream_invoke(system_prompt, user_prompt, **kwargs):
+                 │    │             │              │              └ {}
+                 │    │             │              └ '{\n  "query": "Generate a comprehensive daily portfolio report for darshanjain15062002@gmail.com\'s investment portfolio sho...
+                 │    │             └ '\n你是一位专业的HTML报告生成专家。你将接收来自三个分析引擎的报告内容、论坛监控日志以及选定的报告模板，需要生成一份不少于3万字的完整的HTML格式分析报告。\n\n<INPUT JSON SCHEMA>\n{\n  "type": "obje...
+                 │    └ <function LLMClient.stream_invoke at 0x000002889B086FC0>
+                 └ <llms.base.LLMClient object at 0x000002889B36F4D0>
+
+  File "C:\Darshan\stockanalysis\ReportEngine\llms\base.py", line 118, in stream_invoke
+    raise e
+
+  File "C:\Darshan\stockanalysis\ReportEngine\llms\base.py", line 104, in stream_invoke
+    stream = self.client.chat.completions.create(
+             │    │      │    │           └ <function Completions.create at 0x000002889B987560>
+             │    │      │    └ <openai.resources.chat.completions.completions.Completions object at 0x000002889B77F190>
+             │    │      └ <openai.resources.chat.chat.Chat object at 0x000002889B77EF90>
+             │    └ <openai.OpenAI object at 0x000002889B6CD550>
+             └ <llms.base.LLMClient object at 0x000002889B36F4D0>
+
+  File "C:\Users\darsh\AppData\Local\Programs\Python\Python311\Lib\site-packages\openai\_utils\_utils.py", line 286, in wrapper
+    return func(*args, **kwargs)
+           │     │       └ {'model': 'gemini-2.0-flash', 'messages': [{'role': 'system', 'content': '\n你是一位专业的HTML报告生成专家。你将接收来自三个分析引擎的报告内容、论坛监控日志以及选定的报告...
+           │     └ (<openai.resources.chat.completions.completions.Completions object at 0x000002889B77F190>,)
+           └ <function Completions.create at 0x000002889B987380>
+  File "C:\Users\darsh\AppData\Local\Programs\Python\Python311\Lib\site-packages\openai\resources\chat\completions\completions.py", line 1189, in create
+    return self._post(
+           │    └ <bound method SyncAPIClient.post of <openai.OpenAI object at 0x000002889B6CD550>>
+           └ <openai.resources.chat.completions.completions.Completions object at 0x000002889B77F190>
+  File "C:\Users\darsh\AppData\Local\Programs\Python\Python311\Lib\site-packages\openai\_base_client.py", line 1259, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+           │    │          │    │       │        │            │                  └ openai.Stream[openai.types.chat.chat_completion_chunk.ChatCompletionChunk]
+           │    │          │    │       │        │            └ True
+           │    │          │    │       │        └ FinalRequestOptions(method='post', url='/chat/completions', params={}, headers=NOT_GIVEN, max_retries=NOT_GIVEN, timeout=3000...
+           │    │          │    │       └ <class 'openai.types.chat.chat_completion.ChatCompletion'>
+           │    │          │    └ <function SyncAPIClient.request at 0x0000028899F345E0>
+           │    │          └ <openai.OpenAI object at 0x000002889B6CD550>
+           │    └ ~ResponseT
+           └ <function cast at 0x0000028896234FE0>
+  File "C:\Users\darsh\AppData\Local\Programs\Python\Python311\Lib\site-packages\openai\_base_client.py", line 1047, in request
+    raise self._make_status_error_from_response(err.response) from None
+          │    └ <function BaseClient._make_status_error_from_response at 0x0000028899F2ED40>
+          └ <openai.OpenAI object at 0x000002889B6CD550>
+
+openai.PermissionDeniedError: Error code: 403 - [{'error': {'code': 403, 'message': 'Your API key was reported as leaked. Please use another API key.', 'status': 'PERMISSION_DENIED'}}]
+
+
+During handling of the above exception, another exception occurred:
+
+
+Traceback (most recent call last):
+
+  File "C:\Darshan\stockanalysis\ReportEngine\test.py", line 382, in <module>
+    generate_daily_reports()
+    └ <function generate_daily_reports at 0x000002889B14C9A0>
+
+  File "C:\Darshan\stockanalysis\ReportEngine\test.py", line 312, in generate_daily_reports
+    report = agent.generate_report(
+             │     └ <function ReportAgent.generate_report at 0x000002889B14C0E0>
+             └ <agent.ReportAgent object at 0x000002889B13F0D0>
+
+> File "C:\Darshan\stockanalysis\ReportEngine\agent.py", line 205, in generate_report
+    html_report = self._generate_html_report(query, reports, forum_logs, template_result)
+                  │    │                     │      │        │           └ {'template_name': '自由发挥模板', 'template_content': '', 'selection_reason': '未找到合适的预设模板，让LLM根据内容自行设计报告结构'}
+                  │    │                     │      │        └ '\n[ForumHost]: Daily portfolio report for darshanjain15062002@gmail.com - 2025-12-01\n[PortfolioAgent]: Analyzed 6 holdings ...
+                  │    │                     │      └ [{'type': 'portfolio', 'summary': 'Portfolio of 6 stocks with total value ₹13,949.41. Overall P&L: ₹1,197.19 (+9.39%)', 'key_...
+                  │    │                     └ "Generate a comprehensive daily portfolio report for darshanjain15062002@gmail.com's investment portfolio showing current per...
+                  │    └ <function ReportAgent._generate_html_report at 0x000002889B14C220>
+                  └ <agent.ReportAgent object at 0x000002889B13F0D0>
+
+  File "C:\Darshan\stockanalysis\ReportEngine\agent.py", line 288, in _generate_html_report
+    html_content = self.html_generation_node.run(html_input)
+                   │    │                    │   └ {'query': "Generate a comprehensive daily portfolio report for darshanjain15062002@gmail.com's investment portfolio showing c...
+                   │    │                    └ <function HTMLGenerationNode.run at 0x000002889B0A20C0>
+                   │    └ <nodes.html_generation_node.HTMLGenerationNode object at 0x000002889B6CFA50>
+                   └ <agent.ReportAgent object at 0x000002889B13F0D0>
+
+  File "C:\Darshan\stockanalysis\ReportEngine\nodes\html_generation_node.py", line 74, in run
+    return self._generate_fallback_html(input_data)
+           │    │                       └ {'query': "Generate a comprehensive daily portfolio report for darshanjain15062002@gmail.com's investment portfolio showing c...
+           │    └ <function HTMLGenerationNode._generate_fallback_html at 0x000002889B0A22A0>
+           └ <nodes.html_generation_node.HTMLGenerationNode object at 0x000002889B6CFA50>
+
+  File "C:\Darshan\stockanalysis\ReportEngine\nodes\html_generation_node.py", line 152, in _generate_fallback_html
+    generation_time = datetime.now().strftime("%Y年%m月%d日 %H:%M:%S")
+                      │        └ <method 'now' of 'datetime.datetime' objects>
+                      └ <class 'datetime.datetime'>
+
+UnicodeEncodeError: 'locale' codec can't encode character '\u5e74' in position 2: encoding error
+2025-12-01 22:03:22.735 | INFO     | agent:initialize_baseline:62 - 文件数量基准已初始化: {'insight': 0, 'media': 0, 'query': 0}
+2025-12-01 22:03:22.736 | INFO     | agent:__init__:143 - Report Agent已初始化
+2025-12-01 22:03:22.737 | INFO     | agent:__init__:144 - 使用LLM: {'provider': 'gemini-2.0-flash', 'model': 'gemini-2.0-flash', 'api_base': 'https://generativelanguage.googleapis.com/v1beta'}
+2025-12-01 22:03:53.118 | INFO     | agent:generate_report:197 - 开始生成报告: Generate a comprehensive daily portfolio report for darshanjain15062002@gmail.com's investment portfolio showing current performance, profit/loss analysis, and recommendations. Total P&L: ₹1,197.19
+2025-12-01 22:03:53.120 | INFO     | agent:generate_report:198 - 输入数据 - 报告数量: 3, 论坛日志长度: 247
+2025-12-01 22:03:53.120 | INFO     | agent:_select_template:226 - 选择报告模板...
+2025-12-01 22:03:53.120 | INFO     | nodes.template_selection_node:run:42 - 开始模板选择...
+2025-12-01 22:03:53.121 | ERROR    | nodes.template_selection_node:_get_available_templates:193 - 模板目录不存在: ReportEngine/report_template
+2025-12-01 22:03:53.121 | INFO     | nodes.template_selection_node:run:52 - 未找到预设模板，使用内置默认模板
+2025-12-01 22:03:53.122 | INFO     | nodes.template_selection_node:_get_fallback_template:239 - 未找到合适模板，使用空模板让LLM自行发挥
+2025-12-01 22:03:53.122 | INFO     | agent:_select_template:249 - 选择模板: 自由发挥模板
+2025-12-01 22:03:53.123 | INFO     | agent:_select_template:250 - 选择理由: 未找到合适的预设模板，让LLM根据内容自行设计报告结构
+2025-12-01 22:03:53.123 | INFO     | agent:_generate_html_report:266 - 多轮生成HTML报告...
+2025-12-01 22:03:53.124 | INFO     | nodes.html_generation_node:run:46 - 开始生成HTML报告...
+2025-12-01 22:03:55.230 | ERROR    | llms.base:stream_invoke:117 - 流式请求失败: Error code: 403 - [{'error': {'code': 403, 'message': 'Your API key was reported as leaked. Please use another API key.', 'status': 'PERMISSION_DENIED'}}]
+2025-12-01 22:03:55.231 | ERROR    | nodes.html_generation_node:run:72 - HTML生成失败: Error code: 403 - [{'error': {'code': 403, 'message': 'Your API key was reported as leaked. Please use another API key.', 'status': 'PERMISSION_DENIED'}}]
+Traceback (most recent call last):
+
+  File "C:\Darshan\stockanalysis\ReportEngine\test.py", line 382, in <module>
+    generate_daily_reports()
+    └ <function generate_daily_reports at 0x00000193B57BC9A0>
+
+  File "C:\Darshan\stockanalysis\ReportEngine\test.py", line 312, in generate_daily_reports
+    report = agent.generate_report(
+             │     └ <function ReportAgent.generate_report at 0x00000193B57BC0E0>
+             └ <agent.ReportAgent object at 0x00000193B57AF090>
+
+  File "C:\Darshan\stockanalysis\ReportEngine\agent.py", line 205, in generate_report
+    html_report = self._generate_html_report(query, reports, forum_logs, template_result)
+                  │    │                     │      │        │           └ {'template_name': '自由发挥模板', 'template_content': '', 'selection_reason': '未找到合适的预设模板，让LLM根据内容自行设计报告结构'}
+                  │    │                     │      │        └ '\n[ForumHost]: Daily portfolio report for darshanjain15062002@gmail.com - 2025-12-01\n[PortfolioAgent]: Analyzed 6 holdings ...
+                  │    │                     │      └ [{'type': 'portfolio', 'summary': 'Portfolio of 6 stocks with total value ₹13,949.41. Overall P&L: ₹1,197.19 (+9.39%)', 'key_...
+                  │    │                     └ "Generate a comprehensive daily portfolio report for darshanjain15062002@gmail.com's investment portfolio showing current per...
+                  │    └ <function ReportAgent._generate_html_report at 0x00000193B57BC220>
+                  └ <agent.ReportAgent object at 0x00000193B57AF090>
+
+  File "C:\Darshan\stockanalysis\ReportEngine\agent.py", line 288, in _generate_html_report
+    html_content = self.html_generation_node.run(html_input)
+                   │    │                    │   └ {'query': "Generate a comprehensive daily portfolio report for darshanjain15062002@gmail.com's investment portfolio showing c...
+                   │    │                    └ <function HTMLGenerationNode.run at 0x00000193B57120C0>
+                   │    └ <nodes.html_generation_node.HTMLGenerationNode object at 0x00000193B5D3AB50>
+                   └ <agent.ReportAgent object at 0x00000193B57AF090>
+
+> File "C:\Darshan\stockanalysis\ReportEngine\nodes\html_generation_node.py", line 63, in run
+    response = self.llm_client.stream_invoke_to_string(SYSTEM_PROMPT_HTML_GENERATION, message)
+               │    │          │                       │                              └ '{\n  "query": "Generate a comprehensive daily portfolio report for darshanjain15062002@gmail.com\'s investment portfolio sho...
+               │    │          │                       └ '\n你是一位专业的HTML报告生成专家。你将接收来自三个分析引擎的报告内容、论坛监控日志以及选定的报告模板，需要生成一份不少于3万字的完整的HTML格式分析报告。\n\n<INPUT JSON SCHEMA>\n{\n  "type": "obje...
+               │    │          └ <function LLMClient.stream_invoke_to_string at 0x00000193B56F7560>
+               │    └ <llms.base.LLMClient object at 0x00000193B59DDC10>
+               └ <nodes.html_generation_node.HTMLGenerationNode object at 0x00000193B5D3AB50>
+
+  File "C:\Darshan\stockanalysis\ReportEngine\llms\base.py", line 135, in stream_invoke_to_string
+    for chunk in self.stream_invoke(system_prompt, user_prompt, **kwargs):
+                 │    │             │              │              └ {}
+                 │    │             │              └ '{\n  "query": "Generate a comprehensive daily portfolio report for darshanjain15062002@gmail.com\'s investment portfolio sho...
+                 │    │             └ '\n你是一位专业的HTML报告生成专家。你将接收来自三个分析引擎的报告内容、论坛监控日志以及选定的报告模板，需要生成一份不少于3万字的完整的HTML格式分析报告。\n\n<INPUT JSON SCHEMA>\n{\n  "type": "obje...
+                 │    └ <function LLMClient.stream_invoke at 0x00000193B56F6FC0>
+                 └ <llms.base.LLMClient object at 0x00000193B59DDC10>
+
+  File "C:\Darshan\stockanalysis\ReportEngine\llms\base.py", line 118, in stream_invoke
+    raise e
+
+  File "C:\Darshan\stockanalysis\ReportEngine\llms\base.py", line 104, in stream_invoke
+    stream = self.client.chat.completions.create(
+             │    │      │    │           └ <function Completions.create at 0x00000193B60F7600>
+             │    │      │    └ <openai.resources.chat.completions.completions.Completions object at 0x00000193B39B9610>
+             │    │      └ <openai.resources.chat.chat.Chat object at 0x00000193B647FF50>
+             │    └ <openai.OpenAI object at 0x00000193B57AD710>
+             └ <llms.base.LLMClient object at 0x00000193B59DDC10>
+
+  File "C:\Users\darsh\AppData\Local\Programs\Python\Python311\Lib\site-packages\openai\_utils\_utils.py", line 286, in wrapper
+    return func(*args, **kwargs)
+           │     │       └ {'model': 'gemini-2.0-flash', 'messages': [{'role': 'system', 'content': '\n你是一位专业的HTML报告生成专家。你将接收来自三个分析引擎的报告内容、论坛监控日志以及选定的报告...
+           │     └ (<openai.resources.chat.completions.completions.Completions object at 0x00000193B39B9610>,)
+           └ <function Completions.create at 0x00000193B60F7420>
+  File "C:\Users\darsh\AppData\Local\Programs\Python\Python311\Lib\site-packages\openai\resources\chat\completions\completions.py", line 1189, in create
+    return self._post(
+           │    └ <bound method SyncAPIClient.post of <openai.OpenAI object at 0x00000193B57AD710>>
+           └ <openai.resources.chat.completions.completions.Completions object at 0x00000193B39B9610>
+  File "C:\Users\darsh\AppData\Local\Programs\Python\Python311\Lib\site-packages\openai\_base_client.py", line 1259, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+           │    │          │    │       │        │            │                  └ openai.Stream[openai.types.chat.chat_completion_chunk.ChatCompletionChunk]
+           │    │          │    │       │        │            └ True
+           │    │          │    │       │        └ FinalRequestOptions(method='post', url='/chat/completions', params={}, headers=NOT_GIVEN, max_retries=NOT_GIVEN, timeout=3000...
+           │    │          │    │       └ <class 'openai.types.chat.chat_completion.ChatCompletion'>
+           │    │          │    └ <function SyncAPIClient.request at 0x00000193B45B45E0>
+           │    │          └ <openai.OpenAI object at 0x00000193B57AD710>
+           │    └ ~ResponseT
+           └ <function cast at 0x00000193B08A4FE0>
+  File "C:\Users\darsh\AppData\Local\Programs\Python\Python311\Lib\site-packages\openai\_base_client.py", line 1047, in request
+    raise self._make_status_error_from_response(err.response) from None
+          │    └ <function BaseClient._make_status_error_from_response at 0x00000193B45AED40>
+          └ <openai.OpenAI object at 0x00000193B57AD710>
+
+openai.PermissionDeniedError: Error code: 403 - [{'error': {'code': 403, 'message': 'Your API key was reported as leaked. Please use another API key.', 'status': 'PERMISSION_DENIED'}}]
+2025-12-01 22:03:55.266 | INFO     | nodes.html_generation_node:_generate_fallback_html:144 - 使用备用HTML生成方法
+2025-12-01 22:03:55.267 | ERROR    | agent:generate_report:221 - 报告生成过程中发生错误: 'locale' codec can't encode character '\u5e74' in position 2: encoding error
+Traceback (most recent call last):
+
+  File "C:\Darshan\stockanalysis\ReportEngine\nodes\html_generation_node.py", line 63, in run
+    response = self.llm_client.stream_invoke_to_string(SYSTEM_PROMPT_HTML_GENERATION, message)
+               │    │          │                       │                              └ '{\n  "query": "Generate a comprehensive daily portfolio report for darshanjain15062002@gmail.com\'s investment portfolio sho...
+               │    │          │                       └ '\n你是一位专业的HTML报告生成专家。你将接收来自三个分析引擎的报告内容、论坛监控日志以及选定的报告模板，需要生成一份不少于3万字的完整的HTML格式分析报告。\n\n<INPUT JSON SCHEMA>\n{\n  "type": "obje...
+               │    │          └ <function LLMClient.stream_invoke_to_string at 0x00000193B56F7560>
+               │    └ <llms.base.LLMClient object at 0x00000193B59DDC10>
+               └ <nodes.html_generation_node.HTMLGenerationNode object at 0x00000193B5D3AB50>
+
+  File "C:\Darshan\stockanalysis\ReportEngine\llms\base.py", line 135, in stream_invoke_to_string
+    for chunk in self.stream_invoke(system_prompt, user_prompt, **kwargs):
+                 │    │             │              │              └ {}
+                 │    │             │              └ '{\n  "query": "Generate a comprehensive daily portfolio report for darshanjain15062002@gmail.com\'s investment portfolio sho...
+                 │    │             └ '\n你是一位专业的HTML报告生成专家。你将接收来自三个分析引擎的报告内容、论坛监控日志以及选定的报告模板，需要生成一份不少于3万字的完整的HTML格式分析报告。\n\n<INPUT JSON SCHEMA>\n{\n  "type": "obje...
+                 │    └ <function LLMClient.stream_invoke at 0x00000193B56F6FC0>
+                 └ <llms.base.LLMClient object at 0x00000193B59DDC10>
+
+  File "C:\Darshan\stockanalysis\ReportEngine\llms\base.py", line 118, in stream_invoke
+    raise e
+
+  File "C:\Darshan\stockanalysis\ReportEngine\llms\base.py", line 104, in stream_invoke
+    stream = self.client.chat.completions.create(
+             │    │      │    │           └ <function Completions.create at 0x00000193B60F7600>
+             │    │      │    └ <openai.resources.chat.completions.completions.Completions object at 0x00000193B39B9610>
+             │    │      └ <openai.resources.chat.chat.Chat object at 0x00000193B647FF50>
+             │    └ <openai.OpenAI object at 0x00000193B57AD710>
+             └ <llms.base.LLMClient object at 0x00000193B59DDC10>
+
+  File "C:\Users\darsh\AppData\Local\Programs\Python\Python311\Lib\site-packages\openai\_utils\_utils.py", line 286, in wrapper
+    return func(*args, **kwargs)
+           │     │       └ {'model': 'gemini-2.0-flash', 'messages': [{'role': 'system', 'content': '\n你是一位专业的HTML报告生成专家。你将接收来自三个分析引擎的报告内容、论坛监控日志以及选定的报告...
+           │     └ (<openai.resources.chat.completions.completions.Completions object at 0x00000193B39B9610>,)
+           └ <function Completions.create at 0x00000193B60F7420>
+  File "C:\Users\darsh\AppData\Local\Programs\Python\Python311\Lib\site-packages\openai\resources\chat\completions\completions.py", line 1189, in create
+    return self._post(
+           │    └ <bound method SyncAPIClient.post of <openai.OpenAI object at 0x00000193B57AD710>>
+           └ <openai.resources.chat.completions.completions.Completions object at 0x00000193B39B9610>
+  File "C:\Users\darsh\AppData\Local\Programs\Python\Python311\Lib\site-packages\openai\_base_client.py", line 1259, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+           │    │          │    │       │        │            │                  └ openai.Stream[openai.types.chat.chat_completion_chunk.ChatCompletionChunk]
+           │    │          │    │       │        │            └ True
+           │    │          │    │       │        └ FinalRequestOptions(method='post', url='/chat/completions', params={}, headers=NOT_GIVEN, max_retries=NOT_GIVEN, timeout=3000...
+           │    │          │    │       └ <class 'openai.types.chat.chat_completion.ChatCompletion'>
+           │    │          │    └ <function SyncAPIClient.request at 0x00000193B45B45E0>
+           │    │          └ <openai.OpenAI object at 0x00000193B57AD710>
+           │    └ ~ResponseT
+           └ <function cast at 0x00000193B08A4FE0>
+  File "C:\Users\darsh\AppData\Local\Programs\Python\Python311\Lib\site-packages\openai\_base_client.py", line 1047, in request
+    raise self._make_status_error_from_response(err.response) from None
+          │    └ <function BaseClient._make_status_error_from_response at 0x00000193B45AED40>
+          └ <openai.OpenAI object at 0x00000193B57AD710>
+
+openai.PermissionDeniedError: Error code: 403 - [{'error': {'code': 403, 'message': 'Your API key was reported as leaked. Please use another API key.', 'status': 'PERMISSION_DENIED'}}]
+
+
+During handling of the above exception, another exception occurred:
+
+
+Traceback (most recent call last):
+
+  File "C:\Darshan\stockanalysis\ReportEngine\test.py", line 382, in <module>
+    generate_daily_reports()
+    └ <function generate_daily_reports at 0x00000193B57BC9A0>
+
+  File "C:\Darshan\stockanalysis\ReportEngine\test.py", line 312, in generate_daily_reports
+    report = agent.generate_report(
+             │     └ <function ReportAgent.generate_report at 0x00000193B57BC0E0>
+             └ <agent.ReportAgent object at 0x00000193B57AF090>
+
+> File "C:\Darshan\stockanalysis\ReportEngine\agent.py", line 205, in generate_report
+    html_report = self._generate_html_report(query, reports, forum_logs, template_result)
+                  │    │                     │      │        │           └ {'template_name': '自由发挥模板', 'template_content': '', 'selection_reason': '未找到合适的预设模板，让LLM根据内容自行设计报告结构'}
+                  │    │                     │      │        └ '\n[ForumHost]: Daily portfolio report for darshanjain15062002@gmail.com - 2025-12-01\n[PortfolioAgent]: Analyzed 6 holdings ...
+                  │    │                     │      └ [{'type': 'portfolio', 'summary': 'Portfolio of 6 stocks with total value ₹13,949.41. Overall P&L: ₹1,197.19 (+9.39%)', 'key_...
+                  │    │                     └ "Generate a comprehensive daily portfolio report for darshanjain15062002@gmail.com's investment portfolio showing current per...
+                  │    └ <function ReportAgent._generate_html_report at 0x00000193B57BC220>
+                  └ <agent.ReportAgent object at 0x00000193B57AF090>
+
+  File "C:\Darshan\stockanalysis\ReportEngine\agent.py", line 288, in _generate_html_report
+    html_content = self.html_generation_node.run(html_input)
+                   │    │                    │   └ {'query': "Generate a comprehensive daily portfolio report for darshanjain15062002@gmail.com's investment portfolio showing c...
+                   │    │                    └ <function HTMLGenerationNode.run at 0x00000193B57120C0>
+                   │    └ <nodes.html_generation_node.HTMLGenerationNode object at 0x00000193B5D3AB50>
+                   └ <agent.ReportAgent object at 0x00000193B57AF090>
+
+  File "C:\Darshan\stockanalysis\ReportEngine\nodes\html_generation_node.py", line 74, in run
+    return self._generate_fallback_html(input_data)
+           │    │                       └ {'query': "Generate a comprehensive daily portfolio report for darshanjain15062002@gmail.com's investment portfolio showing c...
+           │    └ <function HTMLGenerationNode._generate_fallback_html at 0x00000193B57122A0>
+           └ <nodes.html_generation_node.HTMLGenerationNode object at 0x00000193B5D3AB50>
+
+  File "C:\Darshan\stockanalysis\ReportEngine\nodes\html_generation_node.py", line 152, in _generate_fallback_html
+    generation_time = datetime.now().strftime("%Y年%m月%d日 %H:%M:%S")
+                      │        └ <method 'now' of 'datetime.datetime' objects>
+                      └ <class 'datetime.datetime'>
+
+UnicodeEncodeError: 'locale' codec can't encode character '\u5e74' in position 2: encoding error
+2025-12-01 22:06:56.662 | INFO     | agent:initialize_baseline:62 - 文件数量基准已初始化: {'insight': 0, 'media': 0, 'query': 0}
+2025-12-01 22:06:56.664 | INFO     | agent:__init__:143 - Report Agent已初始化
+2025-12-01 22:06:56.665 | INFO     | agent:__init__:144 - 使用LLM: {'provider': 'gemini-2.0-flash', 'model': 'gemini-2.0-flash', 'api_base': 'https://generativelanguage.googleapis.com/v1beta'}
+2025-12-01 22:07:24.765 | INFO     | agent:generate_report:197 - 开始生成报告: Generate a comprehensive daily portfolio report for darshanjain15062002@gmail.com's investment portfolio showing current performance, profit/loss analysis, and recommendations. Total P&L: ₹1,197.19
+2025-12-01 22:07:24.766 | INFO     | agent:generate_report:198 - 输入数据 - 报告数量: 3, 论坛日志长度: 247
+2025-12-01 22:07:24.766 | INFO     | agent:_select_template:226 - 选择报告模板...
+2025-12-01 22:07:24.766 | INFO     | nodes.template_selection_node:run:42 - 开始模板选择...
+2025-12-01 22:07:24.768 | ERROR    | nodes.template_selection_node:_get_available_templates:193 - 模板目录不存在: ReportEngine/report_template
+2025-12-01 22:07:24.769 | INFO     | nodes.template_selection_node:run:52 - 未找到预设模板，使用内置默认模板
+2025-12-01 22:07:24.769 | INFO     | nodes.template_selection_node:_get_fallback_template:239 - 未找到合适模板，使用空模板让LLM自行发挥
+2025-12-01 22:07:24.769 | INFO     | agent:_select_template:249 - 选择模板: 自由发挥模板
+2025-12-01 22:07:24.770 | INFO     | agent:_select_template:250 - 选择理由: 未找到合适的预设模板，让LLM根据内容自行设计报告结构
+2025-12-01 22:07:24.771 | INFO     | agent:_generate_html_report:266 - 多轮生成HTML报告...
+2025-12-01 22:07:24.772 | INFO     | nodes.html_generation_node:run:46 - 开始生成HTML报告...
+2025-12-01 22:08:05.108 | INFO     | nodes.html_generation_node:process_output:108 - 处理LLM原始输出，长度: 33624 字符
+2025-12-01 22:08:05.109 | INFO     | nodes.html_generation_node:process_output:127 - HTML处理完成，最终长度: 33612 字符
+2025-12-01 22:08:05.109 | INFO     | nodes.html_generation_node:run:68 - HTML报告生成完成
+2025-12-01 22:08:05.110 | INFO     | agent:_generate_html_report:294 - HTML报告生成完成
+2025-12-01 22:08:05.113 | INFO     | agent:_save_report:360 - 报告已保存到: final_reports\final_report__20251201_220805.html
+2025-12-01 22:08:05.118 | INFO     | agent:_save_report:366 - 状态已保存到: final_reports\report_state__20251201_220805.json
+2025-12-01 22:08:05.119 | INFO     | agent:generate_report:216 - 报告生成完成，耗时: 40.35 秒
+2025-12-01 22:15:02.922 | INFO     | agent:initialize_baseline:62 - 文件数量基准已初始化: {'insight': 0, 'media': 0, 'query': 0}
+2025-12-01 22:15:02.924 | INFO     | agent:__init__:143 - Report Agent已初始化
+2025-12-01 22:15:02.925 | INFO     | agent:__init__:144 - 使用LLM: {'provider': 'gemini-2.0-flash', 'model': 'gemini-2.0-flash', 'api_base': 'https://generativelanguage.googleapis.com/v1beta'}
+2025-12-01 22:15:30.218 | INFO     | agent:generate_report:197 - 开始生成报告: Generate a comprehensive daily portfolio report for darshanjain15062002@gmail.com's investment portfolio showing current performance, profit/loss analysis, and recommendations. Total P&L: ₹1,197.19
+2025-12-01 22:15:30.218 | INFO     | agent:generate_report:198 - 输入数据 - 报告数量: 3, 论坛日志长度: 247
+2025-12-01 22:15:30.219 | INFO     | agent:_select_template:226 - 选择报告模板...
+2025-12-01 22:15:30.219 | INFO     | nodes.template_selection_node:run:42 - 开始模板选择...
+2025-12-01 22:15:30.221 | ERROR    | nodes.template_selection_node:_get_available_templates:193 - 模板目录不存在: ReportEngine/report_template
+2025-12-01 22:15:30.222 | INFO     | nodes.template_selection_node:run:52 - 未找到预设模板，使用内置默认模板
+2025-12-01 22:15:30.223 | INFO     | nodes.template_selection_node:_get_fallback_template:239 - 未找到合适模板，使用空模板让LLM自行发挥
+2025-12-01 22:15:30.223 | INFO     | agent:_select_template:249 - 选择模板: 自由发挥模板
+2025-12-01 22:15:30.224 | INFO     | agent:_select_template:250 - 选择理由: 未找到合适的预设模板，让LLM根据内容自行设计报告结构
+2025-12-01 22:15:30.226 | INFO     | agent:_generate_html_report:266 - 多轮生成HTML报告...
+2025-12-01 22:15:30.227 | INFO     | nodes.html_generation_node:run:46 - 开始生成HTML报告...
+2025-12-01 22:16:22.993 | INFO     | nodes.html_generation_node:process_output:108 - 处理LLM原始输出，长度: 32883 字符
+2025-12-01 22:16:22.994 | INFO     | nodes.html_generation_node:process_output:127 - HTML处理完成，最终长度: 32875 字符
+2025-12-01 22:16:22.994 | INFO     | nodes.html_generation_node:run:68 - HTML报告生成完成
+2025-12-01 22:16:22.994 | INFO     | agent:_generate_html_report:294 - HTML报告生成完成
+2025-12-01 22:16:22.996 | INFO     | agent:_save_report:360 - 报告已保存到: final_reports\final_report__20251201_221622.html
+2025-12-01 22:16:23.000 | INFO     | agent:_save_report:366 - 状态已保存到: final_reports\report_state__20251201_221622.json
+2025-12-01 22:16:23.000 | INFO     | agent:generate_report:216 - 报告生成完成，耗时: 52.78 秒
+2025-12-01 22:37:35.122 | INFO     | agent:initialize_baseline:62 - 文件数量基准已初始化: {'insight': 0, 'media': 0, 'query': 0}
+2025-12-01 22:37:35.124 | INFO     | agent:__init__:143 - Report Agent已初始化
+2025-12-01 22:37:35.125 | INFO     | agent:__init__:144 - 使用LLM: {'provider': 'gemini-2.0-flash', 'model': 'gemini-2.0-flash', 'api_base': 'https://generativelanguage.googleapis.com/v1beta'}
+2025-12-01 22:38:05.516 | INFO     | agent:generate_report:197 - 开始生成报告: Generate a comprehensive daily portfolio report for darshanjain15062002@gmail.com's investment portfolio showing current performance, profit/loss analysis, and recommendations. Total P&L: ₹1,197.19
+2025-12-01 22:38:05.517 | INFO     | agent:generate_report:198 - 输入数据 - 报告数量: 3, 论坛日志长度: 247
+2025-12-01 22:38:05.517 | INFO     | agent:_select_template:226 - 选择报告模板...
+2025-12-01 22:38:05.518 | INFO     | nodes.template_selection_node:run:42 - 开始模板选择...
+2025-12-01 22:38:05.520 | ERROR    | nodes.template_selection_node:_get_available_templates:193 - 模板目录不存在: ReportEngine/report_template
+2025-12-01 22:38:05.520 | INFO     | nodes.template_selection_node:run:52 - 未找到预设模板，使用内置默认模板
+2025-12-01 22:38:05.521 | INFO     | nodes.template_selection_node:_get_fallback_template:239 - 未找到合适模板，使用空模板让LLM自行发挥
+2025-12-01 22:38:05.521 | INFO     | agent:_select_template:249 - 选择模板: 自由发挥模板
+2025-12-01 22:38:05.522 | INFO     | agent:_select_template:250 - 选择理由: 未找到合适的预设模板，让LLM根据内容自行设计报告结构
+2025-12-01 22:38:05.523 | INFO     | agent:_generate_html_report:266 - 多轮生成HTML报告...
+2025-12-01 22:38:05.525 | INFO     | nodes.html_generation_node:run:46 - 开始生成HTML报告...
+2025-12-01 22:38:56.152 | INFO     | nodes.html_generation_node:process_output:108 - 处理LLM原始输出，长度: 30465 字符
+2025-12-01 22:38:56.152 | INFO     | nodes.html_generation_node:process_output:127 - HTML处理完成，最终长度: 30457 字符
+2025-12-01 22:38:56.153 | INFO     | nodes.html_generation_node:run:68 - HTML报告生成完成
+2025-12-01 22:38:56.153 | INFO     | agent:_generate_html_report:294 - HTML报告生成完成
+2025-12-01 22:38:56.155 | INFO     | agent:_save_report:360 - 报告已保存到: final_reports\final_report__20251201_223856.html
+2025-12-01 22:38:56.159 | INFO     | agent:_save_report:366 - 状态已保存到: final_reports\report_state__20251201_223856.json
+2025-12-01 22:38:56.160 | INFO     | agent:generate_report:216 - 报告生成完成，耗时: 50.64 秒
+2025-12-01 22:41:11.209 | INFO     | agent:initialize_baseline:62 - 文件数量基准已初始化: {'insight': 0, 'media': 0, 'query': 0}
+2025-12-01 22:41:11.211 | INFO     | agent:__init__:143 - Report Agent已初始化
+2025-12-01 22:41:11.211 | INFO     | agent:__init__:144 - 使用LLM: {'provider': 'gemini-2.0-flash', 'model': 'gemini-2.0-flash', 'api_base': 'https://generativelanguage.googleapis.com/v1beta'}
+2025-12-01 22:41:40.308 | INFO     | agent:generate_report:197 - 开始生成报告: Generate a comprehensive daily portfolio report for darshanjain15062002@gmail.com's investment portfolio showing current performance, profit/loss analysis, and recommendations. Total P&L: ₹1,197.19
+2025-12-01 22:41:40.309 | INFO     | agent:generate_report:198 - 输入数据 - 报告数量: 3, 论坛日志长度: 247
+2025-12-01 22:41:40.309 | INFO     | agent:_select_template:226 - 选择报告模板...
+2025-12-01 22:41:40.310 | INFO     | nodes.template_selection_node:run:42 - 开始模板选择...
+2025-12-01 22:41:40.310 | ERROR    | nodes.template_selection_node:_get_available_templates:193 - 模板目录不存在: ReportEngine/report_template
+2025-12-01 22:41:40.311 | INFO     | nodes.template_selection_node:run:52 - 未找到预设模板，使用内置默认模板
+2025-12-01 22:41:40.311 | INFO     | nodes.template_selection_node:_get_fallback_template:239 - 未找到合适模板，使用空模板让LLM自行发挥
+2025-12-01 22:41:40.314 | INFO     | agent:_select_template:249 - 选择模板: 自由发挥模板
+2025-12-01 22:41:40.315 | INFO     | agent:_select_template:250 - 选择理由: 未找到合适的预设模板，让LLM根据内容自行设计报告结构
+2025-12-01 22:41:40.316 | INFO     | agent:_generate_html_report:266 - 多轮生成HTML报告...
+2025-12-01 22:41:40.316 | INFO     | nodes.html_generation_node:run:46 - 开始生成HTML报告...
+2025-12-01 22:42:29.358 | INFO     | nodes.html_generation_node:process_output:108 - 处理LLM原始输出，长度: 33379 字符
+2025-12-01 22:42:29.359 | INFO     | nodes.html_generation_node:process_output:127 - HTML处理完成，最终长度: 33371 字符
+2025-12-01 22:42:29.360 | INFO     | nodes.html_generation_node:run:68 - HTML报告生成完成
+2025-12-01 22:42:29.360 | INFO     | agent:_generate_html_report:294 - HTML报告生成完成
+2025-12-01 22:42:29.364 | INFO     | agent:_save_report:360 - 报告已保存到: final_reports\final_report__20251201_224229.html
+2025-12-01 22:42:29.369 | INFO     | agent:_save_report:366 - 状态已保存到: final_reports\report_state__20251201_224229.json
+2025-12-01 22:42:29.371 | INFO     | agent:generate_report:216 - 报告生成完成，耗时: 49.06 秒
+2025-12-02 20:11:06.231 | INFO     | agent:initialize_baseline:62 - 文件数量基准已初始化: {'insight': 0, 'media': 0, 'query': 0}
+2025-12-02 20:11:06.233 | INFO     | agent:__init__:143 - Report Agent已初始化
+2025-12-02 20:11:06.234 | INFO     | agent:__init__:144 - 使用LLM: {'provider': 'gemini-2.0-flash', 'model': 'gemini-2.0-flash', 'api_base': 'https://generativelanguage.googleapis.com/v1beta'}
+2025-12-02 20:11:36.589 | INFO     | agent:generate_report:197 - 开始生成报告: Generate a comprehensive daily portfolio report for darshanjain15062002@gmail.com's investment portfolio showing current performance, profit/loss analysis, and recommendations. Total P&L: ₹1,197.19
+2025-12-02 20:11:36.591 | INFO     | agent:generate_report:198 - 输入数据 - 报告数量: 3, 论坛日志长度: 247
+2025-12-02 20:11:36.592 | INFO     | agent:_select_template:226 - 选择报告模板...
+2025-12-02 20:11:36.592 | INFO     | nodes.template_selection_node:run:42 - 开始模板选择...
+2025-12-02 20:11:36.593 | ERROR    | nodes.template_selection_node:_get_available_templates:193 - 模板目录不存在: ReportEngine/report_template
+2025-12-02 20:11:36.593 | INFO     | nodes.template_selection_node:run:52 - 未找到预设模板，使用内置默认模板
+2025-12-02 20:11:36.594 | INFO     | nodes.template_selection_node:_get_fallback_template:239 - 未找到合适模板，使用空模板让LLM自行发挥
+2025-12-02 20:11:36.594 | INFO     | agent:_select_template:249 - 选择模板: 自由发挥模板
+2025-12-02 20:11:36.595 | INFO     | agent:_select_template:250 - 选择理由: 未找到合适的预设模板，让LLM根据内容自行设计报告结构
+2025-12-02 20:11:36.596 | INFO     | agent:_generate_html_report:266 - 多轮生成HTML报告...
+2025-12-02 20:11:36.598 | INFO     | nodes.html_generation_node:run:46 - 开始生成HTML报告...
+2025-12-02 20:12:26.099 | INFO     | nodes.html_generation_node:process_output:108 - 处理LLM原始输出，长度: 28281 字符
+2025-12-02 20:12:26.099 | INFO     | nodes.html_generation_node:process_output:127 - HTML处理完成，最终长度: 28273 字符
+2025-12-02 20:12:26.100 | INFO     | nodes.html_generation_node:run:68 - HTML报告生成完成
+2025-12-02 20:12:26.100 | INFO     | agent:_generate_html_report:294 - HTML报告生成完成
+2025-12-02 20:12:26.103 | INFO     | agent:_save_report:360 - 报告已保存到: final_reports\final_report__20251202_201226.html
+2025-12-02 20:12:26.105 | INFO     | agent:_save_report:366 - 状态已保存到: final_reports\report_state__20251202_201226.json
+2025-12-02 20:12:26.105 | INFO     | agent:generate_report:216 - 报告生成完成，耗时: 49.52 秒
+2025-12-02 20:15:05.103 | INFO     | agent:initialize_baseline:62 - 文件数量基准已初始化: {'insight': 0, 'media': 0, 'query': 0}
+2025-12-02 20:15:05.105 | INFO     | agent:__init__:143 - Report Agent已初始化
+2025-12-02 20:15:05.106 | INFO     | agent:__init__:144 - 使用LLM: {'provider': 'gemini-2.0-flash', 'model': 'gemini-2.0-flash', 'api_base': 'https://generativelanguage.googleapis.com/v1beta'}
+2025-12-02 20:15:35.459 | INFO     | agent:generate_report:197 - 开始生成报告: Generate a comprehensive daily portfolio report for darshanjain15062002@gmail.com's investment portfolio showing current performance, profit/loss analysis, and recommendations. Total P&L: ₹1,197.19
+2025-12-02 20:15:35.460 | INFO     | agent:generate_report:198 - 输入数据 - 报告数量: 3, 论坛日志长度: 247
+2025-12-02 20:15:35.461 | INFO     | agent:_select_template:226 - 选择报告模板...
+2025-12-02 20:15:35.461 | INFO     | nodes.template_selection_node:run:42 - 开始模板选择...
+2025-12-02 20:15:35.462 | ERROR    | nodes.template_selection_node:_get_available_templates:193 - 模板目录不存在: ReportEngine/report_template
+2025-12-02 20:15:35.462 | INFO     | nodes.template_selection_node:run:52 - 未找到预设模板，使用内置默认模板
+2025-12-02 20:15:35.463 | INFO     | nodes.template_selection_node:_get_fallback_template:239 - 未找到合适模板，使用空模板让LLM自行发挥
+2025-12-02 20:15:35.463 | INFO     | agent:_select_template:249 - 选择模板: 自由发挥模板
+2025-12-02 20:15:35.464 | INFO     | agent:_select_template:250 - 选择理由: 未找到合适的预设模板，让LLM根据内容自行设计报告结构
+2025-12-02 20:15:35.465 | INFO     | agent:_generate_html_report:266 - 多轮生成HTML报告...
+2025-12-02 20:15:35.466 | INFO     | nodes.html_generation_node:run:46 - 开始生成HTML报告...
+2025-12-02 20:16:16.336 | INFO     | nodes.html_generation_node:process_output:108 - 处理LLM原始输出，长度: 24165 字符
+2025-12-02 20:16:16.337 | INFO     | nodes.html_generation_node:process_output:127 - HTML处理完成，最终长度: 24153 字符
+2025-12-02 20:16:16.337 | INFO     | nodes.html_generation_node:run:68 - HTML报告生成完成
+2025-12-02 20:16:16.338 | INFO     | agent:_generate_html_report:294 - HTML报告生成完成
+2025-12-02 20:16:16.341 | INFO     | agent:_save_report:360 - 报告已保存到: final_reports\final_report__20251202_201616.html
+2025-12-02 20:16:16.343 | INFO     | agent:_save_report:366 - 状态已保存到: final_reports\report_state__20251202_201616.json
+2025-12-02 20:16:16.344 | INFO     | agent:generate_report:216 - 报告生成完成，耗时: 40.88 秒
