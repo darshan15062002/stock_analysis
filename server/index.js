@@ -161,6 +161,9 @@ const aggregateDataSources = async (symbol, dataType) => {
     const sources = [];
     const market = detectMarket(symbol);
 
+    console.log(symbol);
+
+
     if (market === 'US') {
         // US Market Data Sources
         try {
@@ -305,10 +308,19 @@ const aggregateDataSources = async (symbol, dataType) => {
                 }
             });
 
-            const newsItem = []
-            newsResponse?.data?.forEach((item) => {
-                newsItem.push({ title: item.title, link: item.link });
-            })
+            const xml = await newsResponse.data;
+
+            // Parse RSS XML
+            const result = await parseStringPromise(xml);
+
+            const items =
+                result.rss?.channel?.[0]?.item?.map(item => ({
+                    title: item.title?.[0] || "",
+                    link: item.link?.[0] || "",
+                    // You can also add link: item.link?.[0]
+                })) || [];
+
+
 
 
 
@@ -316,7 +328,7 @@ const aggregateDataSources = async (symbol, dataType) => {
 
             sources.push({
                 source: 'Google News',
-                data: newsItem,
+                data: items,
                 reliability: 0.75,
                 market: 'INDIAN'
             });
@@ -666,7 +678,7 @@ app.post('/api/portfolio/analysis', async (req, res) => {
                 weight: holding.weight,
                 market: market,
                 sources: sources,
-                bias_score: calculateBiasScore(sources)
+                // bias_score: calculateBiasScore(sources)
             });
         }
 

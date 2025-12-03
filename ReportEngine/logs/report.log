@@ -556,3 +556,18 @@ UnicodeEncodeError: 'locale' codec can't encode character '\u5e74' in position 2
 2025-12-02 20:16:16.341 | INFO     | agent:_save_report:360 - 报告已保存到: final_reports\final_report__20251202_201616.html
 2025-12-02 20:16:16.343 | INFO     | agent:_save_report:366 - 状态已保存到: final_reports\report_state__20251202_201616.json
 2025-12-02 20:16:16.344 | INFO     | agent:generate_report:216 - 报告生成完成，耗时: 40.88 秒
+2025-12-03 21:47:16.339 | INFO     | agent:initialize_baseline:62 - 文件数量基准已初始化: {'insight': 0, 'media': 0, 'query': 0}
+2025-12-03 21:47:16.341 | INFO     | agent:__init__:143 - Report Agent已初始化
+2025-12-03 21:47:16.342 | INFO     | agent:__init__:144 - 使用LLM: {'provider': 'gemini-2.0-flash', 'model': 'gemini-2.0-flash', 'api_base': 'https://generativelanguage.googleapis.com/v1beta'}
+2025-12-03 21:47:35.871 | INFO     | agent:initialize_baseline:62 - 文件数量基准已初始化: {'insight': 0, 'media': 0, 'query': 0}
+2025-12-03 21:47:35.872 | INFO     | agent:__init__:143 - Report Agent已初始化
+2025-12-03 21:47:35.873 | INFO     | agent:__init__:144 - 使用LLM: {'provider': 'gemini-2.0-flash', 'model': 'gemini-2.0-flash', 'api_base': 'https://generativelanguage.googleapis.com/v1beta'}
+2025-12-03 21:49:00.869 | INFO     | agent:initialize_baseline:62 - 文件数量基准已初始化: {'insight': 0, 'media': 0, 'query': 0}
+2025-12-03 21:49:00.871 | INFO     | agent:__init__:143 - Report Agent已初始化
+2025-12-03 21:49:00.871 | INFO     | agent:__init__:144 - 使用LLM: {'provider': 'gemini-2.0-flash', 'model': 'gemini-2.0-flash', 'api_base': 'https://generativelanguage.googleapis.com/v1beta'}
+2025-12-03 22:00:56.771 | INFO     | agent:initialize_baseline:62 - 文件数量基准已初始化: {'insight': 0, 'media': 0, 'query': 0}
+2025-12-03 22:00:56.773 | INFO     | agent:__init__:143 - Report Agent已初始化
+2025-12-03 22:00:56.773 | INFO     | agent:__init__:144 - 使用LLM: {'provider': 'gemini-2.0-flash', 'model': 'gemini-2.0-flash', 'api_base': 'https://generativelanguage.googleapis.com/v1beta'}
+2025-12-03 22:03:22.175 | INFO     | agent:initialize_baseline:62 - 文件数量基准已初始化: {'insight': 0, 'media': 0, 'query': 0}
+2025-12-03 22:03:22.177 | INFO     | agent:__init__:143 - Report Agent已初始化
+2025-12-03 22:03:22.177 | INFO     | agent:__init__:144 - 使用LLM: {'provider': 'gemini-2.0-flash', 'model': 'gemini-2.0-flash', 'api_base': 'https://generativelanguage.googleapis.com/v1beta'}
