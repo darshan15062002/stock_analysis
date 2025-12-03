@@ -571,3 +571,6 @@ UnicodeEncodeError: 'locale' codec can't encode character '\u5e74' in position 2
 2025-12-03 22:03:22.175 | INFO     | agent:initialize_baseline:62 - 文件数量基准已初始化: {'insight': 0, 'media': 0, 'query': 0}
 2025-12-03 22:03:22.177 | INFO     | agent:__init__:143 - Report Agent已初始化
 2025-12-03 22:03:22.177 | INFO     | agent:__init__:144 - 使用LLM: {'provider': 'gemini-2.0-flash', 'model': 'gemini-2.0-flash', 'api_base': 'https://generativelanguage.googleapis.com/v1beta'}
+2025-12-03 22:15:30.392 | INFO     | agent:initialize_baseline:62 - 文件数量基准已初始化: {'insight': 0, 'media': 0, 'query': 0}
+2025-12-03 22:15:30.394 | INFO     | agent:__init__:143 - Report Agent已初始化
+2025-12-03 22:15:30.395 | INFO     | agent:__init__:144 - 使用LLM: {'provider': 'gemini-2.0-flash', 'model': 'gemini-2.0-flash', 'api_base': 'https://generativelanguage.googleapis.com/v1beta'}
