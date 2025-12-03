@@ -7,10 +7,26 @@ const helmet = require('helmet');
 const multer = require('multer');
 const { GoogleGenerativeAI } = require('@google/generative-ai');
 const { generateElevenAudio } = require('./src/generateAudio');
+const { MongoClient } = require('mongodb');
 require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+// MongoDB connection
+const MONGODB_URI = 'mongodb+srv://darshan:$$dar$$123@cluster0.ohxhu.mongodb.net/';
+let db;
+
+// Initialize MongoDB connection
+MongoClient.connect(MONGODB_URI, {
+    useUnifiedTopology: true
+}).then(client => {
+    console.log('✅ Connected to MongoDB');
+    db = client.db('stockanalysis');
+}).catch(error => {
+    console.error('❌ MongoDB connection error:', error);
+    process.exit(1);
+});
 
 // Initialize Gemini AI
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
@@ -356,6 +372,7 @@ function normalizeStockData(source, rawData) {
 const aggregateDataSources = async (symbol, dataType) => {
     const sources = [];
     const market = detectMarket(symbol);
+    console.log(symbol);
 
     if (market === 'US') {
         // US Market Data Sources
@@ -465,6 +482,7 @@ const aggregateDataSources = async (symbol, dataType) => {
             console.error('AlphaVantage India error:', error.message);
         }
     }
+    console.log(sources, "=============");
 
     return sources;
 };
@@ -567,7 +585,7 @@ app.post('/api/content/bias-check', async (req, res) => {
 
         // Get real data for mentioned stocks
         const stockData = {};
-        for (const symbol of stockMentions.slice(0, 3)) { // Limit to 3 stocks
+        for (const symbol of stockMentions) { // Limit to 3 stocks
             try {
                 const sources = await aggregateDataSources(symbol);
                 stockData[symbol] = sources;
@@ -797,6 +815,9 @@ app.post('/api/portfolio/analysis', async (req, res) => {
             const market = detectMarket(holding.symbol);
             const sources = await aggregateDataSources(holding.symbol);
 
+            console.log(sources, "sd");
+
+
             marketBreakdown[market] += holding.weight;
 
             portfolioData.push({
@@ -820,16 +841,16 @@ app.post('/api/portfolio/analysis', async (req, res) => {
             portfolio_analysis: portfolioAnalysis,
             market_breakdown: marketBreakdown,
             individual_holdings: portfolioData,
-            portfolio_bias_score: {
-                weighted_average: portfolioData.reduce((acc, holding) =>
-                    acc + (holding.bias_score.score * holding.weight), 0),
-                diversification_benefit: portfolioData.length > 1,
-                cross_market_exposure: Object.keys(marketBreakdown).filter(m => marketBreakdown[m] > 0).length > 1
-            },
+            // portfolio_bias_score: {
+            //     weighted_average: portfolioData.reduce((acc, holding) =>
+            //         acc + (holding.bias_score.score * holding.weight), 0),
+            //     diversification_benefit: portfolioData.length > 1,
+            //     cross_market_exposure: Object.keys(marketBreakdown).filter(m => marketBreakdown[m] > 0).length > 1
+            // },
             risks: {
                 currency_risk: marketBreakdown.US > 0 && marketBreakdown.INDIAN > 0,
                 regulatory_risk: 'Multiple jurisdictions',
-                data_quality_variance: portfolioData.some(h => h.bias_score.confidence === 'low')
+                // data_quality_variance: portfolioData.some(h => h.bias_score.confidence === 'low')
             },
             timestamp: new Date().toISOString()
         });
@@ -1562,12 +1583,142 @@ app.use((error, req, res, next) => {
 });
 app.use("/api/audio", express.static(path.join(__dirname, "public", "audio")));
 
+// Subscription endpoint
+app.post('/api/user/subscribe', async (req, res) => {
+    try {
+        const subscriptionData = req.body;
+
+        // Validate required fields
+        if (!subscriptionData.email || !subscriptionData.frequency) {
+            return res.status(400).json({
+                error: 'Email and frequency are required fields'
+            });
+        }
+
+        // Validate email format
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(subscriptionData.email)) {
+            return res.status(400).json({
+                error: 'Invalid email format'
+            });
+        }
+
+        // Validate frequency
+        const validFrequencies = ['daily', 'weekly', 'monthly'];
+        if (!validFrequencies.includes(subscriptionData.frequency)) {
+            return res.status(400).json({
+                error: 'Frequency must be one of: daily, weekly, monthly'
+            });
+        }
+
+        // Add timestamp and additional metadata
+        const subscription = {
+            ...subscriptionData,
+            created_at: new Date().toISOString(),
+            status: 'active',
+            _id: undefined // Let MongoDB generate the ID
+        };
+
+        // Check if user already exists
+        const existingUser = await db.collection('subscriptions').findOne({
+            email: subscriptionData.email
+        });
+
+        if (existingUser) {
+            // Update existing subscription
+            const updateResult = await db.collection('subscriptions').updateOne(
+                { email: subscriptionData.email },
+                {
+                    $set: {
+                        ...subscription,
+                        updated_at: new Date().toISOString()
+                    }
+                }
+            );
+
+            res.status(200).json({
+                success: true,
+                message: 'Subscription updated successfully',
+                subscription_id: existingUser._id,
+                action: 'updated'
+            });
+        } else {
+            // Create new subscription
+            const insertResult = await db.collection('subscriptions').insertOne(subscription);
+
+            res.status(201).json({
+                success: true,
+                message: 'Subscription created successfully',
+                subscription_id: insertResult.insertedId,
+                action: 'created'
+            });
+        }
+
+    } catch (error) {
+        console.error('Subscription error:', error);
+        res.status(500).json({
+            error: 'Internal server error',
+            message: 'Failed to process subscription'
+        });
+    }
+});
+
+// Get subscription by email
+app.get('/api/user/subscription/:email', async (req, res) => {
+    try {
+        const { email } = req.params;
+
+        const subscription = await db.collection('subscriptions').findOne(
+            { email },
+            { projection: { _id: 1, email: 1, frequency: 1, status: 1, created_at: 1, updated_at: 1, portfolio: 1 } }
+        );
+
+        if (!subscription) {
+            return res.status(404).json({
+                error: 'Subscription not found'
+            });
+        }
+
+        res.status(200).json({
+            success: true,
+            subscription
+        });
+
+    } catch (error) {
+        console.error('Get subscription error:', error);
+        res.status(500).json({
+            error: 'Internal server error'
+        });
+    }
+});
+
+// Get all daily subscribers (for report generation)
+app.get('/api/subscribers/daily', async (req, res) => {
+    try {
+        const dailySubscribers = await db.collection('subscriptions').find(
+            { frequency: 'daily', status: 'active' }
+        ).toArray();
+
+        res.status(200).json({
+            success: true,
+            count: dailySubscribers.length,
+            subscribers: dailySubscribers
+        });
+
+    } catch (error) {
+        console.error('Get daily subscribers error:', error);
+        res.status(500).json({
+            error: 'Internal server error'
+        });
+    }
+});
 
 app.listen(PORT, () => {
     console.log(`🚀 Multi-Market Stock Analysis API running on port ${PORT}`);
     console.log(`📊 US & Indian markets supported`);
     console.log(`🔍 Financial content bias detection enabled`);
     console.log(`📍 Endpoints available at http://localhost:${PORT}/api/`);
+    console.log(`💾 MongoDB connected for user subscriptions`);
 });
 
 module.exports = app;

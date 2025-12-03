@@ -574,3 +574,963 @@ UnicodeEncodeError: 'locale' codec can't encode character '\u5e74' in position 2
 2025-12-03 22:15:30.392 | INFO     | agent:initialize_baseline:62 - 文件数量基准已初始化: {'insight': 0, 'media': 0, 'query': 0}
 2025-12-03 22:15:30.394 | INFO     | agent:__init__:143 - Report Agent已初始化
 2025-12-03 22:15:30.395 | INFO     | agent:__init__:144 - 使用LLM: {'provider': 'gemini-2.0-flash', 'model': 'gemini-2.0-flash', 'api_base': 'https://generativelanguage.googleapis.com/v1beta'}
+2025-12-03 22:29:45.625 | INFO     | agent:initialize_baseline:62 - 文件数量基准已初始化: {'insight': 0, 'media': 0, 'query': 0}
+2025-12-03 22:29:45.626 | INFO     | agent:__init__:143 - Report Agent已初始化
+2025-12-03 22:29:45.627 | INFO     | agent:__init__:144 - 使用LLM: {'provider': 'gemini-2.0-flash', 'model': 'gemini-2.0-flash', 'api_base': 'https://generativelanguage.googleapis.com/v1beta'}
+2025-12-03 22:32:57.464 | INFO     | agent:initialize_baseline:62 - 文件数量基准已初始化: {'insight': 0, 'media': 0, 'query': 0}
+2025-12-03 22:32:57.466 | INFO     | agent:__init__:143 - Report Agent已初始化
+2025-12-03 22:32:57.466 | INFO     | agent:__init__:144 - 使用LLM: {'provider': 'gemini-2.0-flash', 'model': 'gemini-2.0-flash', 'api_base': 'https://generativelanguage.googleapis.com/v1beta'}
+2025-12-03 22:36:12.347 | INFO     | agent:initialize_baseline:62 - 文件数量基准已初始化: {'insight': 0, 'media': 0, 'query': 0}
+2025-12-03 22:36:12.349 | INFO     | agent:__init__:143 - Report Agent已初始化
+2025-12-03 22:36:12.349 | INFO     | agent:__init__:144 - 使用LLM: {'provider': 'gemini-2.0-flash', 'model': 'gemini-2.0-flash', 'api_base': 'https://generativelanguage.googleapis.com/v1beta'}
+2025-12-03 22:37:45.598 | INFO     | agent:initialize_baseline:62 - 文件数量基准已初始化: {'insight': 0, 'media': 0, 'query': 0}
+2025-12-03 22:37:45.600 | INFO     | agent:__init__:143 - Report Agent已初始化
+2025-12-03 22:37:45.601 | INFO     | agent:__init__:144 - 使用LLM: {'provider': 'gemini-2.0-flash', 'model': 'gemini-2.0-flash', 'api_base': 'https://generativelanguage.googleapis.com/v1beta'}
+2025-12-03 22:40:35.938 | INFO     | agent:initialize_baseline:62 - 文件数量基准已初始化: {'insight': 0, 'media': 0, 'query': 0}
+2025-12-03 22:40:35.940 | INFO     | agent:__init__:143 - Report Agent已初始化
+2025-12-03 22:40:35.941 | INFO     | agent:__init__:144 - 使用LLM: {'provider': 'gemini-2.0-flash', 'model': 'gemini-2.0-flash', 'api_base': 'https://generativelanguage.googleapis.com/v1beta'}
+2025-12-03 22:42:22.350 | INFO     | agent:initialize_baseline:62 - 文件数量基准已初始化: {'insight': 0, 'media': 0, 'query': 0}
+2025-12-03 22:42:22.350 | INFO     | agent:__init__:143 - Report Agent已初始化
+2025-12-03 22:42:22.352 | INFO     | agent:__init__:144 - 使用LLM: {'provider': 'gemini-2.0-flash', 'model': 'gemini-2.0-flash', 'api_base': 'https://generativelanguage.googleapis.com/v1beta'}
+2025-12-03 22:47:28.687 | INFO     | agent:initialize_baseline:62 - 文件数量基准已初始化: {'insight': 0, 'media': 0, 'query': 0}
+2025-12-03 22:47:28.689 | INFO     | agent:__init__:143 - Report Agent已初始化
+2025-12-03 22:47:28.689 | INFO     | agent:__init__:144 - 使用LLM: {'provider': 'gemini-2.0-flash', 'model': 'gemini-2.0-flash', 'api_base': 'https://generativelanguage.googleapis.com/v1beta'}
+2025-12-03 22:53:56.408 | INFO     | agent:initialize_baseline:62 - 文件数量基准已初始化: {'insight': 0, 'media': 0, 'query': 0}
+2025-12-03 22:53:56.409 | INFO     | agent:__init__:143 - Report Agent已初始化
+2025-12-03 22:53:56.410 | INFO     | agent:__init__:144 - 使用LLM: {'provider': 'gemini-2.0-flash', 'model': 'gemini-2.0-flash', 'api_base': 'https://generativelanguage.googleapis.com/v1beta'}
+2025-12-03 22:54:57.926 | INFO     | agent:initialize_baseline:62 - 文件数量基准已初始化: {'insight': 0, 'media': 0, 'query': 0}
+2025-12-03 22:54:57.927 | INFO     | agent:__init__:143 - Report Agent已初始化
+2025-12-03 22:54:57.928 | INFO     | agent:__init__:144 - 使用LLM: {'provider': 'gemini-2.0-flash', 'model': 'gemini-2.0-flash', 'api_base': 'https://generativelanguage.googleapis.com/v1beta'}
+2025-12-03 22:58:36.657 | INFO     | agent:initialize_baseline:62 - 文件数量基准已初始化: {'insight': 0, 'media': 0, 'query': 0}
+2025-12-03 22:58:36.657 | INFO     | agent:__init__:143 - Report Agent已初始化
+2025-12-03 22:58:36.658 | INFO     | agent:__init__:144 - 使用LLM: {'provider': 'gemini-2.0-flash', 'model': 'gemini-2.0-flash', 'api_base': 'https://generativelanguage.googleapis.com/v1beta'}
+2025-12-03 23:00:23.904 | INFO     | agent:initialize_baseline:62 - 文件数量基准已初始化: {'insight': 0, 'media': 0, 'query': 0}
+2025-12-03 23:00:23.905 | INFO     | agent:__init__:143 - Report Agent已初始化
+2025-12-03 23:00:23.905 | INFO     | agent:__init__:144 - 使用LLM: {'provider': 'gemini-2.0-flash', 'model': 'gemini-2.0-flash', 'api_base': 'https://generativelanguage.googleapis.com/v1beta'}
+2025-12-03 23:04:55.886 | INFO     | agent:initialize_baseline:62 - 文件数量基准已初始化: {'insight': 0, 'media': 0, 'query': 0}
+2025-12-03 23:04:55.887 | INFO     | agent:__init__:143 - Report Agent已初始化
+2025-12-03 23:04:55.887 | INFO     | agent:__init__:144 - 使用LLM: {'provider': 'gemini-2.0-flash', 'model': 'gemini-2.0-flash', 'api_base': 'https://generativelanguage.googleapis.com/v1beta'}
+2025-12-03 23:08:50.948 | INFO     | agent:initialize_baseline:62 - 文件数量基准已初始化: {'insight': 0, 'media': 0, 'query': 0}
+2025-12-03 23:08:50.949 | INFO     | agent:__init__:143 - Report Agent已初始化
+2025-12-03 23:08:50.949 | INFO     | agent:__init__:144 - 使用LLM: {'provider': 'gemini-2.0-flash', 'model': 'gemini-2.0-flash', 'api_base': 'https://generativelanguage.googleapis.com/v1beta'}
+2025-12-03 23:09:15.398 | INFO     | agent:generate_report:197 - 开始生成报告: You are **Portfolio Advisor Pro**, an expert Indian stock market advisor writing a DAILY PORTFOLIO REPORT for darshanjain15062002@gmail.com.
+
+PORTFOLIO SNAPSHOT:
+• Total Value: ₹13,949.41
+• Total P&L: ₹1,197.19 (+9.39%)
+• Holdings: 6 stocks
+• Date: 03-Dec-2025
+
+YOUR MISSION: Generate a professional, beginner-friendly email report with SPECIFIC, ACTIONABLE recommendations.
+
+CRITICAL REQUIREMENTS:
+1. Every recommendation must have 3 clear reasons
+2. Use simple Hindi-English mix ("Hinglish") tone for Indian investors
+3. Quantify everything: "Book 50% profit" not "consider booking"
+4. Mention exact prices and amounts in ₹
+5. Explain WHY in simple terms
+
+REPORT STRUCTURE:
+
+## 📊 EXECUTIVE SUMMARY (3 sentences max)
+Give overall health and 1 key action. Example: "Portfolio up 5.2%. ADANITOTALGAS needs profit booking. SBIN showing strength."
+
+## 🎯 TODAY'S PRIORITY ACTIONS
+Create this exact markdown table:
+
+| Stock | My Advice | Why I'm Saying This | Urgency | Confidence |
+|-------|-----------|---------------------|---------|------------|
+| TATAMOTORS | ⏸️ **HOLD** | No triggers. Stock performing within expectations. | Medium term | **Medium** |
+| ADANITOTALGAS | ⏸️ **HOLD** | No triggers. Stock performing within expectations. | Medium term | **Medium** |
+| INFOSYS | ⏸️ **HOLD** | No triggers. Stock performing within expectations. | Medium term | **Medium** |
+| SBIN | ⏳ **MONITOR** | Healthy profit of 15.2% - Consider booking 25-30% | **This Week** | **Medium** |
+| TATASTEEL | ⏳ **MONITOR** | Healthy profit of 20.5% - Consider booking 25-30% | **This Week** | **Medium** |
+| KALYANJEWL | 💰 **BOOK PROFIT** | Strong profit of 26.0% - Book 50-75% to lock gains | **TODAY** | **Medium** |
+
+## 📈 EACH STOCK EXPLAINED SIMPLY
+
+For EVERY holding, write:
+
+### **[Stock Name] (₹avg_price → ₹current_price)**
+Your Investment: ₹invested | Current Value: ₹current_value | **P&L: ₹pnl (pct%)**
+
+**What Happened:** [Explain price movement in simple terms]
+
+**My Verdict:** [Bullish/Neutral/Bearish]
+
+**ACTION TO TAKE:** [Specific instruction: "Sell 50% of your 6 shares", "Hold all", "Exit completely"]
+
+**3 Reasons Why:**
+1. [Technical/fundamental reason]
+2. [Risk/reward reason]  
+3. [Market condition reason]
+
+**Watch For:** [Price levels, news events]
+
+## 🔄 REBALANCE IF NEEDED
+- Overweight stocks? [Suggest trimming]
+- Underweight opportunities? [Suggest adding]
+
+## ⚠️ RISK CHECK
+List 2-3 specific warnings with mitigation
+
+## 💡 TODAY'S LEARNING
+Explain one concept like "What is partial profit booking?" in 2 lines
+
+## 📅 TOMORROW'S WATCHLIST
+- Key price levels
+- Important news/events
+
+STOCK DATA TO ANALYZE:
+{
+  "portfolio_summary": {
+    "total_invested": 12752.220000000001,
+    "total_value": 13949.410000000002,
+    "total_pnl": 1197.19,
+    "total_pnl_percentage": 9.39,
+    "best_performer": {
+      "basic": {
+        "symbol": "KALYANJEWL.NS",
+        "name": "KALYANJEWL",
+        "quantity": 2,
+        "avg_price": 441.2,
+        "current_price": 555.85,
+        "pnl": 229.3,
+        "pnl_percentage": 25.99,
+        "weight_in_portfolio": 8.72,
+        "total_invested": 882.4,
+        "current_value": 1111.7
+      },
+      "performance_tier": "excellent",
+      "technical_signals": [],
+      "bias_score": {},
+      "action_triggers": [
+        {
+          "type": "profit_target",
+          "severity": "high",
+          "message": "Strong profit of 26.0% - Book 50-75% to lock gains"
+        }
+      ]
+    },
+    "worst_performer": {
+      "basic": {
+        "symbol": "TATAMOTORS.NS",
+        "name": "TATAMOTORS",
+        "quantity": 6,
+        "avg_price": 671.1,
+        "current_price": 688.3000000000001,
+        "pnl": 103.2,
+        "pnl_percentage": 2.56,
+        "weight_in_portfolio": 32.38,
+        "total_invested": 4026.6,
+        "current_value": 4129.8
+      },
+      "performance_tier": "moderate",
+      "technical_signals": [
+        {
+          "source": "Yahoo Finance India",
+          "reliability": 0.88,
+          "market": "INDIAN",
+          "data": {
+            "symbol": "TATAMOTORS.NS",
+            "price": 405.85,
+            "change": 0,
+            "changePercent": "0.00%",
+            "previousClose": 405.85,
+            "open": null,
+            "high": null,
+            "low": null,
+            "volume": null,
+            "currency": "INR"
+          }
+        },
+        {
+          "source": "AlphaVantage India",
+          "data": {},
+          "reliability": 0.8,
+          "market": "INDIAN"
+        }
+      ],
+      "bias_score": {},
+      "action_triggers": []
+    },
+    "risk_level": "Medium"
+  },
+  "holdings": [
+    {
+      "basic": {
+        "symbol": "TATAMOTORS.NS",
+        "name": "TATAMOTORS",
+        "quantity": 6,
+        "avg_price": 671.1,
+        "current_price": 688.3000000000001,
+        "pnl": 103.2,
+        "pnl_percentage": 2.56,
+        "weight_in_portfolio": 32.38,
+        "total_invested": 4026.6,
+        "current_value": 4129.8
+      },
+      "performance_tier": "moderate",
+      "technical_signals": [
+        {
+          "source": "Yahoo Finance India",
+          "reliability": 0.88,
+          "market": "INDIAN",
+          "data": {
+            "symbol": "TATAMOTORS.NS",
+            "price": 405.85,
+            "change": 0,
+            "changePercent": "0.00%",
+            "previousClose": 405.85,
+            "open": null,
+            "high": null,
+            "low": null,
+            "volume": null,
+            "currency": "INR"
+          }
+        },
+        {
+          "source": "AlphaVantage India",
+          "data": {},
+          "reliability": 0.8,
+          "market": "INDIAN"
+        }
+      ],
+      "bias_score": {},
+      "action_triggers": []
+    },
+    {
+      "basic": {
+        "symbol": "ADANITOTALGAS.NS",
+        "name": "ADANITOTALGAS",
+        "quantity": 3,
+        "avg_price": 645.9,
+        "current_price": 675.75,
+        "pnl": 89.55,
+        "pnl_percentage": 4.62,
+        "weight_in_portfolio": 15.9,
+        "total_invested": 1937.7,
+        "current_value": 2027.25
+      },
+      "performance_tier": "moderate",
+      "technical_signals": [
+        {
+          "source": "AlphaVantage India",
+          "data": {},
+          "reliability": 0.8,
+          "market": "INDIAN"
+        }
+      ],
+      "bias_score": {},
+      "action_triggers": []
+    },
+    {
+      "basic": {
+        "symbol": "INFOSYS.NS",
+        "name": "INFOSYS",
+        "quantity": 1,
+        "avg_price": 1502.9,
+        "current_price": 1601.8,
+        "pnl": 98.9,
+        "pnl_percentage": 6.58,
+        "weight_in_portfolio": 12.56,
+        "total_invested": 1502.9,
+        "current_value": 1601.8
+      },
+      "performance_tier": "moderate",
+      "technical_signals": [],
+      "bias_score": {},
+      "action_triggers": []
+    },
+    {
+      "basic": {
+        "symbol": "SBIN.NS",
+        "name": "SBIN",
+        "quantity": 6,
+        "avg_price": 711.6700000000001,
+        "current_price": 819.85,
+        "pnl": 649.08,
+        "pnl_percentage": 15.2,
+        "weight_in_portfolio": 38.57,
+        "total_invested": 4270.02,
+        "current_value": 4919.1
+      },
+      "performance_tier": "good",
+      "technical_signals": [],
+      "bias_score": {},
+      "action_triggers": [
+        {
+          "type": "profit_target",
+          "severity": "medium",
+          "message": "Healthy profit of 15.2% - Consider booking 25-30%"
+        }
+      ]
+    },
+    {
+      "basic": {
+        "symbol": "TATASTEEL.NS",
+        "name": "TATASTEEL",
+        "quantity": 1,
+        "avg_price": 132.6,
+        "current_price": 159.76,
+        "pnl": 27.16,
+        "pnl_percentage": 20.48,
+        "weight_in_portfolio": 1.25,
+        "total_invested": 132.6,
+        "current_value": 159.76
+      },
+      "performance_tier": "excellent",
+      "technical_signals": [
+        {
+          "source": "Yahoo Finance India",
+          "reliability": 0.88,
+          "market": "INDIAN",
+          "data": {
+            "symbol": "TATASTEEL.NS",
+            "price": 166.92,
+            "change": -0.8600000000000136,
+            "changePercent": "-0.51%",
+            "previousClose": 167.78,
+            "open": 167.77999877929688,
+            "high": 167.99000549316406,
+            "low": 165,
+            "volume": 18869811,
+            "currency": "INR"
+          }
+        },
+        {
+          "source": "NSE India",
+          "data": {
+            "symbol": "TATASTEEL",
+            "price": 166.85,
+            "change": -0.9300000000000068,
+            "changePercent": -0.5542972940755791,
+            "high": 167.99,
+            "low": 165
+          },
+          "reliability": 0.95,
+          "market": "INDIAN"
+        },
+        {
+          "source": "AlphaVantage India",
+          "data": {},
+          "reliability": 0.8,
+          "market": "INDIAN"
+        }
+      ],
+      "bias_score": {},
+      "action_triggers": [
+        {
+          "type": "profit_target",
+          "severity": "medium",
+          "message": "Healthy profit of 20.5% - Consider booking 25-30%"
+        }
+      ]
+    },
+    {
+      "basic": {
+        "symbol": "KALYANJEWL.NS",
+        "name": "KALYANJEWL",
+        "quantity": 2,
+        "avg_price": 441.2,
+        "current_price": 555.85,
+        "pnl": 229.3,
+        "pnl_percentage": 25.99,
+        "weight_in_portfolio": 8.72,
+        "total_invested": 882.4,
+        "current_value": 1111.7
+      },
+      "performance_tier": "excellent",
+      "technical_signals": [],
+      "bias_score": {},
+      "action_triggers": [
+        {
+          "type": "profit_target",
+          "severity": "high",
+          "message": "Strong profit of 26.0% - Book 50-75% to lock gains"
+        }
+      ]
+    }
+  ],
+  "market_breakdown": {
+    "US": 0.5471,
+    "INDIAN": 0.4529
+  },
+  "portfolio_bias": {}
+}
+
+RULES:
+- Be DIRECT and SPECIFIC
+- No jargon without explanation
+- If data poor, say "Insufficient data"
+- Use emojis for visual appeal
+- Keep sentences short
+- Focus on ACTION over analysis
+
+Generate the complete report now:
+2025-12-03 23:09:15.401 | INFO     | agent:generate_report:198 - 输入数据 - 报告数量: 1, 论坛日志长度: 91
+2025-12-03 23:09:15.402 | INFO     | agent:_select_template:226 - 选择报告模板...
+2025-12-03 23:09:15.402 | INFO     | nodes.template_selection_node:run:42 - 开始模板选择...
+2025-12-03 23:09:15.403 | ERROR    | nodes.template_selection_node:_get_available_templates:193 - 模板目录不存在: ReportEngine/report_template
+2025-12-03 23:09:15.403 | INFO     | nodes.template_selection_node:run:52 - 未找到预设模板，使用内置默认模板
+2025-12-03 23:09:15.403 | INFO     | nodes.template_selection_node:_get_fallback_template:239 - 未找到合适模板，使用空模板让LLM自行发挥
+2025-12-03 23:09:15.403 | INFO     | agent:_select_template:249 - 选择模板: 自由发挥模板
+2025-12-03 23:09:15.404 | INFO     | agent:_select_template:250 - 选择理由: 未找到合适的预设模板，让LLM根据内容自行设计报告结构
+2025-12-03 23:09:15.404 | INFO     | agent:_generate_html_report:266 - 多轮生成HTML报告...
+2025-12-03 23:09:15.404 | INFO     | nodes.html_generation_node:run:46 - 开始生成HTML报告...
+2025-12-03 23:09:17.122 | ERROR    | llms.base:stream_invoke:117 - 流式请求失败: Error code: 403 - [{'error': {'code': 403, 'message': 'Your API key was reported as leaked. Please use another API key.', 'status': 'PERMISSION_DENIED'}}]
+2025-12-03 23:09:17.122 | ERROR    | nodes.html_generation_node:run:72 - HTML生成失败: Error code: 403 - [{'error': {'code': 403, 'message': 'Your API key was reported as leaked. Please use another API key.', 'status': 'PERMISSION_DENIED'}}]
+Traceback (most recent call last):
+
+  File "C:\Darshan\stockanalysis\ReportEngine\test.py", line 648, in <module>
+    generate_daily_reports()
+    └ <function generate_daily_reports at 0x00000118BEA95120>
+
+  File "C:\Darshan\stockanalysis\ReportEngine\test.py", line 574, in generate_daily_reports
+    report = agent.generate_report(
+             │     └ <function ReportAgent.generate_report at 0x00000118BEA94360>
+             └ <agent.ReportAgent object at 0x00000118BECC8410>
+
+  File "C:\Darshan\stockanalysis\ReportEngine\agent.py", line 205, in generate_report
+    html_report = self._generate_html_report(query, reports, forum_logs, template_result)
+                  │    │                     │      │        │           └ {'template_name': '自由发挥模板', 'template_content': '', 'selection_reason': '未找到合适的预设模板，让LLM根据内容自行设计报告结构'}
+                  │    │                     │      │        └ 'Portfolio report generation for darshanjain15062002@gmail.com on 2025-12-03 23:09:15.398310'
+                  │    │                     │      └ [{'type': 'comprehensive_portfolio_analysis', 'data': {'portfolio_summary': {'total_invested': 12752.220000000001, 'total_val...
+                  │    │                     └ 'You are **Portfolio Advisor Pro**, an expert Indian stock market advisor writing a DAILY PORTFOLIO REPORT for darshanjain150...
+                  │    └ <function ReportAgent._generate_html_report at 0x00000118BEA944A0>
+                  └ <agent.ReportAgent object at 0x00000118BECC8410>
+
+  File "C:\Darshan\stockanalysis\ReportEngine\agent.py", line 288, in _generate_html_report
+    html_content = self.html_generation_node.run(html_input)
+                   │    │                    │   └ {'query': 'You are **Portfolio Advisor Pro**, an expert Indian stock market advisor writing a DAILY PORTFOLIO REPORT for dars...
+                   │    │                    └ <function HTMLGenerationNode.run at 0x00000118BE9EE340>
+                   │    └ <nodes.html_generation_node.HTMLGenerationNode object at 0x00000118BECF00D0>
+                   └ <agent.ReportAgent object at 0x00000118BECC8410>
+
+> File "C:\Darshan\stockanalysis\ReportEngine\nodes\html_generation_node.py", line 63, in run
+    response = self.llm_client.stream_invoke_to_string(SYSTEM_PROMPT_HTML_GENERATION, message)
+               │    │          │                       │                              └ '{\n  "query": "You are **Portfolio Advisor Pro**, an expert Indian stock market advisor writing a DAILY PORTFOLIO REPORT for...
+               │    │          │                       └ '\n你是一位专业的HTML报告生成专家。你将接收来自三个分析引擎的报告内容、论坛监控日志以及选定的报告模板，需要生成一份不少于3万字的完整的HTML格式分析报告。\n\n<INPUT JSON SCHEMA>\n{\n  "type": "obje...
+               │    │          └ <function LLMClient.stream_invoke_to_string at 0x00000118BE9EC040>
+               │    └ <llms.base.LLMClient object at 0x00000118BEA7F290>
+               └ <nodes.html_generation_node.HTMLGenerationNode object at 0x00000118BECF00D0>
+
+  File "C:\Darshan\stockanalysis\ReportEngine\llms\base.py", line 135, in stream_invoke_to_string
+    for chunk in self.stream_invoke(system_prompt, user_prompt, **kwargs):
+                 │    │             │              │              └ {}
+                 │    │             │              └ '{\n  "query": "You are **Portfolio Advisor Pro**, an expert Indian stock market advisor writing a DAILY PORTFOLIO REPORT for...
+                 │    │             └ '\n你是一位专业的HTML报告生成专家。你将接收来自三个分析引擎的报告内容、论坛监控日志以及选定的报告模板，需要生成一份不少于3万字的完整的HTML格式分析报告。\n\n<INPUT JSON SCHEMA>\n{\n  "type": "obje...
+                 │    └ <function LLMClient.stream_invoke at 0x00000118BE9D7380>
+                 └ <llms.base.LLMClient object at 0x00000118BEA7F290>
+
+  File "C:\Darshan\stockanalysis\ReportEngine\llms\base.py", line 118, in stream_invoke
+    raise e
+
+  File "C:\Darshan\stockanalysis\ReportEngine\llms\base.py", line 104, in stream_invoke
+    stream = self.client.chat.completions.create(
+             │    │      │    │           └ <function Completions.create at 0x00000118BF3A7F60>
+             │    │      │    └ <openai.resources.chat.completions.completions.Completions object at 0x00000118BEDA1990>
+             │    │      └ <openai.resources.chat.chat.Chat object at 0x00000118BECBB110>
+             │    └ <openai.OpenAI object at 0x00000118BECE5BD0>
+             └ <llms.base.LLMClient object at 0x00000118BEA7F290>
+
+  File "C:\Users\darsh\AppData\Local\Programs\Python\Python311\Lib\site-packages\openai\_utils\_utils.py", line 286, in wrapper
+    return func(*args, **kwargs)
+           │     │       └ {'model': 'gemini-2.0-flash', 'messages': [{'role': 'system', 'content': '\n你是一位专业的HTML报告生成专家。你将接收来自三个分析引擎的报告内容、论坛监控日志以及选定的报告...
+           │     └ (<openai.resources.chat.completions.completions.Completions object at 0x00000118BEDA1990>,)
+           └ <function Completions.create at 0x00000118BF3A7E20>
+  File "C:\Users\darsh\AppData\Local\Programs\Python\Python311\Lib\site-packages\openai\resources\chat\completions\completions.py", line 1189, in create
+    return self._post(
+           │    └ <bound method SyncAPIClient.post of <openai.OpenAI object at 0x00000118BECE5BD0>>
+           └ <openai.resources.chat.completions.completions.Completions object at 0x00000118BEDA1990>
+  File "C:\Users\darsh\AppData\Local\Programs\Python\Python311\Lib\site-packages\openai\_base_client.py", line 1259, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+           │    │          │    │       │        │            │                  └ openai.Stream[openai.types.chat.chat_completion_chunk.ChatCompletionChunk]
+           │    │          │    │       │        │            └ True
+           │    │          │    │       │        └ FinalRequestOptions(method='post', url='/chat/completions', params={}, headers=NOT_GIVEN, max_retries=NOT_GIVEN, timeout=3000...
+           │    │          │    │       └ <class 'openai.types.chat.chat_completion.ChatCompletion'>
+           │    │          │    └ <function SyncAPIClient.request at 0x00000118BD898860>
+           │    │          └ <openai.OpenAI object at 0x00000118BECE5BD0>
+           │    └ ~ResponseT
+           └ <function cast at 0x00000118B9B7D260>
+  File "C:\Users\darsh\AppData\Local\Programs\Python\Python311\Lib\site-packages\openai\_base_client.py", line 1047, in request
+    raise self._make_status_error_from_response(err.response) from None
+          │    └ <function BaseClient._make_status_error_from_response at 0x00000118BD88AFC0>
+          └ <openai.OpenAI object at 0x00000118BECE5BD0>
+
+openai.PermissionDeniedError: Error code: 403 - [{'error': {'code': 403, 'message': 'Your API key was reported as leaked. Please use another API key.', 'status': 'PERMISSION_DENIED'}}]
+2025-12-03 23:09:17.271 | INFO     | nodes.html_generation_node:_generate_fallback_html:144 - 使用备用HTML生成方法
+2025-12-03 23:09:17.272 | ERROR    | agent:generate_report:221 - 报告生成过程中发生错误: 'locale' codec can't encode character '\u5e74' in position 2: encoding error
+Traceback (most recent call last):
+
+  File "C:\Darshan\stockanalysis\ReportEngine\nodes\html_generation_node.py", line 63, in run
+    response = self.llm_client.stream_invoke_to_string(SYSTEM_PROMPT_HTML_GENERATION, message)
+               │    │          │                       │                              └ '{\n  "query": "You are **Portfolio Advisor Pro**, an expert Indian stock market advisor writing a DAILY PORTFOLIO REPORT for...
+               │    │          │                       └ '\n你是一位专业的HTML报告生成专家。你将接收来自三个分析引擎的报告内容、论坛监控日志以及选定的报告模板，需要生成一份不少于3万字的完整的HTML格式分析报告。\n\n<INPUT JSON SCHEMA>\n{\n  "type": "obje...
+               │    │          └ <function LLMClient.stream_invoke_to_string at 0x00000118BE9EC040>
+               │    └ <llms.base.LLMClient object at 0x00000118BEA7F290>
+               └ <nodes.html_generation_node.HTMLGenerationNode object at 0x00000118BECF00D0>
+
+  File "C:\Darshan\stockanalysis\ReportEngine\llms\base.py", line 135, in stream_invoke_to_string
+    for chunk in self.stream_invoke(system_prompt, user_prompt, **kwargs):
+                 │    │             │              │              └ {}
+                 │    │             │              └ '{\n  "query": "You are **Portfolio Advisor Pro**, an expert Indian stock market advisor writing a DAILY PORTFOLIO REPORT for...
+                 │    │             └ '\n你是一位专业的HTML报告生成专家。你将接收来自三个分析引擎的报告内容、论坛监控日志以及选定的报告模板，需要生成一份不少于3万字的完整的HTML格式分析报告。\n\n<INPUT JSON SCHEMA>\n{\n  "type": "obje...
+                 │    └ <function LLMClient.stream_invoke at 0x00000118BE9D7380>
+                 └ <llms.base.LLMClient object at 0x00000118BEA7F290>
+
+  File "C:\Darshan\stockanalysis\ReportEngine\llms\base.py", line 118, in stream_invoke
+    raise e
+
+  File "C:\Darshan\stockanalysis\ReportEngine\llms\base.py", line 104, in stream_invoke
+    stream = self.client.chat.completions.create(
+             │    │      │    │           └ <function Completions.create at 0x00000118BF3A7F60>
+             │    │      │    └ <openai.resources.chat.completions.completions.Completions object at 0x00000118BEDA1990>
+             │    │      └ <openai.resources.chat.chat.Chat object at 0x00000118BECBB110>
+             │    └ <openai.OpenAI object at 0x00000118BECE5BD0>
+             └ <llms.base.LLMClient object at 0x00000118BEA7F290>
+
+  File "C:\Users\darsh\AppData\Local\Programs\Python\Python311\Lib\site-packages\openai\_utils\_utils.py", line 286, in wrapper
+    return func(*args, **kwargs)
+           │     │       └ {'model': 'gemini-2.0-flash', 'messages': [{'role': 'system', 'content': '\n你是一位专业的HTML报告生成专家。你将接收来自三个分析引擎的报告内容、论坛监控日志以及选定的报告...
+           │     └ (<openai.resources.chat.completions.completions.Completions object at 0x00000118BEDA1990>,)
+           └ <function Completions.create at 0x00000118BF3A7E20>
+  File "C:\Users\darsh\AppData\Local\Programs\Python\Python311\Lib\site-packages\openai\resources\chat\completions\completions.py", line 1189, in create
+    return self._post(
+           │    └ <bound method SyncAPIClient.post of <openai.OpenAI object at 0x00000118BECE5BD0>>
+           └ <openai.resources.chat.completions.completions.Completions object at 0x00000118BEDA1990>
+  File "C:\Users\darsh\AppData\Local\Programs\Python\Python311\Lib\site-packages\openai\_base_client.py", line 1259, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+           │    │          │    │       │        │            │                  └ openai.Stream[openai.types.chat.chat_completion_chunk.ChatCompletionChunk]
+           │    │          │    │       │        │            └ True
+           │    │          │    │       │        └ FinalRequestOptions(method='post', url='/chat/completions', params={}, headers=NOT_GIVEN, max_retries=NOT_GIVEN, timeout=3000...
+           │    │          │    │       └ <class 'openai.types.chat.chat_completion.ChatCompletion'>
+           │    │          │    └ <function SyncAPIClient.request at 0x00000118BD898860>
+           │    │          └ <openai.OpenAI object at 0x00000118BECE5BD0>
+           │    └ ~ResponseT
+           └ <function cast at 0x00000118B9B7D260>
+  File "C:\Users\darsh\AppData\Local\Programs\Python\Python311\Lib\site-packages\openai\_base_client.py", line 1047, in request
+    raise self._make_status_error_from_response(err.response) from None
+          │    └ <function BaseClient._make_status_error_from_response at 0x00000118BD88AFC0>
+          └ <openai.OpenAI object at 0x00000118BECE5BD0>
+
+openai.PermissionDeniedError: Error code: 403 - [{'error': {'code': 403, 'message': 'Your API key was reported as leaked. Please use another API key.', 'status': 'PERMISSION_DENIED'}}]
+
+
+During handling of the above exception, another exception occurred:
+
+
+Traceback (most recent call last):
+
+  File "C:\Darshan\stockanalysis\ReportEngine\test.py", line 648, in <module>
+    generate_daily_reports()
+    └ <function generate_daily_reports at 0x00000118BEA95120>
+
+  File "C:\Darshan\stockanalysis\ReportEngine\test.py", line 574, in generate_daily_reports
+    report = agent.generate_report(
+             │     └ <function ReportAgent.generate_report at 0x00000118BEA94360>
+             └ <agent.ReportAgent object at 0x00000118BECC8410>
+
+> File "C:\Darshan\stockanalysis\ReportEngine\agent.py", line 205, in generate_report
+    html_report = self._generate_html_report(query, reports, forum_logs, template_result)
+                  │    │                     │      │        │           └ {'template_name': '自由发挥模板', 'template_content': '', 'selection_reason': '未找到合适的预设模板，让LLM根据内容自行设计报告结构'}
+                  │    │                     │      │        └ 'Portfolio report generation for darshanjain15062002@gmail.com on 2025-12-03 23:09:15.398310'
+                  │    │                     │      └ [{'type': 'comprehensive_portfolio_analysis', 'data': {'portfolio_summary': {'total_invested': 12752.220000000001, 'total_val...
+                  │    │                     └ 'You are **Portfolio Advisor Pro**, an expert Indian stock market advisor writing a DAILY PORTFOLIO REPORT for darshanjain150...
+                  │    └ <function ReportAgent._generate_html_report at 0x00000118BEA944A0>
+                  └ <agent.ReportAgent object at 0x00000118BECC8410>
+
+  File "C:\Darshan\stockanalysis\ReportEngine\agent.py", line 288, in _generate_html_report
+    html_content = self.html_generation_node.run(html_input)
+                   │    │                    │   └ {'query': 'You are **Portfolio Advisor Pro**, an expert Indian stock market advisor writing a DAILY PORTFOLIO REPORT for dars...
+                   │    │                    └ <function HTMLGenerationNode.run at 0x00000118BE9EE340>
+                   │    └ <nodes.html_generation_node.HTMLGenerationNode object at 0x00000118BECF00D0>
+                   └ <agent.ReportAgent object at 0x00000118BECC8410>
+
+  File "C:\Darshan\stockanalysis\ReportEngine\nodes\html_generation_node.py", line 74, in run
+    return self._generate_fallback_html(input_data)
+           │    │                       └ {'query': 'You are **Portfolio Advisor Pro**, an expert Indian stock market advisor writing a DAILY PORTFOLIO REPORT for dars...
+           │    └ <function HTMLGenerationNode._generate_fallback_html at 0x00000118BE9EE520>
+           └ <nodes.html_generation_node.HTMLGenerationNode object at 0x00000118BECF00D0>
+
+  File "C:\Darshan\stockanalysis\ReportEngine\nodes\html_generation_node.py", line 152, in _generate_fallback_html
+    generation_time = datetime.now().strftime("%Y年%m月%d日 %H:%M:%S")
+                      │        └ <method 'now' of 'datetime.datetime' objects>
+                      └ <class 'datetime.datetime'>
+
+UnicodeEncodeError: 'locale' codec can't encode character '\u5e74' in position 2: encoding error
+2025-12-03 23:10:33.558 | INFO     | agent:initialize_baseline:62 - 文件数量基准已初始化: {'insight': 0, 'media': 0, 'query': 0}
+2025-12-03 23:10:33.560 | INFO     | agent:__init__:143 - Report Agent已初始化
+2025-12-03 23:10:33.560 | INFO     | agent:__init__:144 - 使用LLM: {'provider': 'gemini-2.0-flash', 'model': 'gemini-2.0-flash', 'api_base': 'https://generativelanguage.googleapis.com/v1beta'}
+2025-12-03 23:11:00.799 | INFO     | agent:generate_report:197 - 开始生成报告: You are **Portfolio Advisor Pro**, an expert Indian stock market advisor writing a DAILY PORTFOLIO REPORT for darshanjain15062002@gmail.com.
+
+PORTFOLIO SNAPSHOT:
+• Total Value: ₹13,949.41
+• Total P&L: ₹1,197.19 (+9.39%)
+• Holdings: 6 stocks
+• Date: 03-Dec-2025
+
+YOUR MISSION: Generate a professional, beginner-friendly email report with SPECIFIC, ACTIONABLE recommendations.
+
+CRITICAL REQUIREMENTS:
+1. Every recommendation must have 3 clear reasons
+2. Use simple Hindi-English mix ("Hinglish") tone for Indian investors
+3. Quantify everything: "Book 50% profit" not "consider booking"
+4. Mention exact prices and amounts in ₹
+5. Explain WHY in simple terms
+
+REPORT STRUCTURE:
+
+## 📊 EXECUTIVE SUMMARY (3 sentences max)
+Give overall health and 1 key action. Example: "Portfolio up 5.2%. ADANITOTALGAS needs profit booking. SBIN showing strength."
+
+## 🎯 TODAY'S PRIORITY ACTIONS
+Create this exact markdown table:
+
+| Stock | My Advice | Why I'm Saying This | Urgency | Confidence |
+|-------|-----------|---------------------|---------|------------|
+| TATAMOTORS | ⏸️ **HOLD** | No triggers. Stock performing within expectations. | Medium term | **Medium** |
+| ADANITOTALGAS | ⏸️ **HOLD** | No triggers. Stock performing within expectations. | Medium term | **Medium** |
+| INFOSYS | ⏸️ **HOLD** | No triggers. Stock performing within expectations. | Medium term | **Medium** |
+| SBIN | ⏳ **MONITOR** | Healthy profit of 15.2% - Consider booking 25-30% | **This Week** | **Medium** |
+| TATASTEEL | ⏳ **MONITOR** | Healthy profit of 20.5% - Consider booking 25-30% | **This Week** | **Medium** |
+| KALYANJEWL | 💰 **BOOK PROFIT** | Strong profit of 26.0% - Book 50-75% to lock gains | **TODAY** | **Medium** |
+
+## 📈 EACH STOCK EXPLAINED SIMPLY
+
+For EVERY holding, write:
+
+### **[Stock Name] (₹avg_price → ₹current_price)**
+Your Investment: ₹invested | Current Value: ₹current_value | **P&L: ₹pnl (pct%)**
+
+**What Happened:** [Explain price movement in simple terms]
+
+**My Verdict:** [Bullish/Neutral/Bearish]
+
+**ACTION TO TAKE:** [Specific instruction: "Sell 50% of your 6 shares", "Hold all", "Exit completely"]
+
+**3 Reasons Why:**
+1. [Technical/fundamental reason]
+2. [Risk/reward reason]  
+3. [Market condition reason]
+
+**Watch For:** [Price levels, news events]
+
+## 🔄 REBALANCE IF NEEDED
+- Overweight stocks? [Suggest trimming]
+- Underweight opportunities? [Suggest adding]
+
+## ⚠️ RISK CHECK
+List 2-3 specific warnings with mitigation
+
+## 💡 TODAY'S LEARNING
+Explain one concept like "What is partial profit booking?" in 2 lines
+
+## 📅 TOMORROW'S WATCHLIST
+- Key price levels
+- Important news/events
+
+STOCK DATA TO ANALYZE:
+{
+  "portfolio_summary": {
+    "total_invested": 12752.220000000001,
+    "total_value": 13949.410000000002,
+    "total_pnl": 1197.19,
+    "total_pnl_percentage": 9.39,
+    "best_performer": {
+      "basic": {
+        "symbol": "KALYANJEWL.NS",
+        "name": "KALYANJEWL",
+        "quantity": 2,
+        "avg_price": 441.2,
+        "current_price": 555.85,
+        "pnl": 229.3,
+        "pnl_percentage": 25.99,
+        "weight_in_portfolio": 8.72,
+        "total_invested": 882.4,
+        "current_value": 1111.7
+      },
+      "performance_tier": "excellent",
+      "technical_signals": [],
+      "bias_score": {},
+      "action_triggers": [
+        {
+          "type": "profit_target",
+          "severity": "high",
+          "message": "Strong profit of 26.0% - Book 50-75% to lock gains"
+        }
+      ]
+    },
+    "worst_performer": {
+      "basic": {
+        "symbol": "TATAMOTORS.NS",
+        "name": "TATAMOTORS",
+        "quantity": 6,
+        "avg_price": 671.1,
+        "current_price": 688.3000000000001,
+        "pnl": 103.2,
+        "pnl_percentage": 2.56,
+        "weight_in_portfolio": 32.38,
+        "total_invested": 4026.6,
+        "current_value": 4129.8
+      },
+      "performance_tier": "moderate",
+      "technical_signals": [
+        {
+          "source": "Yahoo Finance India",
+          "reliability": 0.88,
+          "market": "INDIAN",
+          "data": {
+            "symbol": "TATAMOTORS.NS",
+            "price": 405.85,
+            "change": 0,
+            "changePercent": "0.00%",
+            "previousClose": 405.85,
+            "open": null,
+            "high": null,
+            "low": null,
+            "volume": null,
+            "currency": "INR"
+          }
+        },
+        {
+          "source": "AlphaVantage India",
+          "data": {},
+          "reliability": 0.8,
+          "market": "INDIAN"
+        }
+      ],
+      "bias_score": {},
+      "action_triggers": []
+    },
+    "risk_level": "Medium"
+  },
+  "holdings": [
+    {
+      "basic": {
+        "symbol": "TATAMOTORS.NS",
+        "name": "TATAMOTORS",
+        "quantity": 6,
+        "avg_price": 671.1,
+        "current_price": 688.3000000000001,
+        "pnl": 103.2,
+        "pnl_percentage": 2.56,
+        "weight_in_portfolio": 32.38,
+        "total_invested": 4026.6,
+        "current_value": 4129.8
+      },
+      "performance_tier": "moderate",
+      "technical_signals": [
+        {
+          "source": "Yahoo Finance India",
+          "reliability": 0.88,
+          "market": "INDIAN",
+          "data": {
+            "symbol": "TATAMOTORS.NS",
+            "price": 405.85,
+            "change": 0,
+            "changePercent": "0.00%",
+            "previousClose": 405.85,
+            "open": null,
+            "high": null,
+            "low": null,
+            "volume": null,
+            "currency": "INR"
+          }
+        },
+        {
+          "source": "AlphaVantage India",
+          "data": {},
+          "reliability": 0.8,
+          "market": "INDIAN"
+        }
+      ],
+      "bias_score": {},
+      "action_triggers": []
+    },
+    {
+      "basic": {
+        "symbol": "ADANITOTALGAS.NS",
+        "name": "ADANITOTALGAS",
+        "quantity": 3,
+        "avg_price": 645.9,
+        "current_price": 675.75,
+        "pnl": 89.55,
+        "pnl_percentage": 4.62,
+        "weight_in_portfolio": 15.9,
+        "total_invested": 1937.7,
+        "current_value": 2027.25
+      },
+      "performance_tier": "moderate",
+      "technical_signals": [
+        {
+          "source": "AlphaVantage India",
+          "data": {},
+          "reliability": 0.8,
+          "market": "INDIAN"
+        }
+      ],
+      "bias_score": {},
+      "action_triggers": []
+    },
+    {
+      "basic": {
+        "symbol": "INFOSYS.NS",
+        "name": "INFOSYS",
+        "quantity": 1,
+        "avg_price": 1502.9,
+        "current_price": 1601.8,
+        "pnl": 98.9,
+        "pnl_percentage": 6.58,
+        "weight_in_portfolio": 12.56,
+        "total_invested": 1502.9,
+        "current_value": 1601.8
+      },
+      "performance_tier": "moderate",
+      "technical_signals": [],
+      "bias_score": {},
+      "action_triggers": []
+    },
+    {
+      "basic": {
+        "symbol": "SBIN.NS",
+        "name": "SBIN",
+        "quantity": 6,
+        "avg_price": 711.6700000000001,
+        "current_price": 819.85,
+        "pnl": 649.08,
+        "pnl_percentage": 15.2,
+        "weight_in_portfolio": 38.57,
+        "total_invested": 4270.02,
+        "current_value": 4919.1
+      },
+      "performance_tier": "good",
+      "technical_signals": [],
+      "bias_score": {},
+      "action_triggers": [
+        {
+          "type": "profit_target",
+          "severity": "medium",
+          "message": "Healthy profit of 15.2% - Consider booking 25-30%"
+        }
+      ]
+    },
+    {
+      "basic": {
+        "symbol": "TATASTEEL.NS",
+        "name": "TATASTEEL",
+        "quantity": 1,
+        "avg_price": 132.6,
+        "current_price": 159.76,
+        "pnl": 27.16,
+        "pnl_percentage": 20.48,
+        "weight_in_portfolio": 1.25,
+        "total_invested": 132.6,
+        "current_value": 159.76
+      },
+      "performance_tier": "excellent",
+      "technical_signals": [
+        {
+          "source": "Yahoo Finance India",
+          "reliability": 0.88,
+          "market": "INDIAN",
+          "data": {
+            "symbol": "TATASTEEL.NS",
+            "price": 166.92,
+            "change": -0.8600000000000136,
+            "changePercent": "-0.51%",
+            "previousClose": 167.78,
+            "open": 167.77999877929688,
+            "high": 167.99000549316406,
+            "low": 165,
+            "volume": 18869811,
+            "currency": "INR"
+          }
+        },
+        {
+          "source": "NSE India",
+          "data": {
+            "symbol": "TATASTEEL",
+            "price": 166.85,
+            "change": -0.9300000000000068,
+            "changePercent": -0.5542972940755791,
+            "high": 167.99,
+            "low": 165
+          },
+          "reliability": 0.95,
+          "market": "INDIAN"
+        },
+        {
+          "source": "AlphaVantage India",
+          "data": {},
+          "reliability": 0.8,
+          "market": "INDIAN"
+        }
+      ],
+      "bias_score": {},
+      "action_triggers": [
+        {
+          "type": "profit_target",
+          "severity": "medium",
+          "message": "Healthy profit of 20.5% - Consider booking 25-30%"
+        }
+      ]
+    },
+    {
+      "basic": {
+        "symbol": "KALYANJEWL.NS",
+        "name": "KALYANJEWL",
+        "quantity": 2,
+        "avg_price": 441.2,
+        "current_price": 555.85,
+        "pnl": 229.3,
+        "pnl_percentage": 25.99,
+        "weight_in_portfolio": 8.72,
+        "total_invested": 882.4,
+        "current_value": 1111.7
+      },
+      "performance_tier": "excellent",
+      "technical_signals": [],
+      "bias_score": {},
+      "action_triggers": [
+        {
+          "type": "profit_target",
+          "severity": "high",
+          "message": "Strong profit of 26.0% - Book 50-75% to lock gains"
+        }
+      ]
+    }
+  ],
+  "market_breakdown": {
+    "US": 0.5471,
+    "INDIAN": 0.4529
+  },
+  "portfolio_bias": {}
+}
+
+RULES:
+- Be DIRECT and SPECIFIC
+- No jargon without explanation
+- If data poor, say "Insufficient data"
+- Use emojis for visual appeal
+- Keep sentences short
+- Focus on ACTION over analysis
+
+Generate the complete report now:
+2025-12-03 23:11:00.802 | INFO     | agent:generate_report:198 - 输入数据 - 报告数量: 1, 论坛日志长度: 91
+2025-12-03 23:11:00.803 | INFO     | agent:_select_template:226 - 选择报告模板...
+2025-12-03 23:11:00.803 | INFO     | nodes.template_selection_node:run:42 - 开始模板选择...
+2025-12-03 23:11:00.804 | ERROR    | nodes.template_selection_node:_get_available_templates:193 - 模板目录不存在: ReportEngine/report_template
+2025-12-03 23:11:00.804 | INFO     | nodes.template_selection_node:run:52 - 未找到预设模板，使用内置默认模板
+2025-12-03 23:11:00.804 | INFO     | nodes.template_selection_node:_get_fallback_template:239 - 未找到合适模板，使用空模板让LLM自行发挥
+2025-12-03 23:11:00.805 | INFO     | agent:_select_template:249 - 选择模板: 自由发挥模板
+2025-12-03 23:11:00.805 | INFO     | agent:_select_template:250 - 选择理由: 未找到合适的预设模板，让LLM根据内容自行设计报告结构
+2025-12-03 23:11:00.805 | INFO     | agent:_generate_html_report:266 - 多轮生成HTML报告...
+2025-12-03 23:11:00.806 | INFO     | nodes.html_generation_node:run:46 - 开始生成HTML报告...
+2025-12-03 23:11:50.379 | INFO     | nodes.html_generation_node:process_output:108 - 处理LLM原始输出，长度: 25690 字符
+2025-12-03 23:11:50.380 | INFO     | nodes.html_generation_node:process_output:127 - HTML处理完成，最终长度: 25682 字符
+2025-12-03 23:11:50.380 | INFO     | nodes.html_generation_node:run:68 - HTML报告生成完成
+2025-12-03 23:11:50.382 | INFO     | agent:_generate_html_report:294 - HTML报告生成完成
+2025-12-03 23:11:50.382 | INFO     | agent:_save_report:360 - 报告已保存到: final_reports\final_report__20251203_231150.html
+2025-12-03 23:11:50.383 | INFO     | agent:_save_report:366 - 状态已保存到: final_reports\report_state__20251203_231150.json
+2025-12-03 23:11:50.383 | INFO     | agent:generate_report:216 - 报告生成完成，耗时: 49.58 秒

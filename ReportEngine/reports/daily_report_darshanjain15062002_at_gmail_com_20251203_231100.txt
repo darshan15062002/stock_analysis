@@ -1,0 +1,887 @@
+Daily Portfolio Report for darshanjain15062002@gmail.com
+Generated on: 2025-12-03 23:11:50
+==================================================
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Portfolio Report - 03-Dec-2025</title>
+    <style>
+        /* CSS Reset */
+        html, body, div, span, applet, object, iframe,
+        h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+        a, abbr, acronym, address, big, cite, code,
+        del, dfn, em, img, ins, kbd, q, s, samp,
+        small, strike, strong, sub, sup, tt, var,
+        b, u, i, center,
+        dl, dt, dd, ol, ul, li,
+        fieldset, form, label, legend,
+        table, caption, tbody, tfoot, thead, tr, th, td,
+        article, aside, canvas, details, embed,
+        figure, figcaption, footer, header, hgroup,
+        menu, nav, output, ruby, section, summary,
+        time, mark, audio, video {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            font-size: 100%;
+            font: inherit;
+            vertical-align: baseline;
+        }
+
+        /* HTML5 display-role reset for older browsers */
+        article, aside, details, figcaption, figure,
+        footer, header, hgroup, menu, nav, section {
+            display: block;
+        }
+
+        body {
+            line-height: 1;
+        }
+
+        ol, ul {
+            list-style: none;
+        }
+
+        blockquote, q {
+            quotes: none;
+        }
+
+        blockquote:before, blockquote:after,
+        q:before, q:after {
+            content: '';
+            content: none;
+        }
+
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+
+        /* General Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #2c3e50;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 2em;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+
+        h3 {
+            font-size: 1.6em;
+            margin-top: 25px;
+            margin-bottom: 10px;
+            color: #34495e;
+        }
+
+        h4 {
+            font-size: 1.3em;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            color: #34495e;
+        }
+
+        p {
+            margin-bottom: 15px;
+            font-size: 1.1em;
+            color: #555;
+        }
+
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Table Styles */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        tbody tr:hover {
+            background-color: #f9f9f9;
+        }
+
+        /* List Styles */
+        ul, ol {
+            margin-bottom: 20px;
+        }
+
+        ul {
+            list-style-type: disc;
+            margin-left: 30px;
+        }
+
+        ol {
+            list-style-type: decimal;
+            margin-left: 30px;
+        }
+
+        li {
+            margin-bottom: 8px;
+            font-size: 1.1em;
+            color: #555;
+        }
+
+        /* Code Styles */
+        pre {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin-bottom: 20px;
+        }
+
+        code {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9em;
+            color: #c7254e;
+            background-color: #f9f2f4;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+
+        /* Button Styles */
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #2980b9;
+        }
+
+        /* Form Styles */
+        form {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            font-size: 1em;
+        }
+
+        textarea {
+            height: 150px;
+        }
+
+        input[type="submit"] {
+            background-color: #3498db;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #2980b9;
+        }
+
+        /* Footer Styles */
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            color: #777;
+            font-size: 0.9em;
+        }
+
+        /* Media Queries for Responsiveness */
+        @media (max-width: 768px) {
+            .container {
+                width: 95%;
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            h2 {
+                font-size: 1.7em;
+            }
+
+            h3 {
+                font-size: 1.4em;
+            }
+
+            p {
+                font-size: 1em;
+            }
+
+            th, td {
+                padding: 10px;
+            }
+        }
+
+        /* Dark Mode Styles */
+        body.dark-mode {
+            background-color: #222;
+            color: #eee;
+        }
+
+        body.dark-mode .container {
+            background-color: #333;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+        }
+
+        body.dark-mode h1,
+        body.dark-mode h2,
+        body.dark-mode h3,
+        body.dark-mode h4,
+        body.dark-mode label {
+            color: #eee;
+        }
+
+        body.dark-mode p,
+        body.dark-mode li {
+            color: #ccc;
+        }
+
+        body.dark-mode th {
+            background-color: #444;
+            color: #eee;
+        }
+
+        body.dark-mode tbody tr:hover {
+            background-color: #555;
+        }
+
+        body.dark-mode code {
+            background-color: #444;
+            color: #f8bbd0;
+        }
+
+        body.dark-mode footer {
+            border-top-color: #555;
+            color: #aaa;
+        }
+        /* Additional Styles */
+        .priority-high {
+            color: red;
+            font-weight: bold;
+        }
+
+        .priority-medium {
+            color: orange;
+        }
+
+        .confidence-high {
+            color: green;
+            font-weight: bold;
+        }
+
+        .confidence-medium {
+            color: darkgreen;
+        }
+        /* Collapsible Section Styles */
+        .collapsible {
+            background-color: #777;
+            color: white;
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 15px;
+            border-radius: 5px;
+            margin-bottom: 5px;
+        }
+
+        .active, .collapsible:hover {
+            background-color: #555;
+        }
+
+        .collapsible:after {
+            content: '\002B';
+            color: white;
+            font-weight: bold;
+            float: right;
+            margin-left: 5px;
+        }
+
+        .active:after {
+            content: "\2212";
+        }
+
+        .content {
+            padding: 0 18px;
+            background-color: #f1f1f1;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.2s ease-out;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        /* Chart Styles */
+        .chart-container {
+            width: 80%;
+            margin: 20px auto;
+        }
+         /* Print Styles */
+        @media print {
+            body {
+                background-color: #fff !important;
+                color: #000 !important;
+            }
+
+            .container {
+                box-shadow: none !important;
+            }
+
+            /* Hide elements not needed for printing */
+            .no-print {
+                display: none !important;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <button class="no-print" onclick="toggleDarkMode()">Toggle Dark Mode</button>
+        <button class="no-print" onclick="window.print()">Print Report</button>
+
+        <h1>Daily Portfolio Report - 03-Dec-2025</h1>
+
+        <h2>📊 EXECUTIVE SUMMARY</h2>
+        <p>Portfolio is up 9.39% 🎉. KALYANJEWL showing strong profit - Book 50-75% gains 💰. SBIN showing strength - Monitor for potential profit booking ⏳.</p>
+
+        <h2>🎯 TODAY'S PRIORITY ACTIONS</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Stock</th>
+                    <th>My Advice</th>
+                    <th>Why I'm Saying This</th>
+                    <th>Urgency</th>
+                    <th>Confidence</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>TATAMOTORS</td>
+                    <td>⏸️ <b>HOLD</b></td>
+                    <td>No triggers. Stock performing within expectations.</td>
+                    <td>Medium term</td>
+                    <td><b>Medium</b></td>
+                </tr>
+                <tr>
+                    <td>ADANITOTALGAS</td>
+                    <td>⏸️ <b>HOLD</b></td>
+                    <td>No triggers. Stock performing within expectations.</td>
+                    <td>Medium term</td>
+                    <td><b>Medium</b></td>
+                </tr>
+                <tr>
+                    <td>INFOSYS</td>
+                    <td>⏸️ <b>HOLD</b></td>
+                    <td>No triggers. Stock performing within expectations.</td>
+                    <td>Medium term</td>
+                    <td><b>Medium</b></td>
+                </tr>
+                <tr>
+                    <td>SBIN</td>
+                    <td>⏳ <b>MONITOR</b></td>
+                    <td>Healthy profit of 15.2% - Consider booking 25-30%</td>
+                    <td><b>This Week</b></td>
+                    <td><b>Medium</b></td>
+                </tr>
+                <tr>
+                    <td>TATASTEEL</td>
+                    <td>⏳ <b>MONITOR</b></td>
+                    <td>Healthy profit of 20.5% - Consider booking 25-30%</td>
+                    <td><b>This Week</b></td>
+                    <td><b>Medium</b></td>
+                </tr>
+                <tr>
+                    <td>KALYANJEWL</td>
+                    <td>💰 <b>BOOK PROFIT</b></td>
+                    <td>Strong profit of 26.0% - Book 50-75% to lock gains</td>
+                    <td><b>TODAY</b></td>
+                    <td><b>Medium</b></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>📈 EACH STOCK EXPLAINED SIMPLY</h2>
+
+        <h3><b>TATAMOTORS (₹671.1 → ₹688.30)</b></h3>
+        <p>Your Investment: ₹4026.6 | Current Value: ₹4129.8 | <b>P&L: ₹103.2 (2.56%)</b></p>
+        <p><b>What Happened:</b> TATAMOTORS ka price thoda sa upar gaya hai. Zyada movement nahi dikh raha.</p>
+        <p><b>My Verdict:</b> Neutral</p>
+        <p><b>ACTION TO TAKE:</b> Hold all</p>
+        <p><b>3 Reasons Why:</b></p>
+        <ol>
+            <li>Technical indicators filhaal neutral hain.</li>
+            <li>Risk reward ratio abhi clear nahi hai.</li>
+            <li>Market conditions stable hain, koi badi movement nahi hai.</li>
+        </ol>
+        <p><b>Watch For:</b> ₹700 ke level ko break karta hai ya nahi.</p>
+
+        <h3><b>ADANITOTALGAS (₹645.9 → ₹675.75)</b></h3>
+        <p>Your Investment: ₹1937.7 | Current Value: ₹2027.25 | <b>P&L: ₹89.55 (4.62%)</b></p>
+        <p><b>What Happened:</b> ADANITOTALGAS ka price bhi halka sa badha hai.</p>
+        <p><b>My Verdict:</b> Neutral</p>
+        <p><b>ACTION TO TAKE:</b> Hold all</p>
+        <p><b>3 Reasons Why:</b></p>
+        <ol>
+            <li>Technical indicators mixed signals de rahe hain.</li>
+            <li>Abhi aur upside potential hai lekin risk bhi hai.</li>
+            <li>Overall market sentiment thoda cautious hai.</li>
+        </ol>
+        <p><b>Watch For:</b> ₹700 ke level ko touch karta hai ya nahi.</p>
+
+        <h3><b>INFOSYS (₹1502.9 → ₹1601.8)</b></h3>
+        <p>Your Investment: ₹1502.9 | Current Value: ₹1601.8 | <b>P&L: ₹98.9 (6.58%)</b></p>
+        <p><b>What Happened:</b> INFOSYS mein bhi growth dikh rahi hai.</p>
+        <p><b>My Verdict:</b> Neutral</p>
+        <p><b>ACTION TO TAKE:</b> Hold all</p>
+        <p><b>3 Reasons Why:</b></p>
+        <ol>
+            <li>INFOSYS fundamentally strong hai.</li>
+            <li>IT sector mein growth expected hai.</li>
+            <li>Market volatility kam hai.</li>
+        </ol>
+        <p><b>Watch For:</b> ₹1650 ke level ko cross karta hai ya nahi.</p>
+
+        <h3><b>SBIN (₹711.67 → ₹819.85)</b></h3>
+        <p>Your Investment: ₹4270.02 | Current Value: ₹4919.1 | <b>P&L: ₹649.08 (15.2%)</b></p>
+        <p><b>What Happened:</b> SBIN ne achha perform kiya hai, price mein kaafi increase hua hai.</p>
+        <p><b>My Verdict:</b> Bullish</p>
+        <p><b>ACTION TO TAKE:</b> Consider selling 25% of your 6 shares to book profit. Sell 1.5 shares (round down to 1 share)</p>
+        <p><b>3 Reasons Why:</b></p>
+        <ol>
+            <li>15% profit ho gaya hai, partial profit booking kar sakte hain.</li>
+            <li>Banking sector mein positive trend hai.</li>
+            <li>Agar price neeche aata hai toh phir se buy kar sakte hain.</li>
+        </ol>
+        <p><b>Watch For:</b> ₹850 ke level ko touch karta hai ya nahi.</p>
+
+        <h3><b>TATASTEEL (₹132.6 → ₹159.76)</b></h3>
+        <p>Your Investment: ₹132.6 | Current Value: ₹159.76 | <b>P&L: ₹27.16 (20.48%)</b></p>
+        <p><b>What Happened:</b> TATASTEEL ka price bhi badha hai.</p>
+        <p><b>My Verdict:</b> Bullish</p>
+        <p><b>ACTION TO TAKE:</b> Consider selling 25% of your 1 share to book profit.  Since you only have 1 share, holding is fine.</p>
+        <p><b>3 Reasons Why:</b></p>
+        <ol>
+            <li>20% se zyada profit ho raha hai.</li>
+            <li>Steel sector mein demand badh rahi hai.</li>
+            <li>Market mein overall positive sentiment hai.</li>
+        </ol>
+        <p><b>Watch For:</b> ₹170 ke level ko cross karta hai ya nahi.</p>
+
+        <h3><b>KALYANJEWL (₹441.2 → ₹555.85)</b></h3>
+        <p>Your Investment: ₹882.4 | Current Value: ₹1111.7 | <b>P&L: ₹229.3 (25.99%)</b></p>
+        <p><b>What Happened:</b> KALYANJEWL ne bahut achha perform kiya hai! Price mein significant increase hua hai.</p>
+        <p><b>My Verdict:</b> Very Bullish</p>
+        <p><b>ACTION TO TAKE:</b> Sell 50% of your 2 shares to lock gains. Sell 1 share.</p>
+        <p><b>3 Reasons Why:</b></p>
+        <ol>
+            <li>Strong profit of 26% - Book 50-75% to lock gains.</li>
+            <li>Jewellery sector mein festive season ki wajah se demand badh sakti hai.</li>
+            <li>Agar price neeche aata hai toh phir se buy kar sakte hain.</li>
+        </ol>
+        <p><b>Watch For:</b> ₹600 ke level ko touch karta hai ya nahi.</p>
+
+        <h2>🔄 REBALANCE IF NEEDED</h2>
+        <p>SBIN portfolio mein overweight hai. Kalyan Jewellers mein profit book karna will help rebalance. Consider reinvesting profits into other sectors.</p>
+
+        <h2>⚠️ RISK CHECK</h2>
+        <ul>
+            <li>Market volatility badh sakti hai due to global events. Diversify your portfolio.</li>
+            <li>Interest rates mein change ho sakta hai, which could impact banking stocks. Keep an eye on RBI announcements.</li>
+        </ul>
+
+        <h2>💡 TODAY'S LEARNING</h2>
+        <p>What is partial profit booking? Partial profit booking ka matlab hai apne investment ka ek hissa bech kar profit lock karna, instead of selling everything.</p>
+
+        <h2>📅 TOMORROW'S WATCHLIST</h2>
+        <ul>
+            <li>Key price levels for SBIN and TATASTEEL</li>
+            <li>Important news/events related to the banking and steel sectors</li>
+        </ul>
+        <h2>📊 Data Visualization</h2>
+        <div class="chart-container">
+            <canvas id="portfolioChart"></canvas>
+        </div>
+        <h2>📁 Data Appendix</h2>
+        <pre>
+            <code>
+{
+  "portfolio_summary": {
+    "total_invested": 12752.220000000001,
+    "total_value": 13949.410000000002,
+    "total_pnl": 1197.19,
+    "total_pnl_percentage": 9.39,
+    "best_performer": {
+      "basic": {
+        "symbol": "KALYANJEWL.NS",
+        "name": "KALYANJEWL",
+        "quantity": 2,
+        "avg_price": 441.2,
+        "current_price": 555.85,
+        "pnl": 229.3,
+        "pnl_percentage": 25.99,
+        "weight_in_portfolio": 8.72,
+        "total_invested": 882.4,
+        "current_value": 1111.7
+      },
+      "performance_tier": "excellent",
+      "technical_signals": [],
+      "bias_score": {},
+      "action_triggers": [
+        {
+          "type": "profit_target",
+          "severity": "high",
+          "message": "Strong profit of 26.0% - Book 50-75% to lock gains"
+        }
+      ]
+    },
+    "worst_performer": {
+      "basic": {
+        "symbol": "TATAMOTORS.NS",
+        "name": "TATAMOTORS",
+        "quantity": 6,
+        "avg_price": 671.1,
+        "current_price": 688.3000000000001,
+        "pnl": 103.2,
+        "pnl_percentage": 2.56,
+        "weight_in_portfolio": 32.38,
+        "total_invested": 4026.6,
+        "current_value": 4129.8
+      },
+      "performance_tier": "moderate",
+      "technical_signals": [
+        {
+          "source": "Yahoo Finance India",
+          "reliability": 0.88,
+          "market": "INDIAN",
+          "data": {
+            "symbol": "TATAMOTORS.NS",
+            "price": 405.85,
+            "change": 0,
+            "changePercent": "0.00%",
+            "previousClose": 405.85,
+            "open": null,
+            "high": null,
+            "low": null,
+            "volume": null,
+            "currency": "INR"
+          }
+        },
+        {
+          "source": "AlphaVantage India",
+          "data": {},
+          "reliability": 0.8,
+          "market": "INDIAN"
+        }
+      ],
+      "bias_score": {},
+      "action_triggers": []
+    },
+    "risk_level": "Medium"
+  },
+  "holdings": [
+    {
+      "basic": {
+        "symbol": "TATAMOTORS.NS",
+        "name": "TATAMOTORS",
+        "quantity": 6,
+        "avg_price": 671.1,
+        "current_price": 688.3000000000001,
+        "pnl": 103.2,
+        "pnl_percentage": 2.56,
+        "weight_in_portfolio": 32.38,
+        "total_invested": 4026.6,
+        "current_value": 4129.8
+      },
+      "performance_tier": "moderate",
+      "technical_signals": [
+        {
+          "source": "Yahoo Finance India",
+          "reliability": 0.88,
+          "market": "INDIAN",
+          "data": {
+            "symbol": "TATAMOTORS.NS",
+            "price": 405.85,
+            "change": 0,
+            "changePercent": "0.00%",
+            "previousClose": 405.85,
+            "open": null,
+            "high": null,
+            "low": null,
+            "volume": null,
+            "currency": "INR"
+          }
+        },
+        {
+          "source": "AlphaVantage India",
+          "data": {},
+          "reliability": 0.8,
+          "market": "INDIAN"
+        }
+      ],
+      "bias_score": {},
+      "action_triggers": []
+    },
+    {
+      "basic": {
+        "symbol": "ADANITOTALGAS.NS",
+        "name": "ADANITOTALGAS",
+        "quantity": 3,
+        "avg_price": 645.9,
+        "current_price": 675.75,
+        "pnl": 89.55,
+        "pnl_percentage": 4.62,
+        "weight_in_portfolio": 15.9,
+        "total_invested": 1937.7,
+        "current_value": 2027.25
+      },
+      "performance_tier": "moderate",
+      "technical_signals": [
+        {
+          "source": "AlphaVantage India",
+          "data": {},
+          "reliability": 0.8,
+          "market": "INDIAN"
+        }
+      ],
+      "bias_score": {},
+      "action_triggers": []
+    },
+    {
+      "basic": {
+        "symbol": "INFOSYS.NS",
+        "name": "INFOSYS",
+        "quantity": 1,
+        "avg_price": 1502.9,
+        "current_price": 1601.8,
+        "pnl": 98.9,
+        "pnl_percentage": 6.58,
+        "weight_in_portfolio": 12.56,
+        "total_invested": 1502.9,
+        "current_value": 1601.8
+      },
+      "performance_tier": "moderate",
+      "technical_signals": [],
+      "bias_score": {},
+      "action_triggers": []
+    },
+    {
+      "basic": {
+        "symbol": "SBIN.NS",
+        "name": "SBIN",
+        "quantity": 6,
+        "avg_price": 711.6700000000001,
+        "current_price": 819.85,
+        "pnl": 649.08,
+        "pnl_percentage": 15.2,
+        "weight_in_portfolio": 38.57,
+        "total_invested": 4270.02,
+        "current_value": 4919.1
+      },
+      "performance_tier": "good",
+      "technical_signals": [],
+      "bias_score": {},
+      "action_triggers": [
+        {
+          "type": "profit_target",
+          "severity": "medium",
+          "message": "Healthy profit of 15.2% - Consider booking 25-30%"
+        }
+      ]
+    },
+    {
+      "basic": {
+        "symbol": "TATASTEEL.NS",
+        "name": "TATASTEEL",
+        "quantity": 1,
+        "avg_price": 132.6,
+        "current_price": 159.76,
+        "pnl": 27.16,
+        "pnl_percentage": 20.48,
+        "weight_in_portfolio": 1.25,
+        "total_invested": 132.6,
+        "current_value": 159.76
+      },
+      "performance_tier": "excellent",
+      "technical_signals": [
+        {
+          "source": "Yahoo Finance India",
+          "reliability": 0.88,
+          "market": "INDIAN",
+          "data": {
+            "symbol": "TATASTEEL.NS",
+            "price": 166.92,
+            "change": -0.8600000000000136,
+            "changePercent": "-0.51%",
+            "previousClose": 167.78,
+            "open": 167.77999877929688,
+            "high": 167.99000549316406,
+            "low": 165,
+            "volume": 18869811,
+            "currency": "INR"
+          }
+        },
+        {
+          "source": "NSE India",
+          "data": {
+            "symbol": "TATASTEEL",
+            "price": 166.85,
+            "change": -0.9300000000000068,
+            "changePercent": -0.5542972940755791,
+            "high": 167.99,
+            "low": 165
+          },
+          "reliability": 0.95,
+          "market": "INDIAN"
+        },
+        {
+          "source": "AlphaVantage India",
+          "data": {},
+          "reliability": 0.8,
+          "market": "INDIAN"
+        }
+      ],
+      "bias_score": {},
+      "action_triggers": [
+        {
+          "type": "profit_target",
+          "severity": "medium",
+          "message": "Healthy profit of 20.5% - Consider booking 25-30%"
+        }
+      ]
+    },
+    {
+      "basic": {
+        "symbol": "KALYANJEWL.NS",
+        "name": "KALYANJEWL",
+        "quantity": 2,
+        "avg_price": 441.2,
+        "current_price": 555.85,
+        "pnl": 229.3,
+        "pnl_percentage": 25.99,
+        "weight_in_portfolio": 8.72,
+        "total_invested": 882.4,
+        "current_value": 1111.7
+      },
+      "performance_tier": "excellent",
+      "technical_signals": [],
+      "bias_score": {},
+      "action_triggers": [
+        {
+          "type": "profit_target",
+          "severity": "high",
+          "message": "Strong profit of 26.0% - Book 50-75% to lock gains"
+        }
+      ]
+    }
+  ],
+  "market_breakdown": {
+    "US": 0.5471,
+    "INDIAN": 0.4529
+  },
+  "portfolio_bias": {}
+}
+            </code>
+        </pre>
+
+        <footer>
+            Generated on 03-Dec-2025 for darshanjain15062002@gmail.com
+        </footer>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+         // Function to toggle dark mode
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+        }
+        const portfolioData = {
+            labels: ['TATAMOTORS', 'ADANITOTALGAS', 'INFOSYS', 'SBIN', 'TATASTEEL', 'KALYANJEWL'],
+            datasets: [{
+                label: 'Current Value (INR)',
+                data: [4129.8, 2027.25, 1601.8, 4919.1, 159.76, 1111.7],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 10

@@ -27,160 +27,16 @@ from utils.config import Settings
 
 # MongoDB connection
 MONGODB_URI = 'mongodb+srv://darshan:$$dar$$123@cluster0.ohxhu.mongodb.net/'
-SERVER_URL = 'https://stock-analysis-y1zp.onrender.com'
+SERVER_URL = 'http://localhost:3000'
 
 # Email configuration
 EMAIL_CONFIG = {
     'smtp_server': 'smtp.gmail.com',
     'smtp_port': 587,
-    'sender_email': 'darshanjain15062002@gmail.com',  # Replace with your email
-    'sender_password': 'huas kpfn wwwn wpyq',   # Replace with your app password
+    'sender_email': 'your_email@gmail.com',  # Replace with your email
+    'sender_password': 'your_app_password',   # Replace with your app password
     'sender_name': 'Stock Analysis Report Engine'
 }
-
-def create_enriched_portfolio_data(subscriber, portfolio_analysis):
-    """Transform Node API data into comprehensive analysis structure"""
-    holdings = subscriber.get('portfolio', {}).get('holdings', [])
-    if not holdings or not portfolio_analysis:
-        return None
-    
-    individual_holdings = portfolio_analysis.get('individual_holdings', [])
-    total_invested = sum(h.get('total_invested', 0) for h in holdings)
-    
-    enriched_holdings = []
-    for holding in holdings:
-        symbol = holding['symbol']
-        
-        # Find matching analysis data
-        analysis_for_stock = next(
-            (h for h in individual_holdings if h['symbol'] == symbol), 
-            {}
-        )
-        
-        profit_pct = (holding['profit_loss'] / holding['total_invested']) * 100
-        
-        enriched_holdings.append({
-            'basic': {
-                'symbol': symbol,
-                'name': holding['name'],
-                'quantity': holding.get('quantity', 0),
-                'avg_price': holding.get('avg_price', 0),
-                'current_price': holding.get('current_price', 0),
-                'pnl': holding.get('profit_loss', 0),
-                'pnl_percentage': round(profit_pct, 2),
-                'weight_in_portfolio': round((holding['current_value'] / total_invested) * 100, 2),
-                'total_invested': holding.get('total_invested', 0),
-                'current_value': holding.get('current_value', 0)
-            },
-            'performance_tier': calculate_performance_tier(profit_pct),
-            'technical_signals': analysis_for_stock.get('sources', []),
-            'bias_score': analysis_for_stock.get('bias_score', {}),
-            'action_triggers': generate_action_triggers(holding, 
-                {h['symbol']: h for h in individual_holdings})
-        })
-    
-    return {
-        'portfolio_summary': {
-            'total_invested': total_invested,
-            'total_value': sum(h['current_value'] for h in holdings),
-            'total_pnl': sum(h['profit_loss'] for h in holdings),
-            'total_pnl_percentage': round((sum(h['profit_loss'] for h in holdings) / total_invested * 100), 2),
-            'best_performer': max(enriched_holdings, key=lambda x: x['basic']['pnl_percentage']),
-            'worst_performer': min(enriched_holdings, key=lambda x: x['basic']['pnl_percentage']),
-            'risk_level': 'Medium'  # You can enhance this
-        },
-        'holdings': enriched_holdings,
-        'market_breakdown': portfolio_analysis.get('market_breakdown', {}),
-        'portfolio_bias': portfolio_analysis.get('portfolio_bias_score', {})
-    }
-
-
-def generate_structured_prompt(enriched_data, email):
-    """Create a detailed, structured prompt for the AI agent"""
-    if not enriched_data:
-        return f"Generate a basic portfolio report for {email}"
-    
-    portfolio = enriched_data['portfolio_summary']
-    holdings = enriched_data['holdings']
-    
-    prompt = f"""You are **Portfolio Advisor Pro**, an expert Indian stock market advisor writing a DAILY PORTFOLIO REPORT for {email}.
-
-PORTFOLIO SNAPSHOT:
-• Total Value: ₹{portfolio['total_value']:,.2f}
-• Total P&L: ₹{portfolio['total_pnl']:,.2f} ({portfolio['total_pnl_percentage']:+.2f}%)
-• Holdings: {len(holdings)} stocks
-• Date: {datetime.now().strftime('%d-%b-%Y')}
-
-YOUR MISSION: Generate a professional, beginner-friendly email report with SPECIFIC, ACTIONABLE recommendations.
-
-CRITICAL REQUIREMENTS:
-1. Every recommendation must have 3 clear reasons
-2. Use simple Hindi-English mix ("Hinglish") tone for Indian investors
-3. Quantify everything: "Book 50% profit" not "consider booking"
-4. Mention exact prices and amounts in ₹
-5. Explain WHY in simple terms
-
-REPORT STRUCTURE:
-
-## 📊 EXECUTIVE SUMMARY (3 sentences max)
-Give overall health and 1 key action. Example: "Portfolio up 5.2%. ADANITOTALGAS needs profit booking. SBIN showing strength."
-
-## 🎯 TODAY'S PRIORITY ACTIONS
-Create this exact markdown table:
-
-| Stock | My Advice | Why I'm Saying This | Urgency | Confidence |
-|-------|-----------|---------------------|---------|------------|
-{chr(10).join([f"| {h['basic']['name']} | {get_top_action(h['action_triggers'])} | {get_action_reason(h)} | {get_urgency(h)} | {get_confidence(h)} |" for h in holdings[:6]])}
-
-## 📈 EACH STOCK EXPLAINED SIMPLY
-
-For EVERY holding, write:
-
-### **[Stock Name] (₹{avg_price} → ₹{current_price})**
-Your Investment: ₹{invested} | Current Value: ₹{value} | **P&L: ₹{pnl} ({pct}%)**
-
-**What Happened:** [Explain price movement in simple terms]
-
-**My Verdict:** [Bullish/Neutral/Bearish]
-
-**ACTION TO TAKE:** [Specific instruction: "Sell 50% of your 6 shares", "Hold all", "Exit completely"]
-
-**3 Reasons Why:**
-1. [Technical/fundamental reason]
-2. [Risk/reward reason]  
-3. [Market condition reason]
-
-**Watch For:** [Price levels, news events]
-
-## 🔄 REBALANCE IF NEEDED
-- Overweight stocks? [Suggest trimming]
-- Underweight opportunities? [Suggest adding]
-
-## ⚠️ RISK CHECK
-List 2-3 specific warnings with mitigation
-
-## 💡 TODAY'S LEARNING
-Explain one concept like "What is partial profit booking?" in 2 lines
-
-## 📅 TOMORROW'S WATCHLIST
-- Key price levels
-- Important news/events
-
-STOCK DATA TO ANALYZE:
-{json.dumps(enriched_data, indent=2, default=str)}
-
-RULES:
-- Be DIRECT and SPECIFIC
-- No jargon without explanation
-- If data poor, say "Insufficient data"
-- Use emojis for visual appeal
-- Keep sentences short
-- Focus on ACTION over analysis
-
-Generate the complete report now:"""
-    
-    return prompt
-
 
 def send_email_with_report(recipient_email, report_content, report_filename=None, html_filename=None):
     """Send email with the generated report"""
@@ -328,14 +184,12 @@ def analyze_portfolio(holdings):
             })
         
         # Call portfolio analysis API
-        response = requests.post(
-            f"{SERVER_URL}/api/portfolio/analysis",
-
-            json={
-                "holdings": api_holdings,
-                "analysis_type": "daily_report"
-                },
-            timeout=60)
+        response = requests.post(f"{SERVER_URL}/api/portfolio/analysis", 
+                               json={
+                                   "holdings": api_holdings,
+                                   "analysis_type": "daily_report"
+                               },
+                               timeout=30)
         
         if response.status_code == 200:
             return response.json()
@@ -435,33 +289,21 @@ def generate_daily_reports():
             # Analyze portfolio
             print("🔍 Analyzing portfolio...")
             portfolio_analysis = analyze_portfolio(holdings)
-
-            if not portfolio_analysis:
-                print("  ⚠️  Skipped - No analysis data")
-                continue
-
-            print("✅ Portfolio analysis completed.", portfolio_analysis)
             
             # Format data for report
-            # mock_reports = format_portfolio_for_report(subscriber, portfolio_analysis)
-
-            enriched_data = create_enriched_portfolio_data(subscriber, portfolio_analysis)
+            mock_reports = format_portfolio_for_report(subscriber, portfolio_analysis)
             
             # Create mock forum logs
-#             mock_forum_logs = f"""
-# [ForumHost]: Daily portfolio report for {email} - {datetime.now().strftime('%Y-%m-%d')}
-# [PortfolioAgent]: Analyzed {len(holdings)} holdings with total value ₹{sum(h.get('current_value', 0) for h in holdings):,.2f}
-# [RiskAgent]: Portfolio shows {'positive' if sum(h.get('profit_loss', 0) for h in holdings) > 0 else 'negative'} performance
-# [RecommendationAgent]: Focus on {'profit booking' if sum(h.get('profit_loss', 0) for h in holdings) > 1000 else 'holding position'}
-# """
-
-            query = generate_structured_prompt(enriched_data, email)
-
+            mock_forum_logs = f"""
+[ForumHost]: Daily portfolio report for {email} - {datetime.now().strftime('%Y-%m-%d')}
+[PortfolioAgent]: Analyzed {len(holdings)} holdings with total value ₹{sum(h.get('current_value', 0) for h in holdings):,.2f}
+[RiskAgent]: Portfolio shows {'positive' if sum(h.get('profit_loss', 0) for h in holdings) > 0 else 'negative'} performance
+[RecommendationAgent]: Focus on {'profit booking' if sum(h.get('profit_loss', 0) for h in holdings) > 1000 else 'holding position'}
+"""
             
-
             # Generate query for report
-            # total_pnl = sum(h.get('profit_loss', 0) for h in holdings)
-            # query = f"Generate a comprehensive daily portfolio report for {email}'s investment portfolio showing current performance, profit/loss analysis, and recommendations. Total P&L: ₹{total_pnl:,.2f}"
+            total_pnl = sum(h.get('profit_loss', 0) for h in holdings)
+            query = f"Generate a comprehensive daily portfolio report for {email}'s investment portfolio showing current performance, profit/loss analysis, and recommendations. Total P&L: ₹{total_pnl:,.2f}"
             
             # Generate report
             print("📝 Generating report...")
@@ -469,12 +311,8 @@ def generate_daily_reports():
             
             report = agent.generate_report(
                 query=query,
-                reports=[{
-                    "type": "comprehensive_portfolio_analysis",
-                    "data": enriched_data,
-                    "timestamp": datetime.now().isoformat()
-                }],
-                forum_logs=f"Portfolio report generation for {email} on {datetime.now()}",
+                reports=mock_reports,
+                forum_logs=mock_forum_logs,
                 save_report=True
             )
             
