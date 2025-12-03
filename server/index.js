@@ -157,12 +157,205 @@ function normalizeStockData(source, rawData) {
 
 
 // Enhanced data aggregation for both US and Indian markets
+// const aggregateDataSources = async (symbol, dataType) => {
+//     const sources = [];
+//     const market = detectMarket(symbol);
+
+//     console.log(symbol);
+
+
+//     if (market === 'US') {
+//         // US Market Data Sources
+//         try {
+//             const avResponse = await axios.get(`${DATA_SOURCES.ALPHA_VANTAGE.baseUrl}`, {
+//                 params: {
+//                     function: 'GLOBAL_QUOTE',
+//                     symbol: symbol,
+//                     apikey: DATA_SOURCES.ALPHA_VANTAGE.key
+//                 }
+//             });
+//             sources.push({
+//                 source: "AlphaVantage",
+//                 reliability: 0.9,
+//                 market: "US",
+//                 data: normalizeStockData("AlphaVantage", avResponse.data)
+//             });
+//         } catch (error) {
+//             console.error('AlphaVantage error:', error.message);
+//         }
+
+//         try {
+//             const fhResponse = await axios.get(`${DATA_SOURCES.FINNHUB.baseUrl}/quote`, {
+//                 params: {
+//                     symbol: symbol,
+//                     token: DATA_SOURCES.FINNHUB.key
+//                 }
+//             });
+//             sources.push({
+//                 source: "Finnhub",
+//                 reliability: 0.9,
+//                 market: "US",
+//                 data: normalizeStockData("Finnhub", fhResponse.data)
+//             });
+//         } catch (error) {
+//             console.error('Finnhub error:', error.message);
+//         }
+//     } else {
+//         // Indian Market Data Sources
+//         const indianSymbol = symbol.includes('.NS') ? symbol : `${symbol}.NS`;
+
+//         try {
+//             // Yahoo Finance for Indian stocks
+//             const yahooResponse = await axios.get(`${DATA_SOURCES.YAHOO_FINANCE.baseUrl}/${indianSymbol}`, {
+//                 params: {
+//                     interval: '1d',
+//                     range: '1d'
+//                 },
+//                 headers: {
+//                     'User-Agent': 'Mozilla/5.0',
+//                     'Accept': 'application/json'
+//                 }
+//             });
+
+//             const chartData = yahooResponse.data.chart.result[0];
+//             const meta = chartData.meta;
+//             const quote = chartData.indicators.quote[0];
+
+//             sources.push({
+//                 source: "Yahoo Finance India",
+//                 reliability: 0.88,
+//                 market: "INDIAN",
+//                 data: normalizeStockData("Yahoo Finance India", yahooResponse.data)
+//             });
+//         } catch (error) {
+//             console.error('Yahoo Finance India error:', error.message);
+//         }
+
+//         try {
+//             // NSE India API (basic quote)
+
+//             const client = axios.create({
+//                 headers: {
+//                     "User-Agent": "Mozilla/5.0",
+//                     "Referer": "https://www.nseindia.com/",
+//                     "Accept-Language": "en-US,en;q=0.9"
+//                 }
+//             });
+
+//             await client.get("https://www.nseindia.com/");
+
+//             const nseResponse = await client.get(`${DATA_SOURCES.NSE_INDIA.baseUrl}/quote-equity`, {
+//                 params: { symbol: symbol.replace('.NS', '') },
+//                 headers: DATA_SOURCES.NSE_INDIA.headers,
+//                 timeout: 5000
+//             });
+
+//             sources.push({
+//                 source: 'NSE India',
+//                 data: {
+//                     symbol: nseResponse.data.info.symbol,
+//                     price: nseResponse.data.priceInfo.lastPrice,
+//                     change: nseResponse.data.priceInfo.change,
+//                     changePercent: nseResponse.data.priceInfo.pChange,
+//                     volume: nseResponse.data.priceInfo.totalTradedVolume,
+//                     high: nseResponse.data.priceInfo.intraDayHighLow.max,
+//                     low: nseResponse.data.priceInfo.intraDayHighLow.min
+//                 },
+//                 reliability: 0.95,
+//                 market: 'INDIAN'
+//             });
+//         } catch (error) {
+//             console.error('NSE India error:', error.message);
+//         }
+
+//         try {
+//             // Alternative: Use Alpha Vantage for Indian stocks too
+//             const avIndiaResponse = await axios.get(`${DATA_SOURCES.ALPHA_VANTAGE.baseUrl}`, {
+//                 params: {
+//                     function: 'GLOBAL_QUOTE',
+//                     symbol: indianSymbol,
+//                     apikey: DATA_SOURCES.ALPHA_VANTAGE.key
+//                 }
+//             });
+//             sources.push({
+//                 source: 'AlphaVantage India',
+//                 data: avIndiaResponse.data,
+//                 reliability: 0.80,
+//                 market: 'INDIAN'
+//             });
+//         } catch (error) {
+//             console.error('AlphaVantage India error:', error.message);
+//         }
+
+//         try {
+
+//             const data = axios.get(`https://stockinsights-ai-main-95a26a0.zuplo.app/api/in/v0/documents/announcement`, {
+//                 params: {
+//                     "ticker": ` BSE:${symbol.replace('.NS', '')}`,
+//                     // take only last one month data
+//                     "from_date": new Date(new Date().getFullYear(), new Date().getMonth() - 1, new Date().getDate()).toISOString().split('T')[0],
+//                     "to_date": new Date().toISOString().split('T')[0]
+//                 },
+//                 headers: {
+//                     "Authorization": `Bearer ${process.env.STOCK_INSIGHTS_AI_KEY}`
+//                 }
+//             });
+
+//             sources.push({
+//                 source: 'Stock Insights AI - Filings',
+//                 data: data.data,
+//                 reliability: 0.85,
+//                 market: 'INDIAN'
+//             });
+
+//         } catch (error) {
+//             console.error('Stock Insights AI error:', error.message);
+//         }
+
+//         try {
+
+//             const newsResponse = await axios.get(`https://news.google.com/rss/search`, {
+//                 params: {
+//                     q: `${symbol} stock`,
+//                     hl: 'en-IN',
+//                     gl: 'IN',
+//                     ceid: 'IN:en'
+//                 }
+//             });
+
+//             const xml = await newsResponse.data;
+
+//             // Parse RSS XML
+//             const result = await parseStringPromise(xml);
+
+//             const items =
+//                 result.rss?.channel?.[0]?.item?.map(item => ({
+//                     title: item.title?.[0] || "",
+//                     link: item.link?.[0] || "",
+//                     // You can also add link: item.link?.[0]
+//                 })) || [];
+
+
+//             sources.push({
+//                 source: 'Google News',
+//                 data: items,
+//                 reliability: 0.75,
+//                 market: 'INDIAN'
+//             });
+
+//         } catch (error) {
+//             console.error('Google News error:', error.message);
+//         }
+
+
+//     }
+
+//     return sources;
+// };
+
 const aggregateDataSources = async (symbol, dataType) => {
     const sources = [];
     const market = detectMarket(symbol);
-
-    console.log(symbol);
-
 
     if (market === 'US') {
         // US Market Data Sources
@@ -271,73 +464,6 @@ const aggregateDataSources = async (symbol, dataType) => {
         } catch (error) {
             console.error('AlphaVantage India error:', error.message);
         }
-
-        try {
-
-            const data = axios.get(`https://stockinsights-ai-main-95a26a0.zuplo.app/api/in/v0/documents/announcement`, {
-                params: {
-                    "ticker": ` BSE:${symbol.replace('.NS', '')}`,
-                    // take only last one month data
-                    "from_date": new Date(new Date().getFullYear(), new Date().getMonth() - 1, new Date().getDate()).toISOString().split('T')[0],
-                    "to_date": new Date().toISOString().split('T')[0]
-                },
-                headers: {
-                    "Authorization": `Bearer ${process.env.STOCK_INSIGHTS_AI_KEY}`
-                }
-            });
-
-            sources.push({
-                source: 'Stock Insights AI - Filings',
-                data: data.data,
-                reliability: 0.85,
-                market: 'INDIAN'
-            });
-
-        } catch (error) {
-            console.error('Stock Insights AI error:', error.message);
-        }
-
-        try {
-
-            const newsResponse = await axios.get(`https://news.google.com/rss/search`, {
-                params: {
-                    q: `${symbol} stock`,
-                    hl: 'en-IN',
-                    gl: 'IN',
-                    ceid: 'IN:en'
-                }
-            });
-
-            const xml = await newsResponse.data;
-
-            // Parse RSS XML
-            const result = await parseStringPromise(xml);
-
-            const items =
-                result.rss?.channel?.[0]?.item?.map(item => ({
-                    title: item.title?.[0] || "",
-                    link: item.link?.[0] || "",
-                    // You can also add link: item.link?.[0]
-                })) || [];
-
-
-
-
-
-
-
-            sources.push({
-                source: 'Google News',
-                data: items,
-                reliability: 0.75,
-                market: 'INDIAN'
-            });
-
-        } catch (error) {
-            console.error('Google News error:', error.message);
-        }
-
-
     }
 
     return sources;
