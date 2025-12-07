@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daily Portfolio Report</title>
+  <style>
+    /* General Styles */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+    }
+
+    h1, h2, h3 {
+      color: #0056b3;
+      margin-bottom: 15px;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2.5em;
+    }
+
+    h2 {
+      font-size: 2em;
+      border-bottom: 2px solid #eee;
+      padding-bottom: 5px;
+    }
+
+    h3 {
+      font-size: 1.6em;
+    }
+
+    p {
+      margin-bottom: 15px;
+      font-size: 1.1em;
+      color: #555;
+    }
+
+    a {
+      color: #007bff;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* Table Styles */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th, td {
+      padding: 12px 15px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #f0f0f0;
+      font-weight: bold;
+      color: #333;
+    }
+
+    tbody tr:hover {
+      background-color: #f9f9f9;
+    }
+
+    /* List Styles */
+    ul, ol {
+      margin-bottom: 20px;
+      padding-left: 30px;
+    }
+
+    li {
+      margin-bottom: 8px;
+      font-size: 1.1em;
+      color: #555;
+    }
+
+    /* Button Styles */
+    .button {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      margin-top: 15px;
+      transition: background-color 0.3s;
+      border: none;
+      cursor: pointer;
+    }
+
+    .button:hover {
+      background-color: #0056b3;
+    }
+
+    /* Form Styles */
+    form {
+      margin-top: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      box-sizing: border-box;
+      font-size: 1em;
+    }
+
+    input[type="submit"] {
+      background-color: #28a745;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 1.1em;
+      transition: background-color 0.3s;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #218838;
+    }
+
+    /* Navigation Styles */
+    nav {
+      background-color: #343a40;
+      color: white;
+      padding: 10px 0;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      padding: 10px 20px;
+      display: inline-block;
+    }
+
+    nav a:hover {
+      background-color: #495057;
+      border-radius: 5px;
+    }
+
+    /* Footer Styles */
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #343a40;
+      color: white;
+      margin-top: 30px;
+      border-radius: 8px;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .container {
+        width: 95%;
+        padding: 15px;
+      }
+
+      h1 {
+        font-size: 2em;
+      }
+
+      h2 {
+        font-size: 1.7em;
+      }
+
+      h3 {
+        font-size: 1.4em;
+      }
+
+      th, td {
+        padding: 8px 10px;
+      }
+
+      nav a {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        box-sizing: border-box;
+      }
+    }
+
+    /* Dark Mode Styles */
+    body.dark-mode {
+      background-color: #333;
+      color: #f4f4f4;
+    }
+
+    body.dark-mode .container {
+      background-color: #444;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+    }
+
+    body.dark-mode h1,
+    body.dark-mode h2,
+    body.dark-mode h3 {
+      color: #90caf9;
+    }
+
+    body.dark-mode p,
+    body.dark-mode li {
+      color: #ddd;
+    }
+
+    body.dark-mode th {
+      background-color: #555;
+      color: #f0f0f0;
+    }
+
+    body.dark-mode tbody tr:hover {
+      background-color: #666;
+    }
+
+    body.dark-mode footer {
+      background-color: #222;
+      color: #eee;
+    }
+
+    body.dark-mode nav {
+      background-color: #222;
+    }
+
+    body.dark-mode nav a:hover {
+      background-color: #333;
+    }
+
+    /* Chart Styles */
+    .chart-container {
+      width: 80%;
+      margin: 20px auto;
+    }
+
+    /* Accordion Styles */
+    .accordion {
+      background-color: #eee;
+      color: #444;
+      cursor: pointer;
+      padding: 18px;
+      width: 100%;
+      border: none;
+      text-align: left;
+      outline: none;
+      font-size: 1.1em;
+      transition: 0.4s;
+      border-radius: 5px;
+      margin-bottom: 5px;
+    }
+
+    .active, .accordion:hover {
+      background-color: #ddd;
+    }
+
+    .accordion:after {
+      content: '\002B'; /* Unicode character for "plus" sign (+) */
+      float: right;
+      margin-left: 5px;
+    }
+
+    .active:after {
+      content: "\2212"; /* Unicode character for "minus" sign (-) */
+    }
+
+    .panel {
+      padding: 0 18px;
+      background-color: white;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.2s ease-out;
+      border-radius: 5px;
+      margin-bottom: 10px;
+    }
+
+    /* Utility Classes */
+    .text-center {
+      text-align: center;
+    }
+
+    .mb-2 {
+      margin-bottom: 20px;
+    }
+
+    .mt-2 {
+      margin-top: 20px;
+    }
+
+    .bold {
+      font-weight: bold;
+    }
+
+    /* Print Styles */
+    @media print {
+      body {
+        background-color: #fff;
+        color: #000;
+      }
+
+      .container {
+        box-shadow: none;
+      }
+
+      nav, .button, footer {
+        display: none;
+      }
+
+      table, tr, td {
+        border: 1px solid #000;
+      }
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+  <nav>
+    <a href="#summary">Report Summary</a>
+    <a href="#portfolio_overview">Portfolio Overview</a>
+    <a href="#holdings_analysis">Holdings Analysis</a>
+    <a href="#ai_analysis">AI Insights</a>
+    <a href="#forum_analysis">Forum Analysis</a>
+    <a href="#recommendations">Recommendations</a>
+    <button id="theme-toggle" class="button">Toggle Dark Mode</button>
+    <button id="print-button" class="button">Print Report</button>
+    <button id="export-pdf" class="button">Export to PDF</button>
+  </nav>
+
+  <div class="container">
+    <header>
+      <h1 class="text-center">Daily Portfolio Report</h1>
+      <p class="text-center mb-2">Report for: darshanjain15062002@gmail.com</p>
+    </header>
+
+    <section id="summary">
+      <h2>Report Summary</h2>
+      <p>This report provides a comprehensive overview of your investment portfolio as of today. It includes an analysis of your holdings, overall portfolio performance, AI-driven insights, and recommendations based on market trends and expert analysis. The total Profit and Loss (P&L) for your portfolio is currently ₹-7,719.45.</p>
+    </section>
+
+    <section id="portfolio_overview">
+      <h2>Portfolio Overview</h2>
+      <p>
+        Based on the query engine report, your portfolio consists of 9 stocks with a total value of ₹196,929.33. The overall Profit and Loss (P&L) is ₹-7,719.45, which represents a -3.77% change in portfolio value.
+      </p>
+      <h3>Key Portfolio Metrics:</h3>
+      <ul>
+        <li><strong>Total Investment:</strong> ₹204,648.78</li>
+        <li><strong>Current Value:</strong> ₹196,929.33</li>
+        <li><strong>Profit/Loss:</strong> ₹-7,719.45 (-3.77%)</li>
+        <li><strong>Number of Holdings:</strong> 9</li>
+      </ul>
+
+      <div class="chart-container">
+        <canvas id="portfolioValueChart"></canvas>
+      </div>
+
+      <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          const ctx = document.getElementById('portfolioValueChart').getContext('2d');
+          const portfolioValueChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+              labels: ['Total Investment', 'Current Value'],
+              datasets: [{
+                label: 'Portfolio Value',
+                data: [204648.78, 196929.33],
+                backgroundColor: [
+                  'rgba(54, 162, 235, 0.7)',
+                  'rgba(255, 99, 132, 0.7)'
+                ],
+                borderColor: [
+                  'rgba(54, 162, 235, 1)',
+                  'rgba(255, 99, 132, 1)'
+                ],
+                borderWidth: 1
+              }]
+            },
+            options: {
+              scales: {
+                y: {
+                  beginAtZero: true
+                }
+              },
+              plugins: {
+                title: {
+                  display: true,
+                  text: 'Portfolio Investment vs. Current Value'
+                }
+              }
+            }
+          });
+        });
+      </script>
+    </section>
+
+    <section id="holdings_analysis">
+      <h2>Holdings Analysis</h2>
+      <p>
+        This section breaks down the performance of each individual holding in your portfolio. It includes the stock symbol, name, quantity held, average purchase price, current price, and the profit/loss (P&L) for each holding.
+      </p>
+
+      <h3>Top Performers:</h3>
+      <ul>
+        <li>INFOSYS (+₹1342.44)</li>
+        <li>HCLTECH (+₹882.00)</li>
+        <li>AXISBANK (+₹875.79)</li>
+      </ul>
+
+      <h3>Holdings Breakdown:</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Symbol</th>
+            <th>Name</th>
+            <th>Quantity</th>
+            <th>Avg. Price</th>
+            <th>Current Price</th>
+            <th>P&L</th>
+            <th>P&L (%)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>INFOSYS.NS</td>
+            <td>INFOSYS</td>
+            <td>11</td>
+            <td>1456.66</td>
+            <td>1578.7</td>
+            <td>1342.44</td>
+            <td>8.38%</td>
+          </tr>
+          <tr>
+            <td>PFC.NS</td>
+            <td>PFC</td>
+            <td>45</td>
+            <td>474.9</td>
+            <td>351.95</td>
+            <td>-5532.75</td>
+            <td>-25.89%</td>
+          </tr>
+          <tr>
+            <td>ITC.NS</td>
+            <td>ITC</td>
+            <td>26</td>
+            <td>417.42</td>
+            <td>400.5</td>
+            <td>-439.92</td>
+            <td>-4.05%</td>
+          </tr>
+          <tr>
+            <td>KOTAKBANK.NS</td>
+            <td>KOTAKBANK</td>
+            <td>18</td>
+            <td>2153.25</td>
+            <td>2146.1</td>
+            <td>-128.7</td>
+            <td>-0.33%</td>
+          </tr>
+          <tr>
+            <td>AXISBANK.NS</td>
+            <td>AXISBANK</td>
+            <td>9</td>
+            <td>1173.39</td>
+            <td>1270.7</td>
+            <td>875.79</td>
+            <td>8.29%</td>
+          </tr>
+          <tr>
+            <td>TCS.NS</td>
+            <td>TCS</td>
+            <td>16</td>
+            <td>3160.56</td>
+            <td>3180</td>
+            <td>311.04</td>
+            <td>0.62%</td>
+          </tr>
+          <tr>
+            <td>BANDHANBNK.NS</td>
+            <td>BANDHANBNK</td>
+            <td>201</td>
+            <td>169.53</td>
+            <td>146.78</td>
+            <td>-4572.75</td>
+            <td>-13.42%</td>
+          </tr>
+          <tr>
+            <td>NTPC.NS</td>
+            <td>NTPC</td>
+            <td>20</td>
+            <td>345.78</td>
+            <td>322.95</td>
+            <td>-456.6</td>
+            <td>-6.60%</td>
+          </tr>
+          <tr>
+            <td>HCLTECH.NS</td>
+            <td>HCLTECH</td>
+            <td>10</td>
+            <td>1552.3</td>
+            <td>1640.5</td>
+            <td>882</td>
+            <td>5.68%</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="chart-container">
+        <canvas id="holdingsPnlChart"></canvas>
+      </div>
+
+      <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          const ctx = document.getElementById('holdingsPnlChart').getContext('2d');
+          const holdingsData = [
+            {symbol: 'INFOSYS.NS', pnl: 1342.44},
+            {symbol: 'PFC.NS', pnl: -5532.75},
+            {symbol: 'ITC.NS', pnl: -439.92},
+            {symbol: 'KOTAKBANK.NS', pnl: -128.7},
+            {symbol: 'AXISBANK.NS', pnl: 875.79},
+            {symbol: 'TCS.NS', pnl: 311.04},
+            {symbol: 'BANDHANBNK.NS', pnl: -4572.75},
+            {symbol: 'NTPC.NS', pnl: -456.6},
+            {symbol: 'HCLTECH.NS', pnl: 882}
+          ];
+
+          const labels = holdingsData.map(item => item.symbol);
+          const pnlData = holdingsData.map(item => item.pnl);
+          const backgroundColors = pnlData.map(pnl => pnl > 0 ? 'rgba(75, 192, 192, 0.7)' : 'rgba(255, 99, 132, 0.7)');
+          const borderColors = pnlData.map(pnl => pnl > 0 ? 'rgba(75, 192, 192, 1)' : 'rgba(255, 99, 132, 1)');
+
+          const holdingsPnlChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+              labels: labels,
+              datasets: [{
+                label: 'Profit/Loss',
+                data: pnlData,
+                backgroundColor: backgroundColors,
+                borderColor: borderColors,
+                borderWidth: 1
+              }]
+            },
+            options: {
+              scales: {
+                y: {
+                  beginAtZero: true
+                }
+              },
+              plugins: {
+                title: {
+                  display: true,
+                  text: 'Profit/Loss by Holding'
+                }
+              }
+            }
+          });
+        });
+      </script>
+    </section>
+
+    <section id="ai_analysis">
+      <h2>AI-Driven Insights</h2>
+      <p>
+        The AI analysis provides additional context and insights, focusing on the implications for a US-based investor, even though the data is exclusively from the Indian market. Key aspects include currency risk, political and regulatory risks, and market correlations.
+      </p>
+
+      <button class="accordion">Objective Summary of Current Metrics</button>
+      <div class="panel">
+        <p>
+          <strong>Portfolio Composition:</strong> The portfolio is exclusively composed of Indian stocks listed on the NSE (National Stock Exchange of India). The top 3 largest holdings are TCS (25.84%), Kotak Bank (19.62%) and Bandhan Bank (14.98%).<br>
+          <strong>Currency Risk:</strong> Data provided does not mention the exchange rate. Therefore, any calculations of dollar-denominated returns are not possible without an exchange rate. This is the most important aspect of US market exposure to foreign assets.<br>
+          <strong>Performance Snapshot:</strong> Several stocks show positive price changes (Infosys, ITC, Axis Bank, TCS, HCLTech), while others show negative changes (Kotak Bank, Bandhan Bank, NTPC). PFC remained unchanged. The change percentages are relatively small, within +/- 1.5% for most stocks.<br>
+          <strong>Data Quality:</strong> The reliability of the data source (NSE India) is high (0.95). However, the bias score of 0.76 suggests some (although not crippling) bias in data.<br>
+          <strong>Missing Information:</strong> Crucially, the data lacks information vital for a US investor. We don't have dividend yields, P/E ratios, analyst ratings, or other fundamental data needed for a comprehensive evaluation from a US perspective. Volume data is also missing, making judging short-term interest in the stocks from other investors difficult.
+        </p>
+      </div>
+
+      <button class="accordion">Market-Specific Risk Assessment (India, from a US Perspective)</button>
+      <div class="panel">
+        <p>
+          <strong>Currency Risk (Critical):</strong> The Indian Rupee (INR) is subject to fluctuations against the US dollar. This is the most significant risk for a US-based investor. A weakening Rupee will erode dollar-denominated returns, and vice-versa. Hedging currency risk is possible, but adds complexity and cost.<br>
+          <strong>Political and Regulatory Risk:</strong> India's political landscape can influence market sentiment. Changes in government policy, trade agreements, or tax laws can impact specific sectors or the overall economy. US investors need to be aware of these potential disruptions.<br>
+          <strong>Regulatory Differences:</strong> Indian accounting standards and regulatory frameworks differ from those in the US. This can make it difficult to compare Indian companies to US peers or to fully understand financial statements without specialized knowledge. Compliance with Indian regulations adds complexity.<br>
+          <strong>Market Correlation:</strong> While the Indian market is generally less correlated with the US market than developed European markets, global events can still create significant cross-market movements. US economic downturns can impact global demand and thus affect Indian companies, especially those with significant export exposure.<br>
+          <strong>Liquidity:</strong> While larger Indian stocks have good liquidity, some smaller-cap stocks might be less liquid, potentially making it difficult to enter or exit positions quickly at desired prices.
+        </p>
+      </div>
+
+      <button class="accordion">Key Factors to Monitor for US Markets (Relevant to this Portfolio)</button>
+      <div class="panel">
+        <p>
+          <strong>US Dollar Strength:</strong> A strengthening US dollar negatively impacts the value of overseas holdings when converted back to USD. Conversely, a weakening dollar boosts returns. The Federal Reserve's interest rate policy is a key driver of dollar strength.<br>
+          <strong>Global Economic Growth:</strong> A strong global economy generally benefits export-oriented economies like India. US investors should monitor indicators of global economic health, such as GDP growth, manufacturing PMIs, and trade data.<br>
+          <strong>Interest Rate Differentials:</strong> Monitor the difference between US and Indian interest rates. Significant differences can influence capital flows and currency valuations.<br>
+          <strong>Commodity Prices:</strong> India is a net importer of several commodities. Changes in commodity prices, especially oil, can affect the Indian economy and corporate profitability.<br>
+          <strong>US Inflation and Fed Policy:</strong> Rising US inflation can lead to tighter monetary policy by the Federal Reserve, potentially slowing down US economic growth and impacting global markets.<br>
+          <strong>Technology Trends:</strong> Due to the portfolio's high exposure to technology, changing technology trends that may impact the services offered by TCS and HCLTech are relevant to monitor.
+        </p>
+      </div>
+
+      <button class="accordion">Potential Biases in the Data or Common Market Misconceptions</button>
+      <div class="panel">
+        <p>
+          <strong>Data Bias:</strong> While the data source has high reliability, the bias score of 0.76 from sources suggest some bias. We lack transparency on how the bias is calculated and should take it into account when making decisions.<br>
+          <strong>Home Country Bias:</strong> A potential bias is the assumption that Indian companies will perform well simply because India is a growing economy. Stock-specific analysis is still essential.<br>
+          <strong>Ignoring Currency Risk:</strong> A common misconception is that focusing solely on the stock price performance in the local currency is sufficient. Currency fluctuations can significantly alter the actual dollar-denominated returns.<br>
+          <strong>Overconfidence in Single Data Point:</strong> The provided data is a single snapshot and doesn't represent long-term performance or volatility. Drawing definitive conclusions from this limited data is risky.<br>
+          <strong>Neglecting Opportunity Cost:</strong> Investing in Indian stocks means foregoing potential returns from US-based investments. A US investor must consider whether the potential returns justify the added complexity and risks.
+        </p>
+      </div>
+
+      <button class="accordion">Multiple Scenarios</button>
+      <div class="panel">
+        <p>
+          <strong>Bull Case (Positive for this portfolio):</strong><br>
+          <ul>
+            <li>Global economic growth accelerates, driven by US consumer spending and infrastructure investment.</li>
+            <li>The US dollar weakens slightly, boosting dollar-denominated returns from Indian stocks.</li>
+            <li>The Indian Rupee strengthens relative to the dollar due to increased foreign investment.</li>
+            <li>The IT and financial sectors (significant components of the portfolio) experience strong growth in India.</li>
+          </ul>
+          <strong>Bear Case (Negative for this portfolio):</strong><br>
+          <ul>
+            <li>The US economy enters a recession, triggering a global economic slowdown.</li>
+            <li>The US dollar strengthens significantly due to safe-haven demand.</li>
+            <li>The Indian Rupee weakens due to capital flight and economic uncertainty.</li>
+            <li>Geopolitical tensions increase, negatively impacting investor sentiment towards emerging markets.</li>
+          </ul>
+          <strong>Neutral Case:</strong><br>
+          <ul>
+            <li>The US economy grows at a moderate pace.</li>
+            <li>The US dollar remains relatively stable.</li>
+            <li>The Indian economy continues to grow, but at a slower pace than in the bull case.</li>
+            <li>The portfolio's performance is largely driven by the specific performance of the individual companies, with currency fluctuations having a moderate impact.</li>
+          </ul>
+        </p>
+      </div>
+
+      <button class="accordion">Cross-Market Comparison Insights</button>
+      <div class="panel">
+        <p>
+          <strong>Valuation Differences:</strong> Indian stock valuations (P/E ratios, price-to-book ratios) are often higher than US valuations due to higher growth expectations. US investors should be aware of this and carefully assess whether the valuations are justified.<br>
+          <strong>Sector Exposure:</strong> The Indian market has different sector weightings compared to the US market. For example, technology and financials may have a higher weight in the Indian market, while healthcare and consumer staples might have a lower weight. This difference in sector exposure should be considered when comparing portfolio performance.<br>
+          <strong>Regulatory Landscape:</strong> US markets have stricter regulatory oversight and reporting requirements compared to Indian markets. This can lead to lower transparency and potential for fraud in Indian markets.<br>
+          <strong>Growth Potential:</strong> While the US economy is mature, India is a developing economy with high growth potential. This can offer opportunities for higher returns, but also comes with greater risk.
+        </p>
+      </div>
+
+      <script>
+        var acc = document.getElementsByClassName("accordion");
+        var i;
+
+        for (i = 0; i < acc.length; i++) {
+          acc[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
+            if (panel.style.maxHeight) {
+              panel.style.maxHeight = null;
+            } else {
+              panel.style.maxHeight = panel.scrollHeight + "px";
+            }
+          });
+        }
+      </script>
+    </section>
+
+    <section id="forum_analysis">
+      <h2>Forum Analysis</h2>
+      <p>
+        Analysis of forum logs reveals the following insights:
+      </p>
+      <ul>
+        <li><strong>PortfolioAgent:</strong> Analyzed 9 holdings with a total value of ₹196,929.33</li>
+        <li><strong>RiskAgent:</strong> Portfolio shows negative performance</li>
+        <li><strong>RecommendationAgent:</strong> Focus on holding position</li>
+      </ul>
+      <p>
+        The forum discussions indicate an awareness of the portfolio's negative performance. However, the recommendation is to maintain current positions, suggesting a longer-term perspective or belief in eventual recovery.
+      </p>
+
+      <div class="chart-container">
+        <canvas id="forumActivityChart"></canvas>
+      </div>
+
+      <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          const ctx = document.getElementById('forumActivityChart').getContext('2d');
+          const forumData = [
+            { agent: 'PortfolioAgent', activity: 1 },
+            { agent: 'RiskAgent', activity: 1 },
+            { agent: 'RecommendationAgent', activity: 1 }
+          ];
+
+          const labels = forumData.map(item => item.agent);
+          const activityData = forumData.map(item => item.activity);
+
+          const forumActivityChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+              labels: labels,
+              datasets: [{
+                label: 'Forum Activity',
+                data: activityData,
+                backgroundColor: [
+                  'rgba(255, 99, 132, 0.7)',
+                  'rgba(54, 162, 235, 0.7)',
+                  'rgba(255, 206, 86, 0.7)'
+                ],
+                borderColor: [
+                  'rgba(255, 99, 132, 1)',
+                  'rgba(54, 162, 235, 1)',
+                  'rgba(255, 206, 86, 1)'
+                ],
+                borderWidth: 1
+              }]
+            },
+            options: {
+              plugins: {
+                title: {
+                  display: true,
+                  text: 'Forum Activity Distribution'
+                }
+              }
+            }
+          });
+        });
+      </script>
+    </section>
+
+    <section id="recommendations">
+      <h2>Recommendations</h2>
+      <p>
+        Based on the analysis, the following recommendations are provided:
+      </p>
+      <ol>
+        <li>
+          <strong>Monitor Currency Risk:</strong> Given the portfolio's exposure to Indian stocks, closely monitor the INR/USD exchange rate and consider hedging strategies to mitigate currency risk.
+        </li>
+        <li>
+          <strong>Re-evaluate PFC and BANDHANBNK:</strong> The holdings in PFC and BANDHANBNK show significant losses. Consider re-evaluating these positions based on updated financial analysis and market conditions.
+        </li>
+        <li>
+          <strong>Diversify Portfolio:</strong> Consider diversifying the portfolio by including assets from different geographies and asset classes to reduce overall risk.
+        </li>
+        <li>
+          <strong>Long-Term Strategy:</strong> While the current P&L is negative, maintain a long-term investment strategy and focus on fundamentally strong companies.
+        </li>
+        <li>
+          <strong>Stay Informed:</strong> Keep abreast of global economic trends, US Federal Reserve policies, and Indian market developments to make informed investment decisions.
+        </li>
+      </ol>
+    </section>
+  </div>
+
+  <footer>
+    <p>&copy; 2024 Daily Portfolio Report. All rights reserved.</p>
+  </footer>
+
+  <script>
+    document.getElementById('theme-toggle').addEventListener('click', function() {
+      document.body.classList.toggle('dark-mode');
+    });
+
+    document.getElementById('print-button').addEventListener('click', function() {
+      window.print();
+    });
+
+    document.getElementById('export-pdf').addEventListener('click', function() {
+      alert('Export to PDF functionality is under development.');
+    });
+
+    // JavaScript for theme persistence
+    (function() {
+      const themeToggle = document.getElementById('theme-toggle');
+      const body = document.body;
+      const darkModeClass = 'dark-mode';
+
+      // Function to set the theme
+      function setTheme(theme) {
+        if (theme === 'dark') {
+          body.classList.add(darkModeClass);
+        } else {
+          body.classList.remove(darkModeClass);
+        }
+        localStorage.setItem('theme', theme);
+      }
+
+      // Function to get the stored theme
+      function getTheme() {
+        return localStorage.getItem('theme') || 'light'; // Default to light
+      }
+
+      // Set the initial theme
+      setTheme(getTheme());
+
+      // Add event listener to the theme toggle button
+      themeToggle.addEventListener('click', function() {
+        if (body.classList.contains(darkModeClass)) {
+          setTheme('light');
+        } else {
+          setTheme('dark');
+        }
+      });
+    })();
+
+    // JavaScript for Print functionality
+    document.getElementById('print-button').addEventListener('click', function() {
+        window.print();
+    });
+
+    // JavaScript for Export to PDF functionality
+    document.getElementById('export-pdf').addEventListener('click', function() {
+        alert('Export to PDF functionality is under development.');
+    });
+  </script>
+</body>
+</html>

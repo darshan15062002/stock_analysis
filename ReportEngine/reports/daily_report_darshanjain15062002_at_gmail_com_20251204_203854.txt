@@ -1,0 +1,766 @@
+Daily Portfolio Report for darshanjain15062002@gmail.com
+Generated on: 2025-12-04 20:39:33
+==================================================
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Analysis Report</title>
+    <style>
+        /* CSS Reset */
+        body,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        p,
+        ul,
+        ol,
+        li,
+        figure,
+        figcaption,
+        blockquote,
+        dl,
+        dd {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Basic Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .dark-mode {
+            background-color: #121212;
+            color: #eee;
+        }
+
+        .dark-mode h1,
+        .dark-mode h2,
+        .dark-mode h3,
+        .dark-mode h4,
+        .dark-mode h5,
+        .dark-mode h6 {
+            color: #fff;
+        }
+
+        .dark-mode .report-section {
+            background-color: #222;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+        }
+
+        .dark-mode .summary-box {
+            background-color: #333;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+            color: #fff;
+        }
+
+        .dark-mode .table-container {
+            background-color: #333;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+        }
+
+        .dark-mode table {
+            color: #fff;
+        }
+
+        .dark-mode thead {
+            background-color: #444;
+        }
+
+        .dark-mode tbody tr:nth-child(even) {
+            background-color: #444;
+        }
+
+        .dark-mode .toggle-button {
+            background-color: #444;
+            color: #fff;
+        }
+
+        .dark-mode .toggle-button:hover {
+            background-color: #555;
+        }
+
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            color: #0056b3;
+            margin-bottom: 5px;
+        }
+
+        header p {
+            font-size: 1.1em;
+            color: #777;
+        }
+
+        /* Section Styling */
+        .report-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .report-section h2 {
+            font-size: 1.8em;
+            color: #0056b3;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 5px;
+        }
+
+        .report-section h3 {
+            font-size: 1.4em;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        /* Summary Box */
+        .summary-box {
+            background-color: #e9ecef;
+            padding: 15px;
+            border-left: 5px solid #0056b3;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+
+        .summary-box p {
+            font-size: 1.1em;
+            color: #555;
+        }
+
+        /* Table Styling */
+        .table-container {
+            overflow-x: auto;
+            border-radius: 8px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        thead {
+            background-color: #0056b3;
+            color: white;
+            font-weight: bold;
+        }
+
+        th,
+        td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tbody tr:hover {
+            background-color: #ddd;
+        }
+
+        /* Chart Container */
+        .chart-container {
+            margin-bottom: 30px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            color: #777;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+
+            header h1 {
+                font-size: 2em;
+            }
+
+            header p {
+                font-size: 1em;
+            }
+
+            .report-section {
+                padding: 15px;
+            }
+
+            .report-section h2 {
+                font-size: 1.6em;
+            }
+
+            th,
+            td {
+                padding: 10px;
+                font-size: 0.9em;
+            }
+        }
+
+        /* Utilities */
+        .text-center {
+            text-align: center;
+        }
+
+        .mt-2 {
+            margin-top: 10px;
+        }
+
+        .mt-3 {
+            margin-top: 15px;
+        }
+
+        .mb-2 {
+            margin-bottom: 10px;
+        }
+
+        .mb-3 {
+            margin-bottom: 15px;
+        }
+
+        /* Collapsible Section */
+        .collapsible {
+            background-color: #777;
+            color: white;
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 15px;
+        }
+
+        .active,
+        .collapsible:hover {
+            background-color: #555;
+        }
+
+        .collapsible:after {
+            content: '\002B';
+            color: white;
+            font-weight: bold;
+            float: right;
+            margin-left: 5px;
+        }
+
+        .active:after {
+            content: "\2212";
+        }
+
+        .content {
+            padding: 0 18px;
+            background-color: #f9f9f9;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.2s ease-out;
+        }
+
+        /* Button Styles */
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 1em;
+            text-decoration: none;
+            background-color: #0056b3;
+            color: white;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #003d82;
+        }
+
+        /* Print Styles */
+        @media print {
+
+            body,
+            .container {
+                background-color: white !important;
+                color: black !important;
+                box-shadow: none !important;
+            }
+
+            /* Hide unnecessary elements */
+            header,
+            footer,
+            .button,
+            .toggle-button,
+            .collapsible {
+                display: none !important;
+            }
+
+            /* Adjust table styles */
+            table {
+                border: 1px solid #000 !important;
+            }
+
+            th,
+            td {
+                border: 1px solid #000 !important;
+                padding: 8px !important;
+            }
+
+            /* Ensure charts are visible */
+            .chart-container {
+                display: block !important;
+            }
+        }
+
+        /* Theme Toggle Button */
+        .toggle-button {
+            background-color: #0056b3;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        .toggle-button:hover {
+            background-color: #003d82;
+        }
+
+        /* Improved Styling for Mobile Responsiveness */
+        @media (max-width: 600px) {
+            .container {
+                padding: 10px;
+            }
+
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            .report-section h2 {
+                font-size: 1.4em;
+            }
+
+            .table-container {
+                overflow-x: auto;
+            }
+
+            th,
+            td {
+                padding: 8px;
+                font-size: 0.8em;
+                white-space: nowrap;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Portfolio Analysis Report</h1>
+            <p>Comprehensive daily portfolio report for darshanjain15062002@gmail.com's investment portfolio.</p>
+            <button class="toggle-button" onclick="toggleDarkMode()">Toggle Dark Mode</button>
+            <button class="button" onclick="window.print()">Print Report</button>
+        </header>
+
+        <!-- Table of Contents -->
+        <section class="report-section">
+            <h2>Table of Contents</h2>
+            <ul>
+                <li><a href="#executive-summary">Executive Summary</a></li>
+                <li><a href="#portfolio-overview">Portfolio Overview</a></li>
+                <li><a href="#holdings-analysis">Holdings Analysis</a></li>
+                <li><a href="#performance-analysis">Performance Analysis</a></li>
+                <li><a href="#forum-discussion">Forum Discussion</a></li>
+                <li><a href="#recommendations">Recommendations</a></li>
+                <li><a href="#appendix">Appendix</a></li>
+            </ul>
+        </section>
+
+        <!-- Executive Summary -->
+        <section class="report-section" id="executive-summary">
+            <h2>Executive Summary</h2>
+            <div class="summary-box">
+                <p>This report provides a comprehensive analysis of darshanjain15062002@gmail.com's investment
+                    portfolio as of today. The portfolio consists of 9 stocks with a total value of ₹196,929.33.
+                    The overall Profit and Loss (P&L) stands at ₹-7,719.45, representing a -3.77% return on the total
+                    investment of ₹204,648.78. The report details individual holdings, performance metrics, and
+                    recommendations for optimizing the portfolio.</p>
+            </div>
+            <p>Key findings include:</p>
+            <ul>
+                <li>Total Portfolio Value: ₹196,929.33</li>
+                <li>Overall P&L: ₹-7,719.45 (-3.77%)</li>
+                <li>Top Performing Stocks: INFOSYS (+₹1342.44), HCLTECH (+₹882.00), AXISBANK (+₹875.79)</li>
+                <li>Underperforming Stocks: PFC (-₹5532.75), BANDHANBNK (-₹4572.75), ITC (-₹439.92)</li>
+            </ul>
+        </section>
+
+        <!-- Portfolio Overview -->
+        <section class="report-section" id="portfolio-overview">
+            <h2>Portfolio Overview</h2>
+            <div class="summary-box">
+                <p>The portfolio currently holds 9 different stocks. An initial investment of ₹204,648.78 has resulted
+                    in a current value of ₹196,929.33. This section provides a detailed breakdown of the portfolio's
+                    composition and overall performance.</p>
+            </div>
+            <div class="mt-3">
+                <h3>Key Portfolio Metrics:</h3>
+                <ul>
+                    <li><strong>Total Investment:</strong> ₹204,648.78</li>
+                    <li><strong>Current Value:</strong> ₹196,929.33</li>
+                    <li><strong>Profit/Loss:</strong> ₹-7,719.45</li>
+                    <li><strong>Number of Holdings:</strong> 9</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Holdings Analysis -->
+        <section class="report-section" id="holdings-analysis">
+            <h2>Holdings Analysis</h2>
+            <p>This section provides a detailed analysis of each stock holding within the portfolio, including their
+                quantity, average purchase price, current price, and individual P&L.</p>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Symbol</th>
+                            <th>Name</th>
+                            <th>Quantity</th>
+                            <th>Avg. Price</th>
+                            <th>Current Price</th>
+                            <th>P&L</th>
+                            <th>P&L (%)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>INFOSYS.NS</td>
+                            <td>INFOSYS</td>
+                            <td>11</td>
+                            <td>1456.66</td>
+                            <td>1578.70</td>
+                            <td>1342.44</td>
+                            <td>8.38%</td>
+                        </tr>
+                        <tr>
+                            <td>PFC.NS</td>
+                            <td>PFC</td>
+                            <td>45</td>
+                            <td>474.90</td>
+                            <td>351.95</td>
+                            <td>-5532.75</td>
+                            <td>-25.89%</td>
+                        </tr>
+                        <tr>
+                            <td>ITC.NS</td>
+                            <td>ITC</td>
+                            <td>26</td>
+                            <td>417.42</td>
+                            <td>400.50</td>
+                            <td>-439.92</td>
+                            <td>-4.05%</td>
+                        </tr>
+                        <tr>
+                            <td>KOTAKBANK.NS</td>
+                            <td>KOTAKBANK</td>
+                            <td>18</td>
+                            <td>2153.25</td>
+                            <td>2146.10</td>
+                            <td>-128.70</td>
+                            <td>-0.33%</td>
+                        </tr>
+                        <tr>
+                            <td>AXISBANK.NS</td>
+                            <td>AXISBANK</td>
+                            <td>9</td>
+                            <td>1173.39</td>
+                            <td>1270.70</td>
+                            <td>875.79</td>
+                            <td>8.29%</td>
+                        </tr>
+                        <tr>
+                            <td>TCS.NS</td>
+                            <td>TCS</td>
+                            <td>16</td>
+                            <td>3160.56</td>
+                            <td>3180.00</td>
+                            <td>311.04</td>
+                            <td>0.62%</td>
+                        </tr>
+                        <tr>
+                            <td>BANDHANBNK.NS</td>
+                            <td>BANDHANBNK</td>
+                            <td>201</td>
+                            <td>169.53</td>
+                            <td>146.78</td>
+                            <td>-4572.75</td>
+                            <td>-13.42%</td>
+                        </tr>
+                        <tr>
+                            <td>NTPC.NS</td>
+                            <td>NTPC</td>
+                            <td>20</td>
+                            <td>345.78</td>
+                            <td>322.95</td>
+                            <td>-456.60</td>
+                            <td>-6.60%</td>
+                        </tr>
+                        <tr>
+                            <td>HCLTECH.NS</td>
+                            <td>HCLTECH</td>
+                            <td>10</td>
+                            <td>1552.30</td>
+                            <td>1640.50</td>
+                            <td>882.00</td>
+                            <td>5.68%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Chart Example (Replace with Actual Chart Data) -->
+            <div class="chart-container">
+                <canvas id="holdingsChart" width="400" height="200"></canvas>
+            </div>
+        </section>
+
+        <!-- Performance Analysis -->
+        <section class="report-section" id="performance-analysis">
+            <h2>Performance Analysis</h2>
+            <p>This section analyzes the overall performance of the portfolio, highlighting key performance
+                indicators and comparing them against relevant benchmarks.</p>
+
+            <div class="summary-box">
+                <p>The portfolio has experienced a negative P&L of ₹-7,719.45, resulting in a -3.77% return on
+                    investment. While some stocks have performed well, the overall performance is dragged down by
+                    significant losses in PFC and BANDHANBNK.</p>
+            </div>
+
+            <div class="mt-3">
+                <h3>Key Performance Indicators:</h3>
+                <ul>
+                    <li><strong>Total P&L:</strong> ₹-7,719.45</li>
+                    <li><strong>P&L Percentage:</strong> -3.77%</li>
+                    <li><strong>Best Performing Stock:</strong> INFOSYS (+₹1342.44)</li>
+                    <li><strong>Worst Performing Stock:</strong> PFC (-₹5532.75)</li>
+                </ul>
+            </div>
+
+            <!-- Chart Example (Replace with Actual Chart Data) -->
+            <div class="chart-container">
+                <canvas id="performanceChart" width="400" height="200"></canvas>
+            </div>
+        </section>
+
+        <!-- Forum Discussion -->
+        <section class="report-section" id="forum-discussion">
+            <h2>Forum Discussion</h2>
+            <p>Insights from forum discussions related to the portfolio analysis are summarized below.</p>
+
+            <div class="summary-box">
+                <p><strong>ForumHost:</strong> Daily portfolio report for darshanjain15062002@gmail.com - 2025-12-04
+                </p>
+                <p><strong>PortfolioAgent:</strong> Analyzed 9 holdings with total value ₹196,929.33</p>
+                <p><strong>RiskAgent:</strong> Portfolio shows negative performance</p>
+                <p><strong>RecommendationAgent:</strong> Focus on holding position</p>
+            </div>
+
+            <p>The forum discussion highlights the negative performance of the portfolio and suggests focusing on the
+                current holdings. Further analysis and discussion may be needed to determine specific actions for
+                improving portfolio performance.</p>
+        </section>
+
+        <!-- Recommendations -->
+        <section class="report-section" id="recommendations">
+            <h2>Recommendations</h2>
+            <p>Based on the analysis, the following recommendations are provided:</p>
+
+            <ul>
+                <li><strong>Re-evaluate PFC and BANDHANBNK:</strong> Given their significant losses, consider whether to
+                    hold, reduce, or exit these positions. Analyze the underlying factors contributing to their
+                    underperformance and assess their future prospects.</li>
+                <li><strong>Capitalize on INFOSYS and HCLTECH:</strong> These stocks have shown positive performance.
+                    Consider increasing positions if the outlook remains favorable.</li>
+                <li><strong>Diversification:</strong> Evaluate the current diversification of the portfolio. Consider
+                    adding stocks from different sectors to mitigate risk.</li>
+                <li><strong>Risk Management:</strong> Implement risk management strategies to protect against further
+                    losses. This may include setting stop-loss orders or hedging positions.</li>
+                <li><strong>Continuous Monitoring:</strong> Regularly monitor the portfolio's performance and make
+                    adjustments as needed based on market conditions and company-specific developments.</li>
+            </ul>
+        </section>
+
+        <!-- Appendix -->
+        <section class="report-section" id="appendix">
+            <h2>Appendix</h2>
+            <h3>Data Sources</h3>
+            <ul>
+                <li>Query Engine Report</li>
+                <li>Media Engine Report</li>
+                <li>Insight Engine Report</li>
+                <li>Forum Logs</li>
+            </ul>
+
+            <h3>Disclaimers</h3>
+            <p>This report is for informational purposes only and should not be considered as financial advice.
+                Investment decisions should be made based on individual circumstances and after consulting with a
+                qualified financial advisor.</p>
+        </section>
+
+        <footer>
+            <p>&copy; 2024 Portfolio Analysis Report. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Function to toggle dark mode
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+        }
+
+        // Collapsible sections functionality
+        var coll = document.getElementsByClassName("collapsible");
+        var i;
+
+        for (i = 0; i < coll.length; i++) {
+            coll[i].addEventListener("click", function () {
+                this.classList.toggle("active");
+                var content = this.nextElementSibling;
+                if (content.style.maxHeight) {
+                    content.style.maxHeight = null;
+                } else {
+                    content.style.maxHeight = content.scrollHeight + "px";
+                }
+            });
+        }
+
+        // Sample chart data (replace with actual data)
+        const holdingsData = {
+            labels: ['INFOSYS', 'PFC', 'ITC', 'KOTAKBANK', 'AXISBANK', 'TCS', 'BANDHANBNK', 'NTPC', 'HCLTECH'],
+            datasets: [{
+                label: 'P&L',
+                data: [1342.44, -5532.75, -439.92, -128.70, 875.79, 311.04, -4572.75, -456.60, 882.00],
+                backgroundColor: [
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 205, 86, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(75, 192, 192, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 205, 86, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(255, 159, 64, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(75, 192, 192, 1)'
+                ],
+                borderWidth: 1
+            }]
+        };
+
+        const performanceData = {
+            labels: ['Total P&L'],
+            datasets: [{
+                label: 'Amount',
+                data: [-7719.45],
+                backgroundColor: ['rgba(255, 99, 132, 0.2)'],
+                borderColor: ['rgba(255, 99, 132, 1)'],
+                borderWidth: 1
+            }]
+        };
+
+        // Chart configuration
+        const chartConfig = {
+            type: 'bar',
+            data: holdingsData,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        };
+
+        const performanceConfig = {
+            type: 'bar',
+            data: performanceData,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        };
+
+
+        // Render charts
+        const holdingsChart = new Chart(
+            document.getElementById('holdingsChart'),
+            chartConfig
+        );
+
+        const performanceChart = new Chart(
+            document.getElementById('performanceChart'),
+            performanceConfig
+        );
+    </script>
+</body>
+
+</html>

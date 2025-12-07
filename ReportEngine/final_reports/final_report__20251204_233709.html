@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Portfolio Report</title>
+    <style>
+        /* Basic Reset */
+        body,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        p,
+        ul,
+        ol,
+        li,
+        figure,
+        figcaption,
+        blockquote,
+        dl,
+        dd {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* General Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        /* Typography */
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #2c3e50;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 2em;
+            margin-bottom: 15px;
+            color: #34495e;
+            border-bottom: 2px solid #ecf0f1;
+            padding-bottom: 5px;
+        }
+
+        h3 {
+            font-size: 1.6em;
+            margin-bottom: 10px;
+            color: #3498db;
+        }
+
+        h4 {
+            font-size: 1.3em;
+            margin-bottom: 8px;
+            color: #2980b9;
+        }
+
+        p {
+            margin-bottom: 15px;
+            color: #555;
+        }
+
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Lists */
+        ul,
+        ol {
+            margin-bottom: 15px;
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 5px;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th,
+        td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ecf0f1;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+            color: #333;
+        }
+
+        tr:hover {
+            background-color: #f9f9f9;
+        }
+
+        /* Forms */
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #3498db;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        /* Code Blocks */
+        pre {
+            background-color: #f0f0f0;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin-bottom: 20px;
+        }
+
+        code {
+            font-family: monospace, monospace;
+            font-size: 1em;
+            color: #333;
+        }
+
+        /* Images */
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Blockquotes */
+        blockquote {
+            border-left: 5px solid #3498db;
+            padding: 15px;
+            margin-bottom: 20px;
+            background-color: #ecf0f1;
+            font-style: italic;
+            color: #555;
+        }
+
+        /* HR */
+        hr {
+            border: 0;
+            height: 1px;
+            background: #ddd;
+            margin: 20px 0;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #333;
+            color: #fff;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        footer a {
+            color: #3498db;
+        }
+
+        /* Utilities */
+        .text-center {
+            text-align: center;
+        }
+
+        .mt-20 {
+            margin-top: 20px;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .container {
+                width: 95%;
+                padding: 10px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            h2 {
+                font-size: 1.7em;
+            }
+
+            th,
+            td {
+                padding: 8px;
+                font-size: 0.9em;
+            }
+        }
+
+        /* Dark Mode Styles */
+        body.dark-mode {
+            background-color: #333;
+            color: #eee;
+        }
+
+        body.dark-mode .container {
+            background-color: #444;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+        }
+
+        body.dark-mode h1,
+        body.dark-mode h2,
+        body.dark-mode h3,
+        body.dark-mode h4 {
+            color: #ddd;
+        }
+
+        body.dark-mode p {
+            color: #ccc;
+        }
+
+        body.dark-mode table {
+            border-color: #666;
+        }
+
+        body.dark-mode th,
+        body.dark-mode td {
+            border-bottom: 1px solid #666;
+        }
+
+        body.dark-mode th {
+            background-color: #555;
+            color: #eee;
+        }
+
+        body.dark-mode pre {
+            background-color: #555;
+            color: #eee;
+        }
+
+        body.dark-mode footer {
+            background-color: #222;
+        }
+
+        /* Button Styles */
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-primary {
+            background-color: #3498db;
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background-color: #2980b9;
+        }
+
+        .btn-secondary {
+            background-color: #7f8c8d;
+            color: #fff;
+        }
+
+        .btn-secondary:hover {
+            background-color: #6c7a7d;
+        }
+
+        .btn-success {
+            background-color: #2ecc71;
+            color: #fff;
+        }
+
+        .btn-success:hover {
+            background-color: #27ae60;
+        }
+
+        .btn-danger {
+            background-color: #e74c3c;
+            color: #fff;
+        }
+
+        .btn-danger:hover {
+            background-color: #c0392b;
+        }
+
+        /* Chart Styles */
+        .chart-container {
+            width: 100%;
+            margin: 20px 0;
+        }
+
+        /* Accordion Styles */
+        .accordion {
+            width: 100%;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .accordion-header {
+            background-color: #f2f2f2;
+            color: #333;
+            padding: 12px 15px;
+            text-align: left;
+            cursor: pointer;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .accordion-content {
+            padding: 15px;
+            display: none;
+            background-color: #fff;
+        }
+
+        .accordion-header:hover {
+            background-color: #e0e0e0;
+        }
+
+        .accordion.active .accordion-content {
+            display: block;
+        }
+
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked+.slider {
+            background-color: #2196F3;
+        }
+
+        input:focus+.slider {
+            box-shadow: 0 0 1px #2196F3;
+        }
+
+        input:checked+.slider:before {
+            transform: translateX(26px);
+        }
+    </style>
+</head>
+
+<body id="report-body">
+    <div class="container">
+        <h1>Daily Portfolio Report</h1>
+
+        <section id="report-metadata">
+            <h2>Report Metadata</h2>
+            <p><strong>Report Date:</strong> 2025-12-04</p>
+            <p><strong>Portfolio Holder:</strong> darshanjain15062002@gmail.com</p>
+        </section>
+
+        <section id="table-of-contents">
+            <h2>Table of Contents</h2>
+            <ul>
+                <li><a href="#executive-summary">Executive Summary</a></li>
+                <li><a href="#portfolio-overview">Portfolio Overview</a></li>
+                <li><a href="#holdings-analysis">Holdings Analysis</a></li>
+                <li><a href="#profit-loss-analysis">Profit & Loss Analysis</a></li>
+                <li><a href="#market-analysis">Market Analysis (Unavailable)</a></li>
+                <li><a href="#forum-activity">Forum Activity</a></li>
+                <li><a href="#recommendations">Recommendations</a></li>
+                <li><a href="#data-appendix">Data Appendix</a></li>
+            </ul>
+        </section>
+
+        <section id="executive-summary">
+            <h2>Executive Summary</h2>
+            <p>This report provides a comprehensive analysis of the investment portfolio of
+                darshanjain15062002@gmail.com as of 2025-12-04. The portfolio consists of 9 stocks with a total
+                value of ₹196,929.33. The overall Profit and Loss (P&L) stands at ₹-7,719.45, representing a -3.77%
+                change.</p>
+            <p>Key observations include significant losses in PFC and Bandhan Bank, offset partially by gains in
+                Infosys, HCLTech, and Axis Bank. The report offers recommendations aimed at improving portfolio
+                performance, considering recent market trends and forum discussions.</p>
+        </section>
+
+        <section id="portfolio-overview">
+            <h2>Portfolio Overview</h2>
+            <p>The portfolio comprises 9 distinct stock holdings. Here's a summary of the portfolio's current
+                status:</p>
+            <ul>
+                <li><strong>Total Investment:</strong> ₹204,648.78</li>
+                <li><strong>Current Value:</strong> ₹196,929.33</li>
+                <li><strong>Profit/Loss:</strong> ₹-7,719.45 (-3.77%)</li>
+                <li><strong>Number of Holdings:</strong> 9</li>
+            </ul>
+        </section>
+
+        <section id="holdings-analysis">
+            <h2>Holdings Analysis</h2>
+            <p>A detailed breakdown of each holding is provided below. The analysis includes stock symbols, names,
+                quantities held, average purchase prices, current prices, and profit/loss figures.</p>
+
+            <h3>Top Performers</h3>
+            <ul>
+                <li>INFOSYS (+₹1342.44)</li>
+                <li>HCLTECH (+₹882.00)</li>
+                <li>AXISBANK (+₹875.79)</li>
+            </ul>
+
+            <h3>Holdings Breakdown</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Symbol</th>
+                        <th>Name</th>
+                        <th>Quantity</th>
+                        <th>Avg. Price</th>
+                        <th>Current Price</th>
+                        <th>P&L (₹)</th>
+                        <th>P&L (%)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>INFOSYS.NS</td>
+                        <td>INFOSYS</td>
+                        <td>11</td>
+                        <td>1456.66</td>
+                        <td>1578.70</td>
+                        <td>1342.44</td>
+                        <td>8.38%</td>
+                    </tr>
+                    <tr>
+                        <td>PFC.NS</td>
+                        <td>PFC</td>
+                        <td>45</td>
+                        <td>474.90</td>
+                        <td>351.95</td>
+                        <td>-5532.75</td>
+                        <td>-25.89%</td>
+                    </tr>
+                    <tr>
+                        <td>ITC.NS</td>
+                        <td>ITC</td>
+                        <td>26</td>
+                        <td>417.42</td>
+                        <td>400.50</td>
+                        <td>-439.92</td>
+                        <td>-4.05%</td>
+                    </tr>
+                    <tr>
+                        <td>KOTAKBANK.NS</td>
+                        <td>KOTAKBANK</td>
+                        <td>18</td>
+                        <td>2153.25</td>
+                        <td>2146.10</td>
+                        <td>-128.70</td>
+                        <td>-0.33%</td>
+                    </tr>
+                    <tr>
+                        <td>AXISBANK.NS</td>
+                        <td>AXISBANK</td>
+                        <td>9</td>
+                        <td>1173.39</td>
+                        <td>1270.70</td>
+                        <td>875.79</td>
+                        <td>8.29%</td>
+                    </tr>
+                    <tr>
+                        <td>TCS.NS</td>
+                        <td>TCS</td>
+                        <td>16</td>
+                        <td>3160.56</td>
+                        <td>3180.00</td>
+                        <td>311.04</td>
+                        <td>0.62%</td>
+                    </tr>
+                    <tr>
+                        <td>BANDHANBNK.NS</td>
+                        <td>BANDHANBNK</td>
+                        <td>201</td>
+                        <td>169.53</td>
+                        <td>146.78</td>
+                        <td>-4572.75</td>
+                        <td>-13.42%</td>
+                    </tr>
+                    <tr>
+                        <td>NTPC.NS</td>
+                        <td>NTPC</td>
+                        <td>20</td>
+                        <td>345.78</td>
+                        <td>322.95</td>
+                        <td>-456.60</td>
+                        <td>-6.60%</td>
+                    </tr>
+                    <tr>
+                        <td>HCLTECH.NS</td>
+                        <td>HCLTECH</td>
+                        <td>10</td>
+                        <td>1552.30</td>
+                        <td>1640.50</td>
+                        <td>882.00</td>
+                        <td>5.68%</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="profit-loss-analysis">
+            <h2>Profit & Loss Analysis</h2>
+            <p>The overall portfolio P&L stands at ₹-7,719.45. A detailed examination reveals that the losses are
+                primarily attributed to PFC and Bandhan Bank. The gains from Infosys, HCLTech, and Axis Bank only
+                partially offset these losses.</p>
+            <p>Further analysis should focus on understanding the reasons behind the underperformance of PFC and
+                Bandhan Bank. This may involve reviewing company-specific news, industry trends, and macroeconomic
+                factors.</p>
+
+            <div class="chart-container">
+                <h3>Portfolio P&L Distribution</h3>
+                <canvas id="pnlChart" width="400" height="200"></canvas>
+            </div>
+        </section>
+
+        <section id="market-analysis">
+            <h2>Market Analysis</h2>
+            <p>Unfortunately, AI-driven market analysis is unavailable for this report. A future iteration will
+                include a comprehensive market overview, focusing on key indices, sector performance, and relevant
+                economic indicators.</p>
+            <p>Please refer to external sources for comprehensive market analysis.</p>
+        </section>
+
+        <section id="forum-activity">
+            <h2>Forum Activity</h2>
+            <p>Analysis of the forum logs reveals the following:</p>
+            <ul>
+                <li><strong>[ForumHost]:</strong> Daily portfolio report for darshanjain15062002@gmail.com -
+                    2025-12-04</li>
+                <li><strong>[PortfolioAgent]:</strong> Analyzed 9 holdings with total value ₹196,929.33</li>
+                <li><strong>[RiskAgent]:</strong> Portfolio shows negative performance</li>
+                <li><strong>[RecommendationAgent]:</strong> Focus on holding position</li>
+            </ul>
+            <p>The general sentiment indicates that the portfolio is underperforming, and the recommendation is to
+                maintain the current holding positions. Further forum discussions may provide additional insights and
+                recommendations.</p>
+
+            <div class="chart-container">
+                <h3>Forum Activity Over Time</h3>
+                <canvas id="forumChart" width="400" height="200"></canvas>
+            </div>
+        </section>
+
+        <section id="recommendations">
+            <h2>Recommendations</h2>
+            <ol>
+                <li><strong>Re-evaluate PFC and Bandhan Bank:</strong> Conduct a thorough review of these holdings to
+                    understand the underlying causes of their underperformance. Consider potential divestment if the
+                    outlook remains negative.</li>
+                <li><strong>Maintain positions in INFOSYS, HCLTECH, and AXISBANK:</strong> These stocks have shown
+                    positive performance and should be held. Consider adding to these positions if the opportunity
+                    arises.</li>
+                <li><strong>Diversify the portfolio:</strong> Explore opportunities to diversify into other sectors or
+                    asset classes to reduce overall portfolio risk.</li>
+                <li><strong>Monitor market trends:</strong> Stay informed about market trends and economic indicators to
+                    make informed investment decisions.</li>
+            </ol>
+        </section>
+
+        <section id="data-appendix">
+            <h2>Data Appendix</h2>
+            <p>The following data is used in this report:</p>
+            <ul>
+                <li><strong>Query Engine Report:</strong> {'type': 'portfolio', 'summary': 'Portfolio of 9 stocks with
+                        total value ₹196,929.33. Overall P&L: ₹-7,719.45 (-3.77%)', 'key_points': ['Total Investment:
+                        ₹204,648.78', 'Current Value: ₹196,929.33', 'Profit/Loss: ₹-7,719.45', 'Number of Holdings:
+                        9']}</li>
+                <li><strong>Media Engine Report:</strong> {'type': 'holdings', 'summary': 'Top performers: INFOSYS
+                        (+₹1342.44), HCLTECH (+₹882.00), AXISBANK (+₹875.79)', 'holdings_breakdown': [{'symbol':
+                        'INFOSYS.NS', 'name': 'INFOSYS', 'quantity': 11, 'avg_price': 1456.66, 'current_price':
+                        1578.7, 'pnl': 1342.44, 'pnl_percentage': 8.378070380184804}, {'symbol': 'PFC.NS', 'name':
+                        'PFC', 'quantity': 45, 'avg_price': 474.9, 'current_price': 351.95, 'pnl': -5532.75,
+                        'pnl_percentage': -25.889660981259212}, {'symbol': 'ITC.NS', 'name': 'ITC', 'quantity':
+                        26, 'avg_price': 417.42, 'current_price': 400.5, 'pnl': -439.92, 'pnl_percentage':
+                        -4.053471323846489}, {'symbol': 'KOTAKBANK.NS', 'name': 'KOTAKBANK', 'quantity': 18,
+                        'avg_price': 2153.25, 'current_price': 2146.1000000000004, 'pnl': -128.7,
+                        'pnl_percentage': -0.33205619412514276}, {'symbol': 'AXISBANK.NS', 'name': 'AXISBANK',
+                        'quantity': 9, 'avg_price': 1173.39, 'current_price': 1270.6999999999998, 'pnl': 875.79,
+                        'pnl_percentage': 8.293065391728216}, {'symbol': 'TCS.NS', 'name': 'TCS', 'quantity': 16,
+                        'avg_price': 3160.56, 'current_price': 3180, 'pnl': 311.04, 'pnl_percentage':
+                        0.6150808717442496}, {'symbol': 'BANDHANBNK.NS', 'name': 'BANDHANBNK', 'quantity': 201,
+                        'avg_price': 169.53, 'current_price': 146.78, 'pnl': -4572.75, 'pnl_percentage':
+                        -13.419453783991035}, {'symbol': 'NTPC.NS', 'name': 'NTPC', 'quantity': 20, 'avg_price':
+                        345.78000000000003, 'current_price': 322.95, 'pnl': -456.6, 'pnl_percentage':
+                        -6.602463994447348}, {'symbol': 'HCLTECH.NS', 'name': 'HCLTECH', 'quantity': 10,
+                        'avg_price': 1552.3, 'current_price': 1640.5, 'pnl': 882, 'pnl_percentage':
+                        5.681891386974171}]}</li>
+                <li><strong>Insight Engine Report:</strong> {'type': 'ai_analysis', 'summary': 'No AI analysis
+                        available', 'bias_score': {}, 'market_breakdown': {}}</li>
+                <li><strong>Forum Logs:</strong> [ForumHost]: Daily portfolio report for
+                    darshanjain15062002@gmail.com - 2025-12-04; [PortfolioAgent]: Analyzed 9 holdings with total value
+                    ₹196,929.33; [RiskAgent]: Portfolio shows negative performance; [RecommendationAgent]: Focus on
+                    holding position</li>
+            </ul>
+        </section>
+
+        <footer>
+            <p>&copy; 2025 Portfolio Analysis. All rights reserved.</p>
+            <p>Generated by <a href="#">Automated Report Engine</a></p>
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // P&L Chart Data
+            const pnlData = {
+                labels: ['INFOSYS', 'PFC', 'ITC', 'KOTAKBANK', 'AXISBANK', 'TCS', 'BANDHANBNK', 'NTPC', 'HCLTECH'],
+                datasets: [{
+                    label: 'Profit/Loss (₹)',
+                    data: [1342.44, -5532.75, -439.92, -128.70, 875.79, 311.04, -4572.75, -456.60, 882.00],
+                    backgroundColor: [
+                        'rgba(75, 192, 192, 0.5)',
+                        'rgba(255, 99, 132, 0.5)',
+                        'rgba(255, 99, 132, 0.5)',
+                        'rgba(255, 99, 132, 0.5)',
+                        'rgba(75, 192, 192, 0.5)',
+                        'rgba(75, 192, 192, 0.5)',
+                        'rgba(255, 99, 132, 0.5)',
+                        'rgba(255, 99, 132, 0.5)',
+                        'rgba(75, 192, 192, 0.5)'
+                    ],
+                    borderColor: [
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(75, 192, 192, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            };
+
+            // Forum Activity Chart Data
+            const forumData = {
+                labels: ['Dec 1', 'Dec 2', 'Dec 3', 'Dec 4'],
+                datasets: [{
+                    label: 'Forum Posts',
+                    data: [5, 8, 6, 10],
+                    fill: false,
+                    borderColor: 'rgb(75, 192, 192)',
+                    tension: 0.1
+                }]
+            };
+
+            // P&L Chart Configuration
+            const pnlConfig = {
+                type: 'bar',
+                data: pnlData,
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            };
+
+            // Forum Chart Configuration
+            const forumConfig = {
+                type: 'line',
+                data: forumData,
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            };
+
+            // Render P&L Chart
+            const pnlChartCanvas = document.getElementById('pnlChart').getContext('2d');
+            const pnlChart = new Chart(pnlChartCanvas, pnlConfig);
+
+            // Render Forum Chart
+            const forumChartCanvas = document.getElementById('forumChart').getContext('2d');
+            const forumChart = new Chart(forumChartCanvas, forumConfig);
+        });
+    </script>
+</body>
+
+</html>

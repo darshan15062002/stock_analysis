@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Portfolio Report</title>
+    <style>
+        /* Basic Reset */
+        html, body, div, span, applet, object, iframe,
+        h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+        a, abbr, acronym, address, big, cite, code,
+        del, dfn, em, img, ins, kbd, q, s, samp,
+        small, strike, strong, sub, sup, tt, var,
+        b, u, i, center,
+        dl, dt, dd, ol, ul, li,
+        fieldset, form, label, legend,
+        table, caption, tbody, tfoot, thead, tr, th, td,
+        article, aside, canvas, details, embed,
+        figure, figcaption, footer, header, hgroup,
+        menu, nav, output, ruby, section, summary,
+        time, mark, audio, video {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            font-size: 100%;
+            font: inherit;
+            vertical-align: baseline;
+        }
+
+        /* HTML5 display-role reset for older browsers */
+        article, aside, details, figcaption, figure,
+        footer, header, hgroup, menu, nav, section {
+            display: block;
+        }
+
+        body {
+            line-height: 1;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        ol, ul {
+            list-style: none;
+        }
+
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+
+        /* General Styles */
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h1, h2, h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+        }
+
+        h2 {
+            font-size: 2em;
+        }
+
+        h3 {
+            font-size: 1.6em;
+        }
+
+        p {
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        a {
+            color: #3498db;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        a:hover {
+            color: #2980b9;
+        }
+
+        /* Navigation */
+        .navigation {
+            margin-bottom: 30px;
+        }
+
+        .navigation ul {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .navigation a {
+            display: inline-block;
+            padding: 10px 15px;
+            background-color: #3498db;
+            color: #fff;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .navigation a:hover {
+            background-color: #2980b9;
+        }
+
+        /* Sections */
+        .section {
+            margin-bottom: 30px;
+        }
+
+        .section h2 {
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        /* Tables */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .data-table th, .data-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .data-table th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+            color: #555;
+        }
+
+        .data-table tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .data-table tbody tr:hover {
+            background-color: #eaeaea;
+        }
+
+        /* Charts */
+        .chart-container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            margin-bottom: 30px;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #333;
+            color: #fff;
+            border-radius: 8px;
+            margin-top: 30px;
+        }
+
+        /* Buttons */
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-size: 1em;
+            margin-top: 10px;
+        }
+
+        .button:hover {
+            background-color: #2980b9;
+        }
+
+        /* Dark Mode */
+        .dark-mode {
+            background-color: #222;
+            color: #eee;
+        }
+
+        .dark-mode .container {
+            background-color: #333;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+        }
+
+        .dark-mode h1, .dark-mode h2, .dark-mode h3 {
+            color: #fff;
+        }
+
+        .dark-mode .data-table th {
+            background-color: #444;
+            color: #ddd;
+        }
+
+        .dark-mode .data-table tbody tr:nth-child(even) {
+            background-color: #555;
+        }
+
+        .dark-mode footer {
+            background-color: #111;
+            color: #ddd;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+                margin: 10px auto;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            h2 {
+                font-size: 1.7em;
+            }
+
+            h3 {
+                font-size: 1.4em;
+            }
+
+            .data-table th, .data-table td {
+                padding: 8px 10px;
+                font-size: 0.9em;
+            }
+
+            .chart-container {
+                width: 100%;
+            }
+        }
+
+        /* Collapsible Sections */
+        .collapsible {
+            background-color: #eee;
+            color: #444;
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 1.2em;
+            transition: 0.4s;
+            border-radius: 5px;
+            margin-bottom: 5px;
+        }
+
+        .active, .collapsible:hover {
+            background-color: #ddd;
+        }
+
+        .collapsible:after {
+            content: '\002B';
+            color: #777;
+            font-weight: bold;
+            float: right;
+            margin-left: 5px;
+        }
+
+        .active:after {
+            content: "\2212";
+        }
+
+        .content {
+            padding: 0 18px;
+            background-color: white;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.2s ease-out;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                background-color: #fff;
+                color: #000;
+            }
+
+            .container {
+                box-shadow: none;
+            }
+
+            .navigation, .button, footer {
+                display: none;
+            }
+
+            .data-table {
+                box-shadow: none;
+            }
+        }
+
+        /* Utility Classes */
+        .text-center {
+            text-align: center;
+        }
+
+        .mt-20 {
+            margin-top: 20px;
+        }
+
+        .mb-20 {
+            margin-bottom: 20px;
+        }
+
+        .bold {
+            font-weight: bold;
+        }
+
+        .italic {
+            font-style: italic;
+        }
+
+        .highlight {
+            background-color: yellow;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .slide-in {
+            animation: slideIn 0.5s ease-in-out;
+        }
+
+        /* Form Elements */
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 1em;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="password"]:focus,
+        textarea:focus,
+        select:focus {
+            border-color: #3498db;
+            outline: none;
+            box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        /* Alerts */
+        .alert {
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid transparent;
+            border-radius: 4px;
+        }
+
+        .alert-success {
+            color: #3c763d;
+            background-color: #dff0d8;
+            border-color: #d6e9c6;
+        }
+
+        .alert-info {
+            color: #31708f;
+            background-color: #d9edf7;
+            border-color: #bce8f1;
+        }
+
+        .alert-warning {
+            color: #8a6d3b;
+            background-color: #fcf8e3;
+            border-color: #faebcc;
+        }
+
+        .alert-danger {
+            color: #a94442;
+            background-color: #f2dede;
+            border-color: #ebccd1;
+        }
+
+        /* List Styles */
+        .styled-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .styled-list li {
+            padding: 10px 15px;
+            margin-bottom: 5px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .styled-list li:last-child {
+            border-bottom: none;
+        }
+
+        .styled-list li:before {
+            content: "\2022";  /* Bullet character */
+            color: #3498db;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+        }
+
+        /* Image Styles */
+        .responsive-img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .rounded-img {
+            border-radius: 5px;
+        }
+
+        /* Code Styles */
+        pre {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            overflow: auto;
+            font-family: monospace;
+        }
+
+        code {
+            font-family: monospace;
+            padding: 2px 5px;
+            background-color: #eee;
+            border-radius: 3px;
+        }
+
+        /* Spacing */
+        .space-top {
+            margin-top: 20px;
+        }
+
+        .space-bottom {
+            margin-bottom: 20px;
+        }
+
+        /* Flexbox Layout */
+        .flex-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .flex-item {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        /* Grid Layout */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .grid-item {
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<div class="container">
+    <!-- Dark Mode Toggle -->
+    <button id="darkModeToggle" class="button">Toggle Dark Mode</button>
+
+    <!-- Print Button -->
+    <button id="printButton" class="button">Print Report</button>
+
+    <!-- PDF Export Button -->
+    <button id="pdfButton" class="button">Export to PDF (Not Functional)</button>
+
+    <h1>Daily Portfolio Report</h1>
+    <p class="mb-20">Generated on: 2025-12-04 for darshanjain15062002@gmail.com</p>
+
+    <div class="navigation">
+        <ul>
+            <li><a href="#summary">Summary</a></li>
+            <li><a href="#performance">Performance Analysis</a></li>
+            <li><a href="#holdings">Holdings Breakdown</a></li>
+            <li><a href="#recommendations">Recommendations</a></li>
+            <li><a href="#forum">Forum Discussion</a></li>
+            <li><a href="#appendix">Appendix</a></li>
+        </ul>
+    </div>
+
+    <section id="summary" class="section">
+        <h2>Summary</h2>
+        <p>This report provides a comprehensive overview of your investment portfolio's performance as of today. The analysis includes key metrics, a breakdown of individual holdings, and recommendations for future investment decisions. This report considers data from multiple analysis engines as well as forum discussions to provide a holistic view.</p>
+        <p><b>Portfolio Overview:</b></p>
+        <ul>
+            <li>Total Investment: ₹204,648.78</li>
+            <li>Current Value: ₹196,929.33</li>
+            <li>Profit/Loss: ₹-7,719.45 (-3.77%)</li>
+            <li>Number of Holdings: 9</li>
+        </ul>
+    </section>
+
+    <section id="performance" class="section">
+        <h2>Performance Analysis</h2>
+        <p>The portfolio experienced a negative performance today, with a total loss of ₹-7,719.45, representing a -3.77% decrease in value. Below are detailed insights into the performance of individual holdings.</p>
+
+        <div class="chart-container">
+            <h3>Portfolio P&L Distribution</h3>
+            <canvas id="pnlChart"></canvas>
+        </div>
+
+        <p><b>Top Performers:</b></p>
+        <ul>
+            <li>INFOSYS (+₹1342.44)</li>
+            <li>HCLTECH (+₹882.00)</li>
+            <li>AXISBANK (+₹875.79)</li>
+        </ul>
+
+        <p><b>Underperformers:</b></p>
+        <ul>
+            <li>PFC (-₹5532.75)</li>
+            <li>BANDHANBNK (-₹4572.75)</li>
+            <li>ITC (-₹439.92)</li>
+        </ul>
+
+        <p><b>Detailed Analysis:</b></p>
+        <p>INFOSYS and HCLTECH showed positive performance, contributing to the overall portfolio value. However, significant losses in PFC and BANDHANBNK dragged down the overall performance. The remaining holdings showed minor fluctuations.</p>
+
+        <p><b>Market Context:</b></p>
+        <p>Portfolio analysis unavailable. External economic factors and market trends may have influenced the portfolio's performance. A more detailed market analysis is needed to understand the broader context of these fluctuations. More specifically, PFC and BANDHANBNK should be closely watched to avoid any further losses, as well as watching to see if there are external factors dragging down their performance</p>
+
+    </section>
+
+    <section id="holdings" class="section">
+        <h2>Holdings Breakdown</h2>
+        <p>The following table provides a detailed breakdown of each holding in your portfolio, including the quantity, average price, current price, and profit/loss.</p>
+
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Symbol</th>
+                    <th>Name</th>
+                    <th>Quantity</th>
+                    <th>Avg. Price (₹)</th>
+                    <th>Current Price (₹)</th>
+                    <th>P&L (₹)</th>
+                    <th>P&L (%)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>INFOSYS.NS</td>
+                    <td>INFOSYS</td>
+                    <td>11</td>
+                    <td>1456.66</td>
+                    <td>1578.7</td>
+                    <td>1342.44</td>
+                    <td>8.38%</td>
+                </tr>
+                <tr>
+                    <td>PFC.NS</td>
+                    <td>PFC</td>
+                    <td>45</td>
+                    <td>474.9</td>
+                    <td>351.95</td>
+                    <td>-5532.75</td>
+                    <td>-25.89%</td>
+                </tr>
+                <tr>
+                    <td>ITC.NS</td>
+                    <td>ITC</td>
+                    <td>26</td>
+                    <td>417.42</td>
+                    <td>400.5</td>
+                    <td>-439.92</td>
+                    <td>-4.05%</td>
+                </tr>
+                <tr>
+                    <td>KOTAKBANK.NS</td>
+                    <td>KOTAKBANK</td>
+                    <td>18</td>
+                    <td>2153.25</td>
+                    <td>2146.10</td>
+                    <td>-128.7</td>
+                    <td>-0.33%</td>
+                </tr>
+                <tr>
+                    <td>AXISBANK.NS</td>
+                    <td>AXISBANK</td>
+                    <td>9</td>
+                    <td>1173.39</td>
+                    <td>1270.70</td>
+                    <td>875.79</td>
+                    <td>8.29%</td>
+                </tr>
+                <tr>
+                    <td>TCS.NS</td>
+                    <td>TCS</td>
+                    <td>16</td>
+                    <td>3160.56</td>
+                    <td>3180</td>
+                    <td>311.04</td>
+                    <td>0.62%</td>
+                </tr>
+                <tr>
+                    <td>BANDHANBNK.NS</td>
+                    <td>BANDHANBNK</td>
+                    <td>201</td>
+                    <td>169.53</td>
+                    <td>146.78</td>
+                    <td>-4572.75</td>
+                    <td>-13.42%</td>
+                </tr>
+                <tr>
+                    <td>NTPC.NS</td>
+                    <td>NTPC</td>
+                    <td>20</td>
+                    <td>345.78</td>
+                    <td>322.95</td>
+                    <td>-456.6</td>
+                    <td>-6.60%</td>
+                </tr>
+                <tr>
+                    <td>HCLTECH.NS</td>
+                    <td>HCLTECH</td>
+                    <td>10</td>
+                    <td>1552.3</td>
+                    <td>1640.5</td>
+                    <td>882</td>
+                    <td>5.68%</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section id="recommendations" class="section">
+        <h2>Recommendations</h2>
+        <p>Based on the current portfolio performance, the following recommendations are suggested:</p>
+        <ul>
+            <li><b>Focus on Holding Position:</b> Given the current market volatility and negative overall performance, it is recommended to primarily focus on maintaining your existing positions.</li>
+            <li><b>Review Underperforming Assets:</b> Conduct a detailed review of PFC and BANDHANBNK to determine if adjustments are needed. Consider the long-term prospects of these investments.</li>
+            <li><b>Diversification:</b> Consider diversifying your portfolio to mitigate risk. Explore opportunities in sectors that are less correlated with your current holdings.</li>
+            <li><b>Rebalance Portfolio:</b> If necessary, rebalance your portfolio by reducing exposure to underperforming assets and increasing exposure to assets with better growth potential.</li>
+            <li><b>Stay Informed:</b> Keep abreast of market trends and economic news that may impact your investments.</li>
+        </ul>
+
+        <p>These recommendations are based on the current analysis and should be considered in conjunction with your personal investment goals and risk tolerance. Remember to do your own due diligence before making any investment decisions. Consider consulting a financial advisor before making substantial changes.</p>
+    </section>
+
+     <section id="forum" class="section">
+        <h2>Forum Discussion</h2>
+        <p>Below is a summary of recent discussions related to your portfolio:</p>
+        <pre>
+[ForumHost]: Daily portfolio report for darshanjain15062002@gmail.com - 2025-12-04
+[PortfolioAgent]: Analyzed 9 holdings with total value ₹196,929.33
+[RiskAgent]: Portfolio shows negative performance
+[RecommendationAgent]: Focus on holding position
+        </pre>
+        <p><b>Key Points from Discussion:</b></p>
+        <ul>
+            <li>The portfolio's negative performance was highlighted by the RiskAgent.</li>
+            <li>The RecommendationAgent suggested focusing on holding existing positions to mitigate risk.</li>
+        </ul>
+
+        <p><b>Analysis:</b></p>
+        <p>The forum discussion confirms the need for a cautious approach given the current market conditions. The recommendation to hold positions aligns with the analysis provided in this report. However, close monitoring of underperforming assets is crucial. A balanced approach is recommended and should be in line with a long-term strategy that allows for a more steady growth</p>
+    </section>
+
+     <section id="appendix" class="section">
+        <h2>Appendix</h2>
+        <h3>Data Sources</h3>
+        <ul>
+            <li>Query Engine Report: {'type': 'portfolio', 'summary': 'Portfolio of 9 stocks with total value ₹196,929.33. Overall P&L: ₹-7,719.45 (-3.77%)', 'key_points': ['Total Investment: ₹204,648.78', 'Current Value: ₹196,929.33', 'Profit/Loss: ₹-7,719.45', 'Number of Holdings: 9']}</li>
+            <li>Media Engine Report: {'type': 'holdings', 'summary': 'Top performers: INFOSYS (+₹1342.44), HCLTECH (+₹882.00), AXISBANK (+₹875.79)', 'holdings_breakdown': [{'symbol': 'INFOSYS.NS', 'name': 'INFOSYS', 'quantity': 11, 'avg_price': 1456.66, 'current_price': 1578.7, 'pnl': 1342.44, 'pnl_percentage': 8.378070380184804}, {'symbol': 'PFC.NS', 'name': 'PFC', 'quantity': 45, 'avg_price': 474.9, 'current_price': 351.95, 'pnl': -5532.75, 'pnl_percentage': -25.889660981259212}, {'symbol': 'ITC.NS', 'name': 'ITC', 'quantity': 26, 'avg_price': 417.42, 'current_price': 400.5, 'pnl': -439.92, 'pnl_percentage': -4.053471323846489}, {'symbol': 'KOTAKBANK.NS', 'name': 'KOTAKBANK', 'quantity': 18, 'avg_price': 2153.25, 'current_price': 2146.1000000000004, 'pnl': -128.7, 'pnl_percentage': -0.33205619412514276}, {'symbol': 'AXISBANK.NS', 'name': 'AXISBANK', 'quantity': 9, 'avg_price': 1173.39, 'current_price': 1270.6999999999998, 'pnl': 875.79, 'pnl_percentage': 8.293065391728216}, {'symbol': 'TCS.NS', 'name': 'TCS', 'quantity': 16, 'avg_price': 3160.56, 'current_price': 3180, 'pnl': 311.04, 'pnl_percentage': 0.6150808717442496}, {'symbol': 'BANDHANBNK.NS', 'name': 'BANDHANBNK', 'quantity': 201, 'avg_price': 169.53, 'current_price': 146.78, 'pnl': -4572.75, 'pnl_percentage': -13.419453783991035}, {'symbol': 'NTPC.NS', 'name': 'NTPC', 'quantity': 20, 'avg_price': 345.78000000000003, 'current_price': 322.95, 'pnl': -456.6, 'pnl_percentage': -6.602463994447348}, {'symbol': 'HCLTECH.NS', 'name': 'HCLTECH', 'quantity': 10, 'avg_price': 1552.3, 'current_price': 1640.5, 'pnl': 882, 'pnl_percentage': 5.681891386974171}]}</li>
+            <li>Insight Engine Report: {'type': 'ai_analysis', 'summary': 'Portfolio analysis unavailable', 'bias_score': {}, 'market_breakdown': {}}</li>
+            <li>Forum Logs: [ForumHost]: Daily portfolio report for darshanjain15062002@gmail.com - 2025-12-04,[PortfolioAgent]: Analyzed 9 holdings with total value ₹196,929.33,[RiskAgent]: Portfolio shows negative performance,[RecommendationAgent]: Focus on holding position</li>
+        </ul>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 All Rights Reserved</p>
+    </footer>
+
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Dark Mode Toggle
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        darkModeToggle.addEventListener('click', function () {
+            document.body.classList.toggle('dark-mode');
+        });
+
+        // Print Button
+        const printButton = document.getElementById('printButton');
+        printButton.addEventListener('click', function () {
+            window.print();
+        });
+
+        // Chart.js - P&L Chart
+        const pnlChartCanvas = document.getElementById('pnlChart').getContext('2d');
+        const pnlData = {
+            labels: ['INFOSYS', 'PFC', 'ITC', 'KOTAKBANK', 'AXISBANK', 'TCS', 'BANDHANBNK', 'NTPC', 'HCLTECH'],
+            datasets: [{
+                label: 'Profit/Loss (₹)',
+                data: [1342.44, -5532.75, -439.92, -128.7, 875.79, 311.04, -4572.75, -456.6, 882],
+                backgroundColor: [
+                    'rgba(75, 192, 192, 0.5)',
+                    'rgba(255, 99, 132, 0.5)',
+                    'rgba(255, 99, 132, 0.5)',
+                    'rgba(255, 99, 132, 0.5)',
+                    'rgba(75, 192, 192, 0.5)',
+                    'rgba(75, 192, 192, 0.5)',
+                    'rgba(255, 99, 132, 0.5)',
+                    'rgba(255, 99, 132, 0.5)',
+                    'rgba(75, 192, 192, 0.5)'
+                ],
+                borderColor: [
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(75, 192, 192, 1)'
+                ],
+                borderWidth: 1
+            }]
+        };
+
+        const pnlChart = new Chart(pnlChartCanvas, {
+            type: 'bar',
+            data: pnlData,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+         // Collapsible Sections
+         var coll = document.getElementsByClassName("collapsible");
+            var i;
+
+            for (i = 0; i < coll.length; i++) {
+              coll[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                var content = this.nextElementSibling;
+                if (content.style.maxHeight){
+                  content.style.maxHeight = null;
+                } else {
+                  content.style.maxHeight = content.scrollHeight + "px";
+                }
+              });
+            }
+    });
+</script>
+
+</body>
+</html>

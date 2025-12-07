@@ -27,14 +27,14 @@ from utils.config import Settings
 
 # MongoDB connection
 MONGODB_URI = 'mongodb+srv://darshan:$$dar$$123@cluster0.ohxhu.mongodb.net/'
-SERVER_URL = 'http://localhost:3000'
+SERVER_URL = 'http://localhost:4000'
 
 # Email configuration
 EMAIL_CONFIG = {
     'smtp_server': 'smtp.gmail.com',
     'smtp_port': 587,
-    'sender_email': 'your_email@gmail.com',  # Replace with your email
-    'sender_password': 'your_app_password',   # Replace with your app password
+    'sender_email': 'darshanjain15062002@gmail.com',  # Replace with your email
+    'sender_password': 'huas kpfn wwwn wpyq',  # Replace with your app password
     'sender_name': 'Stock Analysis Report Engine'
 }
 
@@ -290,6 +290,7 @@ def generate_daily_reports():
             print("🔍 Analyzing portfolio...")
             portfolio_analysis = analyze_portfolio(holdings)
             
+            print("✅ Portfolio analysis completed", portfolio_analysis)
             # Format data for report
             mock_reports = format_portfolio_for_report(subscriber, portfolio_analysis)
             

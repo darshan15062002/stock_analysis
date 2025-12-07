@@ -8,6 +8,8 @@ const multer = require('multer');
 const { GoogleGenerativeAI } = require('@google/generative-ai');
 const { generateElevenAudio } = require('./src/generateAudio');
 const { MongoClient } = require('mongodb');
+const { aggregateDataSources, initializeNSESession } = require('./src/dataAggregation');
+const IndianStockIntelligence = require('./src/dataAggregationPerplexity');
 require('dotenv').config();
 
 const app = express();
@@ -61,35 +63,45 @@ app.use('/api/', limiter);
 
 // Data source configurations
 const DATA_SOURCES = {
-    // US Markets
-    ALPHA_VANTAGE: {
-        baseUrl: 'https://www.alphavantage.co/query',
-        key: process.env.ALPHA_VANTAGE_API_KEY
-    },
-    FINNHUB: {
-        baseUrl: 'https://finnhub.io/api/v1',
-        key: process.env.FINNHUB_API_KEY
-    },
-    POLYGON: {
-        baseUrl: 'https://api.polygon.io',
-        key: process.env.POLYGON_API_KEY
-    },
-
-    // Indian Markets
-    YAHOO_FINANCE: {
-        baseUrl: 'https://query1.finance.yahoo.com/v8/finance/chart',
-        suffix: '.NS' // NSE suffix for Indian stocks
-    },
+    // Primary: NSE India (Official, Real-time)
     NSE_INDIA: {
         baseUrl: 'https://www.nseindia.com/api',
+        reliability: 0.95,
         headers: {
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
-            'Accept': 'application/json',
+            'Accept': '*/*',
             'Accept-Language': 'en-US,en;q=0.9',
-            'Accept-Encoding': 'gzip, deflate, br'
+            'X-Requested-With': 'XMLHttpRequest',
+            'Referer': 'https://www.nseindia.com/',
+            'Connection': 'keep-alive'
         }
+    },
+
+    // Secondary: Yahoo Finance India (Technical indicators)
+    YAHOO_FINANCE: {
+        baseUrl: 'https://query1.finance.yahoo.com/v8/finance/chart',
+        reliability: 0.88
+    },
+
+    // Tertiary: BSE India (Corporate actions)
+    BSE_INDIA: {
+        baseUrl: 'https://api.bseindia.com/BseIndiaAPI/api',
+        reliability: 0.92
+    },
+
+    // Quaternary: Alpha Vantage (Fallback, delayed)
+    ALPHA_VANTAGE: {
+        baseUrl: 'https://www.alphavantage.co/query',
+        key: process.env.ALPHA_VANTAGE_KEY,
+        reliability: 0.75
+    },
+
+    // News: Google News RSS
+    GOOGLE_NEWS: {
+        baseUrl: 'https://news.google.com/rss/search',
+        reliability: 0.70
     }
-};
+}
 
 // Utility functions
 const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
@@ -104,7 +116,7 @@ const detectMarket = (symbol) => {
     if (indianStocks.some(stock => symbol.toUpperCase().includes(stock))) {
         return 'INDIAN';
     }
-    return 'US';
+    return 'INDIAN';
 };
 function normalizeStockData(source, rawData) {
     switch (source) {
@@ -369,123 +381,123 @@ function normalizeStockData(source, rawData) {
 //     return sources;
 // };
 
-const aggregateDataSources = async (symbol, dataType) => {
-    const sources = [];
-    const market = detectMarket(symbol);
-    console.log(symbol);
+// const aggregateDataSources = async (symbol, dataType) => {
+//     const sources = [];
+//     const market = detectMarket(symbol);
+//     console.log(symbol);
 
-    if (market === 'US') {
-        // US Market Data Sources
-        try {
-            const avResponse = await axios.get(`${DATA_SOURCES.ALPHA_VANTAGE.baseUrl}`, {
-                params: {
-                    function: 'GLOBAL_QUOTE',
-                    symbol: symbol,
-                    apikey: DATA_SOURCES.ALPHA_VANTAGE.key
-                }
-            });
-            sources.push({
-                source: "AlphaVantage",
-                reliability: 0.9,
-                market: "US",
-                data: normalizeStockData("AlphaVantage", avResponse.data)
-            });
-        } catch (error) {
-            console.error('AlphaVantage error:', error.message);
-        }
+//     if (market === 'US') {
+//         // US Market Data Sources
+//         try {
+//             const avResponse = await axios.get(`${DATA_SOURCES.ALPHA_VANTAGE.baseUrl}`, {
+//                 params: {
+//                     function: 'GLOBAL_QUOTE',
+//                     symbol: symbol,
+//                     apikey: DATA_SOURCES.ALPHA_VANTAGE.key
+//                 }
+//             });
+//             sources.push({
+//                 source: "AlphaVantage",
+//                 reliability: 0.9,
+//                 market: "US",
+//                 data: normalizeStockData("AlphaVantage", avResponse.data)
+//             });
+//         } catch (error) {
+//             console.error('AlphaVantage error:', error.message);
+//         }
 
-        try {
-            const fhResponse = await axios.get(`${DATA_SOURCES.FINNHUB.baseUrl}/quote`, {
-                params: {
-                    symbol: symbol,
-                    token: DATA_SOURCES.FINNHUB.key
-                }
-            });
-            sources.push({
-                source: "Finnhub",
-                reliability: 0.9,
-                market: "US",
-                data: normalizeStockData("Finnhub", fhResponse.data)
-            });
-        } catch (error) {
-            console.error('Finnhub error:', error.message);
-        }
-    } else {
-        // Indian Market Data Sources
-        const indianSymbol = symbol.includes('.NS') ? symbol : `${symbol}.NS`;
+//         try {
+//             const fhResponse = await axios.get(`${DATA_SOURCES.FINNHUB.baseUrl}/quote`, {
+//                 params: {
+//                     symbol: symbol,
+//                     token: DATA_SOURCES.FINNHUB.key
+//                 }
+//             });
+//             sources.push({
+//                 source: "Finnhub",
+//                 reliability: 0.9,
+//                 market: "US",
+//                 data: normalizeStockData("Finnhub", fhResponse.data)
+//             });
+//         } catch (error) {
+//             console.error('Finnhub error:', error.message);
+//         }
+//     } else {
+//         // Indian Market Data Sources
+//         const indianSymbol = symbol.includes('.NS') ? symbol : `${symbol}.NS`;
 
-        try {
-            // Yahoo Finance for Indian stocks
-            const yahooResponse = await axios.get(`${DATA_SOURCES.YAHOO_FINANCE.baseUrl}/${indianSymbol}`, {
-                params: {
-                    interval: '1d',
-                    range: '1d'
-                }
-            });
+//         try {
+//             // Yahoo Finance for Indian stocks
+//             const yahooResponse = await axios.get(`${DATA_SOURCES.YAHOO_FINANCE.baseUrl}/${indianSymbol}`, {
+//                 params: {
+//                     interval: '1d',
+//                     range: '1d'
+//                 }
+//             });
 
-            const chartData = yahooResponse.data.chart.result[0];
-            const meta = chartData.meta;
-            const quote = chartData.indicators.quote[0];
+//             const chartData = yahooResponse.data.chart.result[0];
+//             const meta = chartData.meta;
+//             const quote = chartData.indicators.quote[0];
 
-            sources.push({
-                source: "Yahoo Finance India",
-                reliability: 0.88,
-                market: "INDIAN",
-                data: normalizeStockData("Yahoo Finance India", yahooResponse.data)
-            });
-        } catch (error) {
-            console.error('Yahoo Finance India error:', error.message);
-        }
+//             sources.push({
+//                 source: "Yahoo Finance India",
+//                 reliability: 0.88,
+//                 market: "INDIAN",
+//                 data: normalizeStockData("Yahoo Finance India", yahooResponse.data)
+//             });
+//         } catch (error) {
+//             console.error('Yahoo Finance India error:', error.message);
+//         }
 
-        try {
-            // NSE India API (basic quote)
-            const nseResponse = await axios.get(`${DATA_SOURCES.NSE_INDIA.baseUrl}/quote-equity`, {
-                params: { symbol: symbol.replace('.NS', '') },
-                headers: DATA_SOURCES.NSE_INDIA.headers,
-                timeout: 5000
-            });
+//         try {
+//             // NSE India API (basic quote)
+//             const nseResponse = await axios.get(`${DATA_SOURCES.NSE_INDIA.baseUrl}/quote-equity`, {
+//                 params: { symbol: symbol.replace('.NS', '') },
+//                 headers: DATA_SOURCES.NSE_INDIA.headers,
+//                 timeout: 5000
+//             });
 
-            sources.push({
-                source: 'NSE India',
-                data: {
-                    symbol: nseResponse.data.info.symbol,
-                    price: nseResponse.data.priceInfo.lastPrice,
-                    change: nseResponse.data.priceInfo.change,
-                    changePercent: nseResponse.data.priceInfo.pChange,
-                    volume: nseResponse.data.priceInfo.totalTradedVolume,
-                    high: nseResponse.data.priceInfo.intraDayHighLow.max,
-                    low: nseResponse.data.priceInfo.intraDayHighLow.min
-                },
-                reliability: 0.95,
-                market: 'INDIAN'
-            });
-        } catch (error) {
-            console.error('NSE India error:', error.message);
-        }
+//             sources.push({
+//                 source: 'NSE India',
+//                 data: {
+//                     symbol: nseResponse.data.info.symbol,
+//                     price: nseResponse.data.priceInfo.lastPrice,
+//                     change: nseResponse.data.priceInfo.change,
+//                     changePercent: nseResponse.data.priceInfo.pChange,
+//                     volume: nseResponse.data.priceInfo.totalTradedVolume,
+//                     high: nseResponse.data.priceInfo.intraDayHighLow.max,
+//                     low: nseResponse.data.priceInfo.intraDayHighLow.min
+//                 },
+//                 reliability: 0.95,
+//                 market: 'INDIAN'
+//             });
+//         } catch (error) {
+//             console.error('NSE India error:', error.message);
+//         }
 
-        try {
-            // Alternative: Use Alpha Vantage for Indian stocks too
-            const avIndiaResponse = await axios.get(`${DATA_SOURCES.ALPHA_VANTAGE.baseUrl}`, {
-                params: {
-                    function: 'GLOBAL_QUOTE',
-                    symbol: indianSymbol,
-                    apikey: DATA_SOURCES.ALPHA_VANTAGE.key
-                }
-            });
-            sources.push({
-                source: 'AlphaVantage India',
-                data: avIndiaResponse.data,
-                reliability: 0.80,
-                market: 'INDIAN'
-            });
-        } catch (error) {
-            console.error('AlphaVantage India error:', error.message);
-        }
-    }
-    console.log(sources, "=============");
+//         try {
+//             // Alternative: Use Alpha Vantage for Indian stocks too
+//             const avIndiaResponse = await axios.get(`${DATA_SOURCES.ALPHA_VANTAGE.baseUrl}`, {
+//                 params: {
+//                     function: 'GLOBAL_QUOTE',
+//                     symbol: indianSymbol,
+//                     apikey: DATA_SOURCES.ALPHA_VANTAGE.key
+//                 }
+//             });
+//             sources.push({
+//                 source: 'AlphaVantage India',
+//                 data: avIndiaResponse.data,
+//                 reliability: 0.80,
+//                 market: 'INDIAN'
+//             });
+//         } catch (error) {
+//             console.error('AlphaVantage India error:', error.message);
+//         }
+//     }
+//     console.log(sources, "=============");
 
-    return sources;
-};
+//     return sources;
+// };
 
 // Enhanced bias calculation for different markets
 const calculateBiasScore = (sources) => {
@@ -791,7 +803,761 @@ app.get('/api/stock/:symbol/analysis', async (req, res) => {
 // Enhanced portfolio analysis with mixed markets
 app.post('/api/portfolio/analysis', async (req, res) => {
     try {
+
+        return res.json({
+            portfolio: [
+                {
+                    "symbol": "INFOSYS.NS",
+                    "analysis": {
+                        "symbol": "INFOSYS.NS",
+                        "company_name": "Infosys Limited",
+                        "last_updated": "07-12-2025 18:40 IST",
+                        "price_data": {
+                            "current_price": 1615.95,
+                            "day_change": 18.35,
+                            "day_change_percent": 1.15,
+                            "previous_close": 1597.6,
+                            "day_high": 1619,
+                            "day_low": 1568,
+                            "volume": 10344725,
+                            "vwap": 1617.78
+                        },
+                        "technical_analysis": {
+                            "trend": "bullish",
+                            "rsi_14": 62,
+                            "sma_20": 1598.5,
+                            "sma_50": 1575.3,
+                            "support_level": 1560,
+                            "resistance_level": 1630,
+                            "volatility": "medium",
+                            "chart_pattern": "uptrend"
+                        },
+                        "fundamental_insights": {
+                            "pe_ratio": 23.84,
+                            "pb_ratio": 7.06,
+                            "roe_percent": 27.22,
+                            "market_cap": "₹671,362.59 Cr",
+                            "dividend_yield": 2.66,
+                            "q2_2024_revenue_growth": 12.5,
+                            "q2_2024_profit_growth": 10.8
+                        },
+                        "recent_news": [
+                            {
+                                "headline": "Infosys reports strong Q2 FY25 revenue growth beating estimates",
+                                "impact": "positive",
+                                "date": "05-12-2025",
+                                "source": "Moneycontrol"
+                            },
+                            {
+                                "headline": "Infosys completes Rs 18,000 crore buyback extinguishing 10 crore shares",
+                                "impact": "positive",
+                                "date": "04-12-2025",
+                                "source": "Screener"
+                            },
+                            {
+                                "headline": "Infosys stock gains on upbeat earnings and strong client additions",
+                                "impact": "positive",
+                                "date": "06-12-2025",
+                                "source": "Economic Times"
+                            }
+                        ],
+                        "corporate_actions": {
+                            "ex_dividend_date": null,
+                            "bonus_ratio": null,
+                            "split_ratio": null,
+                            "board_meeting_date": "15-12-2025"
+                        },
+                        "risk_alerts": [
+                            {
+                                "type": "market",
+                                "severity": "medium",
+                                "description": "IT sector facing global macroeconomic uncertainties impacting client spending"
+                            },
+                            {
+                                "type": "regulatory",
+                                "severity": "low",
+                                "description": "No recent SEBI or regulatory issues reported"
+                            }
+                        ],
+                        "analyst_consensus": {
+                            "recommendation": "buy",
+                            "target_price": 1750,
+                            "upside_potential": 8.3
+                        },
+                        "your_recommendation": {
+                            "action": "buy_more",
+                            "confidence": "high",
+                            "rationale": "Strong Q2 revenue and profit growth; Technical indicators show bullish trend; Attractive valuation relative to peers"
+                        }
+                    }
+                },
+                {
+                    "symbol": "PFC.NS",
+                    "analysis": {
+                        "symbol": "PFC.NS",
+                        "company_name": "Power Finance Corporation Ltd",
+                        "last_updated": "07-12-2025 18:40 IST",
+                        "price_data": {
+                            "current_price": 351.95,
+                            "day_change": -0.7,
+                            "day_change_percent": -0.2,
+                            "previous_close": 352.65,
+                            "day_high": 353.95,
+                            "day_low": 348.8,
+                            "volume": 5200000,
+                            "vwap": 351.8
+                        },
+                        "technical_analysis": {
+                            "trend": "neutral",
+                            "rsi_14": 48,
+                            "sma_20": 355.5,
+                            "sma_50": 365,
+                            "support_level": 345,
+                            "resistance_level": 370,
+                            "volatility": "medium",
+                            "chart_pattern": "consolidation"
+                        },
+                        "fundamental_insights": {
+                            "pe_ratio": 24.5,
+                            "pb_ratio": 1.8,
+                            "roe_percent": 14.2,
+                            "market_cap": "₹1,19,117 Cr",
+                            "dividend_yield": 6.1,
+                            "q2_2024_revenue_growth": 8.5,
+                            "q2_2024_profit_growth": 7.2
+                        },
+                        "recent_news": [
+                            {
+                                "headline": "Power Finance Corporation Q2 FY25 results show steady revenue growth",
+                                "impact": "positive",
+                                "date": "02-12-2025",
+                                "source": "Economic Times"
+                            },
+                            {
+                                "headline": "PFC announces dividend payout maintaining strong financial position",
+                                "impact": "neutral",
+                                "date": "13-06-2025",
+                                "source": "Moneycontrol"
+                            }
+                        ],
+                        "corporate_actions": {
+                            "ex_dividend_date": "13-06-2025",
+                            "bonus_ratio": null,
+                            "split_ratio": null,
+                            "board_meeting_date": null
+                        },
+                        "risk_alerts": [
+                            {
+                                "type": "market",
+                                "severity": "medium",
+                                "description": "Stock price volatility due to macroeconomic factors and interest rate fluctuations"
+                            },
+                            {
+                                "type": "regulatory",
+                                "severity": "low",
+                                "description": "Potential impact from changes in government policies on power sector financing"
+                            }
+                        ],
+                        "analyst_consensus": {
+                            "recommendation": "hold",
+                            "target_price": 370,
+                            "upside_potential": 5.2
+                        },
+                        "your_recommendation": {
+                            "action": "hold",
+                            "confidence": "medium",
+                            "rationale": "Steady fundamental performance with moderate growth prospects; current price near support levels; market volatility suggests cautious approach"
+                        }
+                    }
+                },
+                {
+                    "symbol": "ITC.NS",
+                    "analysis": {
+                        "symbol": "ITC.NS",
+                        "company_name": "ITC Limited",
+                        "last_updated": "05-12-2025 16:00 IST",
+                        "price_data": {
+                            "current_price": 404.6,
+                            "day_change": 1.55,
+                            "day_change_percent": 0.38,
+                            "previous_close": 403.05,
+                            "day_high": 405.35,
+                            "day_low": 402,
+                            "volume": 388802,
+                            "vwap": 404.11
+                        },
+                        "technical_analysis": {
+                            "trend": "neutral",
+                            "rsi_14": 52,
+                            "sma_20": 402.5,
+                            "sma_50": 398.75,
+                            "support_level": 390.15,
+                            "resistance_level": 443.35,
+                            "volatility": "medium",
+                            "chart_pattern": "consolidation"
+                        },
+                        "fundamental_insights": {
+                            "pe_ratio": 25.02,
+                            "pb_ratio": 7.8,
+                            "roe_percent": 48.5,
+                            "market_cap": "₹2,50,000 Cr",
+                            "dividend_yield": 3.2,
+                            "q2_2024_revenue_growth": 8.5,
+                            "q2_2024_profit_growth": 12
+                        },
+                        "recent_news": [
+                            {
+                                "headline": "ITC reports steady Q2 revenue growth amid FMCG demand",
+                                "impact": "positive",
+                                "date": "02-12-2025",
+                                "source": "Economic Times"
+                            },
+                            {
+                                "headline": "ITC stock consolidates near 400 levels, analysts watch support",
+                                "impact": "neutral",
+                                "date": "04-12-2025",
+                                "source": "Moneycontrol"
+                            }
+                        ],
+                        "corporate_actions": {
+                            "ex_dividend_date": "15-12-2025",
+                            "bonus_ratio": null,
+                            "split_ratio": null,
+                            "board_meeting_date": "10-12-2025"
+                        },
+                        "risk_alerts": [
+                            {
+                                "type": "market",
+                                "severity": "medium",
+                                "description": "Moderate volatility expected due to global macroeconomic uncertainties impacting FMCG sector."
+                            },
+                            {
+                                "type": "regulatory",
+                                "severity": "low",
+                                "description": "No significant regulatory changes reported recently affecting ITC operations."
+                            }
+                        ],
+                        "analyst_consensus": {
+                            "recommendation": "hold",
+                            "target_price": 420,
+                            "upside_potential": 3.8
+                        },
+                        "your_recommendation": {
+                            "action": "hold",
+                            "confidence": "high",
+                            "rationale": "Steady revenue and profit growth; strong ROE supports valuation; consolidation pattern suggests limited near-term upside"
+                        }
+                    }
+                },
+                {
+                    "symbol": "KOTAKBANK.NS",
+                    "analysis": {
+                        "symbol": "KOTAKBANK.NS",
+                        "company_name": "Kotak Mahindra Bank Ltd.",
+                        "last_updated": "07-12-2025 18:40 IST",
+                        "price_data": {
+                            "current_price": 2154.9,
+                            "day_change": 12.5,
+                            "day_change_percent": 0.58,
+                            "previous_close": 2142.4,
+                            "day_high": 2169.93,
+                            "day_low": 2116.97,
+                            "volume": 2605000,
+                            "vwap": 2135
+                        },
+                        "technical_analysis": {
+                            "trend": "bullish",
+                            "rsi_14": 61.09,
+                            "sma_20": 2106.47,
+                            "sma_50": 2115.43,
+                            "support_level": 2135.93,
+                            "resistance_level": 2169.93,
+                            "volatility": "medium",
+                            "chart_pattern": "consolidation"
+                        },
+                        "fundamental_insights": {
+                            "pe_ratio": 23.4,
+                            "pb_ratio": 4.5,
+                            "roe_percent": 16.5,
+                            "market_cap": "₹43500 Cr",
+                            "dividend_yield": 0.11,
+                            "q2_2024_revenue_growth": -2.5,
+                            "q2_2024_profit_growth": -1.5
+                        },
+                        "recent_news": [
+                            {
+                                "headline": "Kotak Mahindra Bank sees high value trading amid mixed market sentiment",
+                                "impact": "neutral",
+                                "date": "02-12-2025",
+                                "source": "MarketsMojo"
+                            },
+                            {
+                                "headline": "Kotak Mahindra Bank Q2 profits decline, shares fall 1.5%",
+                                "impact": "negative",
+                                "date": "27-10-2025",
+                                "source": "TradingView"
+                            }
+                        ],
+                        "corporate_actions": {
+                            "ex_dividend_date": null,
+                            "bonus_ratio": null,
+                            "split_ratio": null,
+                            "board_meeting_date": "26-01-2026"
+                        },
+                        "risk_alerts": [
+                            {
+                                "type": "earnings",
+                                "severity": "medium",
+                                "description": "Q2 FY25 profit declined by 1.5% impacting short-term sentiment"
+                            },
+                            {
+                                "type": "market",
+                                "severity": "medium",
+                                "description": "Relative underperformance vs sector peers by 0.93% in recent sessions"
+                            }
+                        ],
+                        "analyst_consensus": {
+                            "recommendation": "buy",
+                            "target_price": 2300,
+                            "upside_potential": 6.8
+                        },
+                        "your_recommendation": {
+                            "action": "hold",
+                            "confidence": "medium",
+                            "rationale": "Q2 profit decline suggests caution; stock remains above key moving averages; technical indicators show consolidation with potential for uptrend"
+                        }
+                    }
+                },
+                {
+                    "symbol": "AXISBANK.NS",
+                    "analysis": {
+                        "symbol": "AXISBANK.NS",
+                        "company_name": "Axis Bank Limited",
+                        "last_updated": "05-12-2025 16:00 IST",
+                        "price_data": {
+                            "current_price": 1281.8,
+                            "day_change": 1.8,
+                            "day_change_percent": 0.14,
+                            "previous_close": 1280,
+                            "day_high": 1304,
+                            "day_low": 1269.4,
+                            "volume": 2728214,
+                            "vwap": 1278.2
+                        },
+                        "technical_analysis": {
+                            "trend": "neutral",
+                            "rsi_14": 52,
+                            "sma_20": 1275,
+                            "sma_50": 1240,
+                            "support_level": 1152,
+                            "resistance_level": 1408,
+                            "volatility": "medium",
+                            "chart_pattern": "consolidation"
+                        },
+                        "fundamental_insights": {
+                            "pe_ratio": 14.23,
+                            "pb_ratio": 2.14,
+                            "roe_percent": 15.5,
+                            "market_cap": "₹3,98,000 Cr",
+                            "dividend_yield": 0.08,
+                            "q2_2024_revenue_growth": 12,
+                            "q2_2024_profit_growth": 10.5
+                        },
+                        "recent_news": [
+                            {
+                                "headline": "Axis Bank Allots ₹5,000 Cr NCDs with 7.27% Coupon",
+                                "impact": "neutral",
+                                "date": "26-11-2025",
+                                "source": "Screener.in"
+                            },
+                            {
+                                "headline": "Axis Bank Q2 FY25 Profit Grows 10.5%, Revenue Up 12%",
+                                "impact": "positive",
+                                "date": "30-11-2025",
+                                "source": "Moneycontrol"
+                            },
+                            {
+                                "headline": "Axis Bank Stock Shows Consolidation Near ₹1280 Levels",
+                                "impact": "neutral",
+                                "date": "05-12-2025",
+                                "source": "TradingView"
+                            }
+                        ],
+                        "corporate_actions": {
+                            "ex_dividend_date": null,
+                            "bonus_ratio": null,
+                            "split_ratio": null,
+                            "board_meeting_date": null
+                        },
+                        "risk_alerts": [
+                            {
+                                "type": "market",
+                                "severity": "medium",
+                                "description": "Annualized volatility at 25.6% indicates moderate price fluctuations."
+                            },
+                            {
+                                "type": "regulatory",
+                                "severity": "low",
+                                "description": "No recent major regulatory issues reported."
+                            }
+                        ],
+                        "analyst_consensus": {
+                            "recommendation": "hold",
+                            "target_price": 1350,
+                            "upside_potential": 5.3
+                        },
+                        "your_recommendation": {
+                            "action": "hold",
+                            "confidence": "medium",
+                            "rationale": "Stable fundamental metrics with moderate growth; technical consolidation suggests limited near-term upside; moderate volatility warrants cautious stance."
+                        }
+                    }
+                },
+                {
+                    "symbol": "TCS.NS",
+                    "analysis": {
+                        "symbol": "TCS.NS",
+                        "company_name": "Tata Consultancy Services Limited",
+                        "last_updated": "07-12-2025 18:40 IST",
+                        "price_data": {
+                            "current_price": 3238.2,
+                            "day_change": 9,
+                            "day_change_percent": 0.28,
+                            "previous_close": 3229.2,
+                            "day_high": 3244.9,
+                            "day_low": 3210,
+                            "volume": 5244013,
+                            "vwap": 3246.02
+                        },
+                        "technical_analysis": {
+                            "trend": "neutral",
+                            "rsi_14": 52,
+                            "sma_20": 3180,
+                            "sma_50": 3100,
+                            "support_level": 3150,
+                            "resistance_level": 3280,
+                            "volatility": "medium",
+                            "chart_pattern": "consolidation"
+                        },
+                        "fundamental_insights": {
+                            "pe_ratio": 23.58,
+                            "pb_ratio": 11.08,
+                            "roe_percent": 46.46,
+                            "market_cap": "₹11,71,862 Cr",
+                            "dividend_yield": 3.89,
+                            "q2_2024_revenue_growth": 8.5,
+                            "q2_2024_profit_growth": 7.2
+                        },
+                        "recent_news": [
+                            {
+                                "headline": "TCS Q3 2025 earnings estimate at ₹35.53 EPS with revenue forecast ₹671.54 B",
+                                "impact": "neutral",
+                                "date": "05-12-2025",
+                                "source": "TradingView"
+                            },
+                            {
+                                "headline": "TCS stock price rises 0.28% amid steady market conditions",
+                                "impact": "neutral",
+                                "date": "06-12-2025",
+                                "source": "Moneycontrol"
+                            }
+                        ],
+                        "corporate_actions": {
+                            "ex_dividend_date": null,
+                            "bonus_ratio": null,
+                            "split_ratio": null,
+                            "board_meeting_date": "15-01-2026"
+                        },
+                        "risk_alerts": [
+                            {
+                                "type": "market",
+                                "severity": "medium",
+                                "description": "Stock has shown a 24.85% decline over the last year indicating market volatility risk."
+                            },
+                            {
+                                "type": "earnings",
+                                "severity": "low",
+                                "description": "Upcoming Q3 earnings on 15-Jan-2026 could impact stock price based on performance."
+                            }
+                        ],
+                        "analyst_consensus": {
+                            "recommendation": "hold",
+                            "target_price": 3500,
+                            "upside_potential": 8.1
+                        },
+                        "your_recommendation": {
+                            "action": "hold",
+                            "confidence": "high",
+                            "rationale": "Strong fundamentals with high ROE and dividend yield; Moderate technical consolidation pattern; Upcoming earnings report introduces short-term uncertainty"
+                        }
+                    }
+                },
+                {
+                    "symbol": "BANDHANBNK.NS",
+                    "analysis": {
+                        "symbol": "BANDHANBNK.NS",
+                        "company_name": "Bandhan Bank Ltd",
+                        "last_updated": "07-12-2025 18:40 IST",
+                        "price_data": {
+                            "current_price": 149.78,
+                            "day_change": -0.22,
+                            "day_change_percent": -0.15,
+                            "previous_close": 150,
+                            "day_high": 150.01,
+                            "day_low": 149.78,
+                            "volume": 6863672,
+                            "vwap": 149.9
+                        },
+                        "technical_analysis": {
+                            "trend": "neutral",
+                            "rsi_14": 60.2,
+                            "sma_20": 146.5,
+                            "sma_50": 152.6,
+                            "support_level": 140,
+                            "resistance_level": 160,
+                            "volatility": "medium",
+                            "chart_pattern": "consolidation"
+                        },
+                        "fundamental_insights": {
+                            "pe_ratio": 13.49,
+                            "pb_ratio": 2.8,
+                            "roe_percent": 18.5,
+                            "market_cap": "₹27715 Cr",
+                            "dividend_yield": 0.88,
+                            "q2_2024_revenue_growth": 12,
+                            "q2_2024_profit_growth": 8.5
+                        },
+                        "recent_news": [
+                            {
+                                "headline": "CLSA maintains high conviction outperform, sees 19% upside on easing MFI pressure and margin recovery ahead",
+                                "impact": "positive",
+                                "date": "02-12-2025",
+                                "source": "Moneycontrol"
+                            },
+                            {
+                                "headline": "Nomura cautious on Bandhan Bank after weak Q4 results; retains Neutral call on stock",
+                                "impact": "negative",
+                                "date": "01-12-2025",
+                                "source": "Economic Times"
+                            },
+                            {
+                                "headline": "Jefferies raises target price for Bandhan Bank shares after Q4 results as valuations reasonable but cuts growth estimates",
+                                "impact": "positive",
+                                "date": "03-12-2025",
+                                "source": "Moneycontrol"
+                            }
+                        ],
+                        "corporate_actions": {
+                            "ex_dividend_date": "14-08-2025",
+                            "bonus_ratio": null,
+                            "split_ratio": null,
+                            "board_meeting_date": null
+                        },
+                        "risk_alerts": [
+                            {
+                                "type": "earnings",
+                                "severity": "medium",
+                                "description": "Elevated credit stress and muted operating performance in recent quarters"
+                            },
+                            {
+                                "type": "market",
+                                "severity": "medium",
+                                "description": "Stock price volatility due to macroeconomic factors and sectoral pressures"
+                            }
+                        ],
+                        "analyst_consensus": {
+                            "recommendation": "buy",
+                            "target_price": 195,
+                            "upside_potential": 30.2
+                        },
+                        "your_recommendation": {
+                            "action": "hold",
+                            "confidence": "medium",
+                            "rationale": "Strong fundamental valuation with PE at 13.49 and ROE at 18.5%; Mixed recent earnings performance with some credit stress; Technical indicators show consolidation with medium volatility"
+                        }
+                    }
+                },
+                {
+                    "symbol": "NTPC.NS",
+                    "analysis": {
+                        "symbol": "NTPC.NS",
+                        "company_name": "NTPC Limited",
+                        "last_updated": "05-12-2025 16:00 IST",
+                        "price_data": {
+                            "current_price": 323.5,
+                            "day_change": 0.55,
+                            "day_change_percent": 0.17,
+                            "previous_close": 322.95,
+                            "day_high": 324.15,
+                            "day_low": 320.95,
+                            "volume": 6574000,
+                            "vwap": 322.98
+                        },
+                        "technical_analysis": {
+                            "trend": "neutral",
+                            "rsi_14": 52,
+                            "sma_20": 325,
+                            "sma_50": 330,
+                            "support_level": 315,
+                            "resistance_level": 335,
+                            "volatility": "medium",
+                            "chart_pattern": "consolidation"
+                        },
+                        "fundamental_insights": {
+                            "pe_ratio": 12.85,
+                            "pb_ratio": 1.63,
+                            "roe_percent": 12.37,
+                            "market_cap": "₹3,13,687.15 Cr",
+                            "dividend_yield": 2.58,
+                            "q2_2024_revenue_growth": 11.66,
+                            "q2_2024_profit_growth": 14.85
+                        },
+                        "recent_news": [
+                            {
+                                "headline": "NTPC share price steady amid power sector reforms",
+                                "impact": "neutral",
+                                "date": "04-12-2025",
+                                "source": "Economic Times"
+                            },
+                            {
+                                "headline": "NTPC Limited focuses on renewable energy expansion",
+                                "impact": "positive",
+                                "date": "02-12-2025",
+                                "source": "Moneycontrol"
+                            }
+                        ],
+                        "corporate_actions": {
+                            "ex_dividend_date": null,
+                            "bonus_ratio": null,
+                            "split_ratio": null,
+                            "board_meeting_date": null
+                        },
+                        "risk_alerts": [
+                            {
+                                "type": "market",
+                                "severity": "medium",
+                                "description": "Stock shows mixed technical signals with recent sell signals from moving averages indicating potential short-term weakness."
+                            },
+                            {
+                                "type": "regulatory",
+                                "severity": "low",
+                                "description": "Potential impact from evolving power sector regulations and government policy changes."
+                            }
+                        ],
+                        "analyst_consensus": {
+                            "recommendation": "buy",
+                            "target_price": 350,
+                            "upside_potential": 8.2
+                        },
+                        "your_recommendation": {
+                            "action": "hold",
+                            "confidence": "medium",
+                            "rationale": "Stable fundamentals with moderate growth; technical consolidation suggests limited near-term upside; watch for regulatory developments and sector reforms."
+                        }
+                    }
+                },
+                {
+                    "symbol": "HCLTECH.NS",
+                    "analysis": {
+                        "symbol": "HCLTECH.NS",
+                        "company_name": "HCL Technologies Limited",
+                        "last_updated": "05-12-2025 16:00 IST",
+                        "price_data": {
+                            "current_price": 1681,
+                            "day_change": 26.4,
+                            "day_change_percent": 1.6,
+                            "previous_close": 1654.6,
+                            "day_high": 1691,
+                            "day_low": 1651,
+                            "volume": 3391204,
+                            "vwap": 1680
+                        },
+                        "technical_analysis": {
+                            "trend": "bullish",
+                            "rsi_14": 62,
+                            "sma_20": 1650,
+                            "sma_50": 1620,
+                            "support_level": 1600,
+                            "resistance_level": 1720,
+                            "volatility": "medium",
+                            "chart_pattern": "uptrend"
+                        },
+                        "fundamental_insights": {
+                            "pe_ratio": 26.44,
+                            "pb_ratio": 5.1,
+                            "roe_percent": 25.5,
+                            "market_cap": "₹456167.10 Cr",
+                            "dividend_yield": 1.2,
+                            "q2_2024_revenue_growth": 12.5,
+                            "q2_2024_profit_growth": 15
+                        },
+                        "recent_news": [
+                            {
+                                "headline": "HCL Technologies reports strong Q2 revenue growth beating estimates",
+                                "impact": "positive",
+                                "date": "02-12-2025",
+                                "source": "Economic Times"
+                            },
+                            {
+                                "headline": "HCL Tech expands cloud services portfolio with new partnerships",
+                                "impact": "positive",
+                                "date": "30-11-2025",
+                                "source": "Moneycontrol"
+                            },
+                            {
+                                "headline": "Global IT spending slowdown may impact HCL Technologies in near term",
+                                "impact": "negative",
+                                "date": "01-12-2025",
+                                "source": "Business Standard"
+                            }
+                        ],
+                        "corporate_actions": {
+                            "ex_dividend_date": "15-12-2025",
+                            "bonus_ratio": null,
+                            "split_ratio": null,
+                            "board_meeting_date": "10-12-2025"
+                        },
+                        "risk_alerts": [
+                            {
+                                "type": "market",
+                                "severity": "medium",
+                                "description": "Potential impact from global IT spending slowdown and currency fluctuations"
+                            },
+                            {
+                                "type": "regulatory",
+                                "severity": "low",
+                                "description": "No major regulatory changes currently impacting operations"
+                            }
+                        ],
+                        "analyst_consensus": {
+                            "recommendation": "buy",
+                            "target_price": 1850,
+                            "upside_potential": 10.1
+                        },
+                        "your_recommendation": {
+                            "action": "buy_more",
+                            "confidence": "high",
+                            "rationale": "Strong Q2 revenue and profit growth; bullish technical trend with RSI above 60; attractive upside potential with target price 10% above current"
+                        }
+                    }
+                }
+            ]
+        });
         const { holdings, analysis_type = 'risk_assessment' } = req.body;
+
+        const intelligence = new IndianStockIntelligence();
+
+        const Data = await Promise.all(
+            holdings.map(async h => ({
+                symbol: h.symbol,
+                analysis: await intelligence.analyze(h.symbol, h.name)
+            }))
+        );
+
+        console.log(JSON.stringify(Data), "======================");
+
+
+        return res.json({ portfolio: Data });
 
         if (!holdings || !Array.isArray(holdings)) {
             return res.status(400).json({
@@ -813,7 +1579,7 @@ app.post('/api/portfolio/analysis', async (req, res) => {
         for (const holding of holdings) {
             await sleep(200); // Rate limiting
             const market = detectMarket(holding.symbol);
-            const sources = await aggregateDataSources(holding.symbol);
+            const sources = await aggregateDataSources(holding.symbol, analysis_type);
 
             console.log(sources, "sd");
 
@@ -1713,6 +2479,7 @@ app.get('/api/subscribers/daily', async (req, res) => {
     }
 });
 
+initializeNSESession();
 app.listen(PORT, () => {
     console.log(`🚀 Multi-Market Stock Analysis API running on port ${PORT}`);
     console.log(`📊 US & Indian markets supported`);

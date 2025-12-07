@@ -217,7 +217,24 @@ class TemplateSelectionNode(BaseNode):
     
     def _extract_template_description(self, template_name: str) -> str:
         """根据模板名称生成描述"""
-        if '企业品牌' in template_name:
+        template_lower = template_name.lower()
+        
+        # Stock Market Analysis Templates
+        if 'daily portfolio' in template_lower:
+            return "Suitable for daily portfolio performance reports with P&L, holdings breakdown, and market context"
+        elif 'weekly portfolio' in template_lower:
+            return "Suitable for weekly portfolio summaries with performance comparison and market trends"
+        elif 'stock analysis' in template_lower:
+            return "Suitable for individual stock analysis with fundamentals, technicals, and recommendations"
+        elif 'portfolio health' in template_lower:
+            return "Suitable for portfolio health checks with anxiety scores, risk assessment, and action plans"
+        elif 'market sentiment' in template_lower:
+            return "Suitable for market sentiment analysis with sector performance and trading ideas"
+        elif 'stock story' in template_lower:
+            return "Suitable for narrative-style stock explanations for beginner investors"
+        
+        # Legacy templates (for backward compatibility)
+        elif '企业品牌' in template_name:
             return "适用于企业品牌声誉和形象分析"
         elif '市场竞争' in template_name:
             return "适用于市场竞争格局和对手分析"
@@ -230,7 +247,7 @@ class TemplateSelectionNode(BaseNode):
         elif '突发' in template_name or '危机' in template_name:
             return "适用于突发事件和危机公关"
         
-        return "通用报告模板"
+        return "General report template for stock market analysis"
     
 
     
